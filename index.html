@@ -12,7 +12,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: #0b0f19;
+            background-color: #d4d7df;
             color: #f3f4f6;
             display: flex;
             justify-content: center;
@@ -84,7 +84,7 @@
         #resultContainer {
             margin-top: 30px;
             padding: 20px;
-            background: #1f2937;
+            background: #e1e4e7;
             border: 1px solid #374151;
             border-radius: 12px;
             display: none;
@@ -106,11 +106,11 @@
 
     <div class="container">
         <h1>Title Valuation Calculator</h1>
-        <p class="subtitle">Hitung valuasi dirimu layaknya startup unicorn.</p>
+        <p class="subtitle">estimate your value.</p>
 
         <form id="valueForm">
             <div class="form-group">
-                <label for="name">Nama / Alias</label>
+                <label for="name">Name / Alias</label>
                 <input type="text" id="name" placeholder="Masukkan nama...">
             </div>
 
@@ -119,6 +119,7 @@
                 <select id="Industry">
                     <option value="50">Finance / Banking / Investment</option>
                     <option value="40">Tech / Software Engineering</option>
+                    <option value="35">Energy / Mining / Heavy Industry</option>
                     <option value="30">Creative Arts / Media / Design</option>
                     <option value="25">F&B / Hospitality / Tourism</option>
                     <option value="15">General Services / Others</option>
@@ -130,7 +131,8 @@
                 <select id="Position">
                     <option value="50">Founder / Owner</option>
                     <option value="45">C-Level / President / Top Executive</option>
-                    <option value="35">Senior Manager / Lead / Expert</option>
+                    <option value="35">Senior Manager / Head of Division / Expert</option>
+                    <option value="30">Manager / Supervisor / Team Lead</option>
                     <option value="25">Middle Staff / Professional</option>
                     <option value="20">Freelancer / Independent</option>
                     <option value="15">Fresh Graduate / Junior / Intern</option>
@@ -152,7 +154,7 @@
             </div>
 
             <div class="form-group">
-                <label for="education">Pendidikan Terakhir</label>
+                <label for="education">Highest Education</label>
                 <select id="education">
                     <option value="50">PhD</option>
                     <option value="35">Master</option>
@@ -161,6 +163,20 @@
                     <option value="5">Junior High School</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="networking">Networking level</label>
+                <select id="networking">
+                    <option value="50">Illuminati / Royal Family</option>
+                    <option value="40">Inner Circle Elite / C-Level Direct</option>
+                    <option value="35">Industry Elite / LinkedIn Influencer</option>
+                    <option value="30">Active Networker / VIP Afterparty Regular</option>
+                    <option value="25">Standard Corpotate / Lunch Gang Member</option>
+                    <option value="15">Casual Acquitance</option>
+                    <option value="10">Strictly Anti-Social</option>
+                    <option value="5">Nobody Knows You </option>
+                </select>
+            </div>        
 
             <button type="button" id="calcBtn">Calculate My Value</button>
         </form>
@@ -180,24 +196,26 @@
             const positionScore = parseInt(document.getElementById('Position').value);
             const incomeScore = parseInt(document.getElementById('income').value);
             const educationScore = parseInt(document.getElementById('education').value);
+            const networkingScore = parseInt(document.getElementById('networking').value);
 
-            const totalScore = industryScore + positionScore + incomeScore + educationScore;
+            const totalScore = industryScore + positionScore + incomeScore + educationScore + networkingScore;
 
             let tierMessage = "";
 
-            if (totalScore >= 160) {
-                tierMessage = "🔥 <b>Ultra High-Net-Worth Individual Tier!</b> You wield leverage comparable to Wall Street market makers.";
-            } else if (totalScore >= 120) {
-                tierMessage = "💼 <b>Inner Circle Executive Tier!</b> Surrounded by absolute privilege where your strategic decisions directly drive corporate valuations.";
-            } else if (totalScore >= 80) {
-                tierMessage = "🚀 <b>High Performer Radar!</b> Massive wealth creation potential is right in front of you.";
-            } else {
-                tierMessage = "🌱 <b>'The Grind' Phase.</b> Relax, every tech tycoon or financial titan started right here.";
-            }
+            if (totalScore >= 210) {
+                tierMessage = "👑 <b>Global Hegemony Tier!</b> You literally pull the strings of the global economy from a dimly lit room.";
+            } else if (totalScore >= 160) {
+                tierMessage = "🔥 <b>Ultra High Net-Worth Individual Tier!</b> You wield leverage that makes regular corporate slaves weep.";
+            } else if (totalScore >= 110) {
+                tierMessage = "💼 <b>Inner Circle Executive Tier!</b> Surrounded ny absolute privilage and high-level insider access.";
+            } else if (totalScore >= 70) {
+                tierMessage = "🚀 <b>High Performer Radar!</b> Massive wealth creation potential, but still grinding for that breakthrough.";
+            } else {}
+                tierMessage = "☕ <b>'The Grinder'.</b> Relax, every tech tycoon or financial overlord started by hugging their desk in despair."; 
 
             const resultContainer = document.getElementById('resultContainer');
             resultContainer.style.display = 'block';
-            document.getElementById('resultTitle').innerText = "Valuation Result: "+ name;
+            document.getElementById('resultTitle').innerText = "Valuation Result: " + name;
             document.getElementById('resultValue').innerHTML = "Total Score: <b>" + totalScore + " / 200</b><br><br><span style='color: #93c5fd;'>" + tierMessage + "</span>";
         });
     </script>
