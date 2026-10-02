@@ -12,8 +12,8 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: #d4d7df;
-            color: #f3f4f6;
+            background-color: #212121;
+            color: #212121;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,8 +21,8 @@
             padding: 20px;
         }
         .container {
-            background: #111827;
-            border: 1px solid #1f2937;
+            background: #171717c;
+            border: 1px solid #2f2f2f;
             padding: 40px;
             border-radius: 16px;
             width: 100%;
@@ -37,7 +37,7 @@
         }
         .subtitle {
             font-size: 0.95rem;
-            color: #9ca3af;
+            color: #8e8ea0;
             margin-bottom: 30px;
         }
         .form-group {
@@ -50,26 +50,26 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
-            color: #9ca3af;
+            color: #8e8ea0;
         }
         input[type="text"], select {
             width: 100%;
             padding: 12px 16px;
-            background-color: #1f2937;
-            border: 1px solid #374151;
+            background-color: #2f2f2f;
+            border: 1px solid #424242;
             border-radius: 8px;
-            color: #ffffff;
+            color: #ececec;
             font-size: 0.95rem;
             outline: none;
         }
         input[type="text"]:focus, select:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            border-color: #10a37f;
+            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.2);
         }
         button {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            background: linear-gradient(135deg, #10a37f 0%, #0e8c6d 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -84,8 +84,8 @@
         #resultContainer {
             margin-top: 30px;
             padding: 20px;
-            background: #e1e4e7;
-            border: 1px solid #374151;
+            background: #2f2f2f;
+            border: 1px solid #424242;
             border-radius: 12px;
             display: none;
         }
@@ -97,7 +97,7 @@
         }
         #resultValue {
             font-size: 0.95rem;
-            color: #d1d5db;
+            color: #acacbe;
             line-height: 1.6;
         }
     </style>
@@ -210,13 +210,14 @@
                 tierMessage = "💼 <b>Inner Circle Executive Tier!</b> Surrounded ny absolute privilage and high-level insider access.";
             } else if (totalScore >= 70) {
                 tierMessage = "🚀 <b>High Performer Radar!</b> Massive wealth creation potential, but still grinding for that breakthrough.";
-            } else {}
+            } else {
                 tierMessage = "☕ <b>'The Grinder'.</b> Relax, every tech tycoon or financial overlord started by hugging their desk in despair."; 
-
+            } 
+            
             const resultContainer = document.getElementById('resultContainer');
             resultContainer.style.display = 'block';
             document.getElementById('resultTitle').innerText = "Valuation Result: " + name;
-            document.getElementById('resultValue').innerHTML = "Total Score: <b>" + totalScore + " / 200</b><br><br><span style='color: #93c5fd;'>" + tierMessage + "</span>";
+            document.getElementById('resultValue').innerHTML = "Total Score: <b>" + totalScore + " / 250</b><br><br><span style='color: #93c5fd;'>" + tierMessage + "</span>";
         });
     </script>
 </body>
