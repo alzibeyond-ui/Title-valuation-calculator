@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Valuation Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: 0.95rem;
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #9ca3af;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        input[type="text"]:focus, select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #resultContainer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            display: none;
+        }
+        #resultTitle {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        #resultValue {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Title Valuation Calculator</h1>
+        <p class="subtitle">Hitung valuasi dirimu layaknya startup unicorn.</p>
+
+        <form id="valueForm">
+            <div class="form-group">
+                <label for="name">Nama / Alias</label>
+                <input type="text" id="name" placeholder="Masukkan nama...">
+            </div>
+
+            <div class="form-group">
+                <label for="Industry">Industry</label>
+                <select id="Industry">
+                    <option value="50">Finance / Banking / Investment</option>
+                    <option value="40">Tech / Software Engineering</option>
+                    <option value="30">Creative Arts / Media / Design</option>
+                    <option value="25">F&B / Hospitality / Tourism</option>
+                    <option value="15">General Services / Others</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Position">Position</label>
+                <select id="Position">
+                    <option value="50">Founder / Owner</option>
+                    <option value="45">C-Level / President / Top Executive</option>
+                    <option value="35">Senior Manager / Lead / Expert</option>
+                    <option value="25">Middle Staff / Professional</option>
+                    <option value="20">Freelancer / Independent</option>
+                    <option value="15">Fresh Graduate / Junior / Intern</option>
+                    <option value="5">Unemployed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="income">Salary / Income</label>
+                <select id="income">
+                    <option value="50">$5M - $10M / Year</option>
+                    <option value="45">$1M - $5M / Year</option>
+                    <option value="35">$500K - $1M / Year</option>
+                    <option value="25">$250K - $500K / Year</option>
+                    <option value="20">$100k - $250K / Year</option>
+                    <option value="15">$50K - $100K / Year</option>
+                    <option value="10">&lt; $50K / Year</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="education">Pendidikan Terakhir</label>
+                <select id="education">
+                    <option value="50">PhD</option>
+                    <option value="35">Master</option>
+                    <option value="25">Bachelor</option>
+                    <option value="15">Senior High School</option>
+                    <option value="5">Junior High School</option>
+                </select>
+            </div>
+
+            <button type="button" id="calcBtn">Calculate My Value</button>
+        </form>
+
+        <div id="resultContainer">
+            <h2 id="resultTitle"></h2>
+            <p id="resultValue"></p>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('calcBtn');
+        
+        btn.addEventListener('click', function() {
+            const name = document.getElementById('name').value || "Anonim";
+            const industryScore = parseInt(document.getElementById('Industry').value);
+            const positionScore = parseInt(document.getElementById('Position').value);
+            const incomeScore = parseInt(document.getElementById('income').value);
+            const educationScore = parseInt(document.getElementById('education').value);
+
+            const totalScore = industryScore + positionScore + incomeScore + educationScore;
+
+            let tierMessage = "";
+
+            if (totalScore >= 160) {
+                tierMessage = "🔥 <b>Ultra High-Net-Worth Individual Tier!</b> You wield leverage comparable to Wall Street market makers.";
+            } else if (totalScore >= 120) {
+                tierMessage = "💼 <b>Inner Circle Executive Tier!</b> Surrounded by absolute privilege where your strategic decisions directly drive corporate valuations.";
+            } else if (totalScore >= 80) {
+                tierMessage = "🚀 <b>High Performer Radar!</b> Massive wealth creation potential is right in front of you.";
+            } else {
+                tierMessage = "🌱 <b>'The Grind' Phase.</b> Relax, every tech tycoon or financial titan started right here.";
+            }
+
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.style.display = 'block';
+            document.getElementById('resultTitle').innerText = "Valuation Result: "+ name;
+            document.getElementById('resultValue').innerHTML = "Total Score: <b>" + totalScore + " / 200</b><br><br><span style='color: #93c5fd;'>" + tierMessage + "</span>";
+        });
+    </script>
+</body>
+</html>
