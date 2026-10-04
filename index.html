@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title Valuation Calculator</title>
+    <title>Corporate Fundamental Valuation</title>
     <style>
         * {
             box-sizing: border-box;
@@ -21,7 +21,7 @@
             padding: 20px;
         }
         .container {
-            background: #171717c;
+            background: #171717;
             border: 1px solid #2f2f2f;
             padding: 40px;
             border-radius: 16px;
@@ -29,19 +29,69 @@
             max-width: 500px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
-        h1 {
-            font-size: 1.8rem;
+        /* Header Dashboard */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .dashboard-header h1 {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             color: #ffffff;
         }
-        .subtitle {
-            font-size: 0.95rem;
+        .dashboard-header p {
+            font-size: 0.9rem;
             color: #8e8ea0;
-            margin-bottom: 30px;
         }
+        /* Gauge Meter Container */
+        .gauge-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 25px;
+            background: #212121;
+            border: 1px solid #2f2f2f;
+            border-radius: 14px;
+            padding: 20px 0 10px 0;
+        }
+        .gauge-svg {
+            width: 200px;
+            height: 110px;
+        }
+        .gauge-score-box {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .gauge-score {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        .gauge-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* Section Title */
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8e8ea0;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+        /* Form Controls */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         label {
             display: block;
@@ -49,142 +99,232 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #8e8ea0;
         }
         input[type="text"], select {
             width: 100%;
-            padding: 12px 16px;
-            background-color: #2f2f2f;
-            border: 1px solid #424242;
+            padding: 12px 14px;
+            background-color: #212121;
+            border: 1px solid #2f2f2f;
             border-radius: 8px;
             color: #ececec;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         input[type="text"]:focus, select:focus {
             border-color: #10a37f;
             box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.2);
         }
-        button {
+        button#calcBtn {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #10a37f 0%, #0e8c6d 100%);
+            padding: 13px;
+            background: #10a37f;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.2s;
         }
-        button:hover {
-            opacity: 0.9;
+        button#calcBtn:hover {
+            background: #0e8c6d;
         }
-        #resultContainer {
-            margin-top: 30px;
-            padding: 20px;
-            background: #2f2f2f;
-            border: 1px solid #424242;
-            border-radius: 12px;
+        /* Factor Cards Grid */
+        .factor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
             display: none;
         }
-        #resultTitle {
-            font-size: 1.2rem;
+        .factor-card {
+            background: #212121;
+            border: 1px solid #2f2f2f;
+            border-radius: 10px;
+            padding: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Aksen garis tipis hijau Open AI dikiri card */
+        .factor-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            background: #10a37f;
+        }
+        .factor-value {
+            font-size: 0.95rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        #resultValue {
-            font-size: 0.95rem;
-            color: #acacbe;
-            line-height: 1.6;
+        .factor-name {
+            font-size: 0.73rem;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        /* Summarry Banner di bawah card */
+        .summary-banner {
+            margin-top: 14px;
+            background: #212121;
+            border: 1px solid #2f2f2f;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #ececec;
+            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Title Valuation Calculator</h1>
-        <p class="subtitle">estimate your value.</p>
+        <div class="dashboard-header">
+            <h1 id="dashboardTitle">Corporate Fundamental Valuation</h1>
+            <p id="dashboardSubtitle">Evaluate fundamental metrics and financial health.</p>
+        </div>
+
+        <!-- Gauge Meter Visual Setengah Lingkaran -->
+        <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 200 110">
+                <!-- Jalur background abu-abu gelap -->
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#2f2f2f" stroke-width="12" stroke-linecap="round"/>
+                <!-- Jalur progress bar warna hijau khas ChatGPT -->
+                <path id="gaugeProgress" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#10a37f" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="transition: stroke-dashoffset 1s ease-in-out;"/>
+            </svg>
+            <div class="gauge-score-box">
+                <div class="gauge-score" id="displayScore">0</div>
+                <div class="gauge-label" id="displayRating" style="color: #10a37f;">AWAITING INPUT</div>
+            </div>
+        </div>
 
         <form id="valueForm">
             <div class="form-group">
-                <label for="name">Name / Alias</label>
-                <input type="text" id="name" placeholder="Masukkan nama...">
+                <label for="name">Company Name</label>
+                <input type="text" id="name" placeholder="Company Name...">
             </div>
 
+            <!-- 1. Liquidity / Cash Flow -->
             <div class="form-group">
-                <label for="Industry">Industry</label>
-                <select id="Industry">
-                    <option value="50">Finance / Banking / Investment</option>
-                    <option value="40">Tech / Software Engineering</option>
-                    <option value="35">Energy / Mining / Heavy Industry</option>
-                    <option value="30">Creative Arts / Media / Design</option>
-                    <option value="25">F&B / Hospitality / Tourism</option>
-                    <option value="15">General Services / Others</option>
+                <label for="liquidity">Liquidity Ratio</label>
+                <select id="liquidity">
+                    <option value="" disabled selected>Select Liquidity...</option>
+                    <option value="50">&gt; 3.0x (Massive Cash Buffer)</option>
+                    <option value="40">2.0x - 3.0x (Strong Liquidity)</option>
+                    <option value="30">1.2x - 2.0x (Healthy Standard)</option>
+                    <option value="20">1.0x - 1.2x (Tight Cash Flow)</option>
+                    <option value="10">&lt; 1.0x (Liquidity Risk)</option>
                 </select>
             </div>
 
+            <!-- 2. Leverage -->
             <div class="form-group">
-                <label for="Position">Position</label>
-                <select id="Position">
-                    <option value="50">Founder / Owner</option>
-                    <option value="45">C-Level / President / Top Executive</option>
-                    <option value="35">Senior Manager / Head of Division / Expert</option>
-                    <option value="30">Manager / Supervisor / Team Lead</option>
-                    <option value="25">Middle Staff / Professional</option>
-                    <option value="20">Freelancer / Independent</option>
-                    <option value="15">Fresh Graduate / Junior / Intern</option>
-                    <option value="5">Unemployed</option>
+                <label for="leverage">Leverage (Debt-to-Equity Ratio)</label>
+                <select id="leverage">
+                    <option value="" disabled selected>Select Leverage...</option>
+                    <option value="50">&lt; 0.2x (Pristine / Near Debt-Free)</option>
+                    <option value="40">0.2x - 0.5x (Conservative & Safe)</option>
+                    <option value="30">0.5x - 1.0x (Moderate Leverage)</option>
+                    <option value="15">1.0x - 2.0x (High Debt Exposure)</option>
+                    <option value="5">&gt; 2.0x (High Insolvency Risk)</option>
                 </select>
             </div>
 
+            <!-- 3. Profitability -->
             <div class="form-group">
-                <label for="income">Salary / Income</label>
-                <select id="income">
-                    <option value="50">$5M - $10M / Year</option>
-                    <option value="45">$1M - $5M / Year</option>
-                    <option value="35">$500K - $1M / Year</option>
-                    <option value="25">$250K - $500K / Year</option>
-                    <option value="20">$100k - $250K / Year</option>
-                    <option value="15">$50K - $100K / Year</option>
-                    <option value="10">&lt; $50K / Year</option>
+                <label for="profitability">Profitability (Net Profit Margin)</label>
+                <select id="profitability">
+                    <option value="" disabled selected>Select Profitability...</option>
+                    <option value="50">&gt; 20% (Elite Cash Cow)</option>
+                    <option value="40">10% - 20% (High Margin)</option>
+                    <option value="30">5% - 10% (Solid Operating Margin)</option>
+                    <option value="20">1% - 5% (Low Margin)</option>
+                    <option value="10">&lt; 1% (Burning Cash Flow)</option>
                 </select>
             </div>
 
+            <!-- 4. Return on Equity -->
             <div class="form-group">
-                <label for="education">Highest Education</label>
-                <select id="education">
-                    <option value="50">PhD</option>
-                    <option value="35">Master</option>
-                    <option value="25">Bachelor</option>
-                    <option value="15">Senior High School</option>
-                    <option value="5">Junior High School</option>
+                <label for="roe">Return on Equity</label>
+                <select id="roe">
+                    <option value="" disabled selected>Select ROE...</option>
+                    <option value="50">&gt; 20% (Exceptional Compounder)</option>
+                    <option value="40">15% - 20% (Strong Returns)</option>
+                    <option value="30">10% - 15% (Average Market Returns)</option>
+                    <option value="20">5% - 10% (Subpar Efficiency)</option>
+                    <option value="10">&lt; 5% (Poor Capital Efficiency)</option>
                 </select>
             </div>
 
+            <!-- 5. Growth Rate-->
             <div class="form-group">
-                <label for="networking">Networking level</label>
-                <select id="networking">
-                    <option value="50">Illuminati / Royal Family</option>
-                    <option value="40">Inner Circle Elite / C-Level Direct</option>
-                    <option value="35">Industry Elite / LinkedIn Influencer</option>
-                    <option value="30">Active Networker / VIP Afterparty Regular</option>
-                    <option value="25">Standard Corpotate / Lunch Gang Member</option>
-                    <option value="15">Casual Acquitance</option>
-                    <option value="10">Strictly Anti-Social</option>
-                    <option value="5">Nobody Knows You </option>
+                <label for="growth">Growth Rate (YoY Revenue Growth)</label>
+                <select id="growth">
+                    <option value="" disabled selected>Select Growth Rate...</option>
+                    <option value="50">&gt; 50% YoY (Hypergrowth Scale)</option>
+                    <option value="35">30% - 50% YoY (Rapid Expansion)</option>
+                    <option value="25">15% - 30% YoY (Steady Growth)</option>
+                    <option value="15">5% - 15% YoY (Mature / Stable Growth)</option>
+                    <option value="5">&lt; 5% YoY (Stagnant / Declining)</option>
                 </select>
-            </div>        
+            </div>
+
+            <!-- 6. Interest Coverage Ratio-->
+            <div class="form-group">
+                <label for="coverage">Interest Coverage Ratio</label>
+                <select id="coverage">
+                    <option value="" disabled selected>Select Interest Coverage Ratio...</option>
+                    <option value="50">&gt; 8.0x (Bulletproof Coverage)</option>
+                    <option value="35">5.0x - 8.0 (Very Safe)</option>
+                    <option value="25">2.5x - 5.0x (Adequate Buffer)</option>
+                    <option value="15">1.0x - 2.5x (Vulnerable to Earnings Drop)</option>
+                    <option value="5">&lt; 1.0x (Default / Cannot Cover Interest)</option>
+                </select>
+            </div>
 
             <button type="button" id="calcBtn">Calculate My Value</button>
         </form>
 
-        <div id="resultContainer">
-            <h2 id="resultTitle"></h2>
-            <p id="resultValue"></p>
+        <!-- Grid kartu faktor keuangan-->
+        <div class="factor-grid" id="factorGrid">
+            <div class="factor-card">
+                <div class="factor-value" id="liquidityValue">-</div>
+                <div class="factor-name">Liquidity</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-value" id="leverageValue">-</div>
+                <div class="factor-name">Leverage</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-value" id="profitabilityValue">-</div>
+                <div class="factor-name">Profitability</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-value" id="roeValue">-</div>
+                <div class="factor-name">ROE</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-value" id="growthValue">-</div>
+                <div class="factor-name">Growth Rate</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-value" id="coverageValue">-</div>
+                <div class="factor-name">Interest Coverage</div>
+            </div>
         </div>
+
+        <div class="summary-banner" id="summaryBanner"></div>
     </div>
 
     <script>
@@ -192,33 +332,69 @@
         
         btn.addEventListener('click', function() {
             const name = document.getElementById('name').value || "Anonim";
-            const industryScore = parseInt(document.getElementById('Industry').value);
-            const positionScore = parseInt(document.getElementById('Position').value);
-            const incomeScore = parseInt(document.getElementById('income').value);
-            const educationScore = parseInt(document.getElementById('education').value);
-            const networkingScore = parseInt(document.getElementById('networking').value);
 
-            const totalScore = industryScore + positionScore + incomeScore + educationScore + networkingScore;
+            const liquiditySelect = document.getElementById('liquidity');
+            const leverageSelect= document.getElementById('leverage');
+            const profitabilitySelect = document.getElementById('profitability');
+            const roeSelect= document.getElementById('roe');
+            const growthSelect = document.getElementById('growth');
+            const coverageSelect = document.getElementById('coverage');
 
-            let tierMessage = "";
+            const liquidityScore = parseInt(liquiditySelect.value);
+            const leverageScore = parseInt(leverageSelect.value);
+            const profitabilityScore = parseInt(profitabilitySelect.value);
+            const roeScore = parseInt(roeSelect.value);
+            const growthScore = parseInt(growthSelect.value);
+            const coverageScore = parseInt(coverageSelect.value);
 
-            if (totalScore >= 210) {
-                tierMessage = "👑 <b>Global Hegemony Tier!</b> You literally pull the strings of the global economy from a dimly lit room.";
-            } else if (totalScore >= 160) {
-                tierMessage = "🔥 <b>Ultra High Net-Worth Individual Tier!</b> You wield leverage that makes regular corporate slaves weep.";
-            } else if (totalScore >= 110) {
-                tierMessage = "💼 <b>Inner Circle Executive Tier!</b> Surrounded ny absolute privilage and high-level insider access.";
-            } else if (totalScore >= 70) {
-                tierMessage = "🚀 <b>High Performer Radar!</b> Massive wealth creation potential, but still grinding for that breakthrough.";
+            const totalScore = liquidityScore + leverageScore + profitabilityScore + roeScore + growthScore + coverageScore;
+            const maxScore = 300;
+
+            const circumference = 251.2; // Panjang jalur setengah lingkaran
+            const percentage = totalScore / maxScore;
+            const strokeDashoffset = circumference - (percentage * circumference);
+
+            document.getElementById('gaugeProgress').style.strokeDashoffset = strokeDashoffset;
+            document.getElementById('displayScore').innerText = totalScore;
+
+            let ratingText = "";
+            let HealthMessage = "";
+
+            if (totalScore >= 230) {
+                ratingText = "<b>TIER 1 (APEX-LEVEL)";
+                HealthMessage = `<b>${CompanyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
+            } else if (totalScore >= 180) {
+                ratingText = "<b>TIER 2 (ELITE-LEVEL)";
+                HealthMessage = `<b>${CompanyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
+            } else if (totalScore >= 150) {
+                ratingText = "<b>TIER 3 (MID-LEVEL)";
+                HealthMessage = `<b>${CompanyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
+            } else if (totalScore >= 100) {
+                ratingText = "<b>TIER 4 (TRASH-LEVEL)";
+                HealthMessage = `<b>${CompanyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
             } else {
-                tierMessage = "☕ <b>'The Grinder'.</b> Relax, every tech tycoon or financial overlord started by hugging their desk in despair."; 
+                ratingText = "<b>TIER 5 (DEAD-LEVEL)";
+                HealthMessage = `<b>${CompanyName}:</b> Wallahi its over bruv 😭😭🥀.`;
             } 
             
-            const resultContainer = document.getElementById('resultContainer');
-            resultContainer.style.display = 'block';
-            document.getElementById('resultTitle').innerText = "Valuation Result: " + name;
-            document.getElementById('resultValue').innerHTML = "Total Score: <b>" + totalScore + " / 250</b><br><br><span style='color: #93c5fd;'>" + tierMessage + "</span>";
+            const labelEl  = document.getElementById('displayRating');
+            labelEl.innerText = ratingText;
+
+            document.getElementById('liquidityValue').innerText = liquiditySelect.options[liquiditySelect.selectedIndex].text.split(' ')[0];
+            document.getElementById('leverageValue').innerText = leverageSelect.options[leverageSelect.selectedIndex].text.split(' ')[0];
+            document.getElementById('profitabilityValue').innerText = profitabilitySelect.options[profitabilitySelect.selectedIndex].text.split(' ')[0];
+            document.getElementById('roeValue').innerText = roeSelect.options[roeSelect.selectedIndex].text.split(' ')[0];
+            document.getElementById('growthValue').innerText = growthSelect.options[growthSelect.selectedIndex].text.split(' ')[0];
+            document.getElementById('coverageValue').innerText = coverageSelect.options[coverageSelect.selectedIndex].text.split(' ')[0];
+
+            document.getElementById('factorGrid').style.display = 'grid';
+            const banner = document.getElementById('summaryBanner');
+            banner.style.display = 'block';
+            banner.innerHTML = HealthMessage;
+
+            document.querySelector('.gauge-container').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
 </html>
+         
