@@ -372,10 +372,6 @@
             const totalScore = liquidityScore + leverageScore + profitabilityScore + roeScore + growthScore + coverageScore;
             const maxScore = 300;
 
-            const circumference = 251.2; // Panjang jalur setengah lingkaran
-            const percentage = totalScore / maxScore;
-            const strokeDashoffset = circumference - (percentage * circumference);
-
             // Hitung persentase untuk progress bar lurus
             const percentage = (totalScore / maxScore) * 100;
             document.getElementById('gaugeProgress').style.width = percentage + '%';
@@ -386,19 +382,19 @@
 
             if (totalScore >= 230) {
                 ratingText = "TIER 1 (APEX-LEVEL)";
-                HealthMessage = `</b>${companyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
+                healthMessage = `</b>${companyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
             } else if (totalScore >= 180) {
                 ratingText = "TIER 2 (ELITE-LEVEL)";
-                HealthMessage = `<b>${companyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
+                healthMessage = `<b>${companyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
             } else if (totalScore >= 150) {
                 ratingText = "TIER 3 (MID-LEVEL)";
-                HealthMessage = `<b>${companyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
+                healthMessage = `<b>${companyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
             } else if (totalScore >= 100) {
                 ratingText = "TIER 4 (TRASH-LEVEL)";
-                HealthMessage = `<b>${companyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
+                healthMessage = `<b>${companyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
             } else {
                 ratingText = "TIER 5 (DEAD-LEVEL)";
-                HealthMessage = `<b>${companyName}:</b> Wallahi its over bruv 😭😭🥀.`;
+                healthMessage = `<b>${companyName}:</b> Wallahi its over bruv 😭😭🥀.`;
             } 
             
             const labelEl  = document.getElementById('displayRating');
@@ -414,7 +410,7 @@
             document.getElementById('factorGrid').style.display = 'grid';
             const banner = document.getElementById('summaryBanner');
             banner.style.display = 'block';
-            banner.innerHTML = HealthMessage;
+            banner.innerHTML = healthMessage;
 
             document.querySelector('.progress-container').scrollIntoView({ behavior: 'smooth' });
         });
