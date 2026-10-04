@@ -44,26 +44,26 @@
             font-size: 0.9rem;
             color: #8e8ea0;
         }
-        /* Gauge Meter Container */
-        .gauge-container {
-            position: relative;
-            text-align: center;
-            margin-bottom: 25px;
+        /* Linear progress container */
+        .prograss-container {
             background: #212121;
             border: 1px solid #2f2f2f;
-            border-radius: 14px;
-            padding: 20px 0 10px 0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
         }
-        .gauge-svg {
-            width: 200px;
-            height: 110px;
+        .score-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
         }
-        .gauge-score-box {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+        .score-label-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .gauge-score {
             font-size: 2rem;
@@ -72,12 +72,34 @@
             line-height: 1;
             letter-spacing: -1px;
         }
-        .gauge-label {
-            font-size: 0.75rem;
+        .score-max {
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-top: 8px;
+            color: #8e8ea0;
+           
+        }
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: #2f2f2f;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #10a37f;
+            width: 0%;
+            border-radius : 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        .gauge-label {
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: center;
+            margin-top: 6px;
         }
         /* Section Title */
         .section-title {
@@ -195,18 +217,18 @@
             <p id="dashboardSubtitle">Evaluate fundamental metrics and financial health.</p>
         </div>
 
-        <!-- Gauge Meter Visual Setengah Lingkaran -->
-        <div class="gauge-container">
-            <svg class="gauge-svg" viewBox="0 0 200 110">
-                <!-- Jalur background abu-abu gelap -->
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#2f2f2f" stroke-width="12" stroke-linecap="round"/>
-                <!-- Jalur progress bar warna hijau khas ChatGPT -->
-                <path id="gaugeProgress" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#10a37f" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="transition: stroke-dashoffset 1s ease-in-out;"/>
-            </svg>
-            <div class="gauge-score-box">
-                <div class="gauge-score" id="displayScore">0</div>
-                <div class="gauge-label" id="displayRating" style="color: #10a37f;">AWAITING INPUT</div>
+        <!-- Linear Progress Bar Indicator -->
+        <div class="progress-container">
+            <div class="score-info">
+                <span class="score-label-text">Fundamental Score</span>
+                <div>
+                    <span class="gauge-score" id="displayScore">0</span><span class="score-max">/300</span>
+                </div>
             </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="gaugeProgress"></div>
+            </div>
+            <div class="gauge-label" id="displayRating" style="color: #10a37f;">AWAITING INPUT</div>
         </div>
 
         <form id="valueForm">
@@ -354,7 +376,9 @@
             const percentage = totalScore / maxScore;
             const strokeDashoffset = circumference - (percentage * circumference);
 
-            document.getElementById('gaugeProgress').style.strokeDashoffset = strokeDashoffset;
+            // Hitung persentase untuk progress bar lurus
+            const percentage = (totalScore / maxScore) * 100;
+            document.getElementById('gaugeProgress').style.width = percentage + '%';
             document.getElementById('displayScore').innerText = totalScore;
 
             let ratingText = "";
@@ -392,10 +416,8 @@
             banner.style.display = 'block';
             banner.innerHTML = HealthMessage;
 
-            document.querySelector('.gauge-container').scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('.progress-container').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
 </html>
-
-           
