@@ -331,7 +331,7 @@
         const btn = document.getElementById('calcBtn');
         
         btn.addEventListener('click', function() {
-            const name = document.getElementById('name').value || "Anonim";
+            const companyName = document.getElementById('name').value || "Anonim";
 
             const liquiditySelect = document.getElementById('liquidity');
             const leverageSelect= document.getElementById('leverage');
@@ -340,12 +340,12 @@
             const growthSelect = document.getElementById('growth');
             const coverageSelect = document.getElementById('coverage');
 
-            const liquidityScore = parseInt(liquiditySelect.value);
-            const leverageScore = parseInt(leverageSelect.value);
-            const profitabilityScore = parseInt(profitabilitySelect.value);
-            const roeScore = parseInt(roeSelect.value);
-            const growthScore = parseInt(growthSelect.value);
-            const coverageScore = parseInt(coverageSelect.value);
+           const liquidityScore = parseInt(liquiditySelect.value) || 0;
+           const leverageScore = parseInt(leverageSelect.value) || 0;
+           const profitabilityScore = parseInt(profitabilitySelect.value) || 0;
+           const roeScore = parseInt(roeSelect.value) || 0;
+           const growthScore = parseInt(growthSelect.value) || 0;
+           const coverageScore = parseInt(coverageSelect.value) || 0;
 
             const totalScore = liquidityScore + leverageScore + profitabilityScore + roeScore + growthScore + coverageScore;
             const maxScore = 300;
@@ -361,20 +361,20 @@
             let HealthMessage = "";
 
             if (totalScore >= 230) {
-                ratingText = "<b>TIER 1 (APEX-LEVEL)";
-                HealthMessage = `<b>${CompanyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
+                ratingText = "TIER 1 (APEX-LEVEL)";
+                HealthMessage = `</b>${companyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
             } else if (totalScore >= 180) {
-                ratingText = "<b>TIER 2 (ELITE-LEVEL)";
-                HealthMessage = `<b>${CompanyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
+                ratingText = "TIER 2 (ELITE-LEVEL)";
+                HealthMessage = `<b>${companyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
             } else if (totalScore >= 150) {
-                ratingText = "<b>TIER 3 (MID-LEVEL)";
-                HealthMessage = `<b>${CompanyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
+                ratingText = "TIER 3 (MID-LEVEL)";
+                HealthMessage = `<b>${companyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
             } else if (totalScore >= 100) {
-                ratingText = "<b>TIER 4 (TRASH-LEVEL)";
-                HealthMessage = `<b>${CompanyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
+                ratingText = "TIER 4 (TRASH-LEVEL)";
+                HealthMessage = `<b>${companyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
             } else {
-                ratingText = "<b>TIER 5 (DEAD-LEVEL)";
-                HealthMessage = `<b>${CompanyName}:</b> Wallahi its over bruv 😭😭🥀.`;
+                ratingText = "TIER 5 (DEAD-LEVEL)";
+                HealthMessage = `<b>${companyName}:</b> Wallahi its over bruv 😭😭🥀.`;
             } 
             
             const labelEl  = document.getElementById('displayRating');
@@ -397,4 +397,5 @@
     </script>
 </body>
 </html>
-         
+
+           
