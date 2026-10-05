@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corporate Fundamental Valuation</title>
+    <title>IVERHIA CALC</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystenFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
             background-color: #212121;
@@ -26,7 +26,7 @@
             padding: 35px;
             border-radius: 16px;
             width: 100%;
-            max-width: 500px;
+            max-width: 1250px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
         /* Header Dashboard */
@@ -50,8 +50,8 @@
         /*Layout Grid 2 kolom ( kiri: form, kanan: hasil )*/
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.1fr 1.4fr;
+            gap: 25px;
             align-items: start;
         }
         @media (max-width: 768px) {
@@ -175,10 +175,9 @@
         /* Factor Cards Grid */
         .factor-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-top: 20px;
-            display: none;
         }
         .factor-card {
             background: #212121;
@@ -237,7 +236,7 @@
 
     <div class="container">
         <div class="dashboard-header">
-            <h1 id="dashboardTitle">Corporate Fundamental Valuation</h1>
+            <h1 id="dashboardTitle">IVERHIA CALC</h1>
             <p id="dashboardSubtitle">Evaluate fundamental metrics and financial health.</p>
         </div>
 
@@ -444,7 +443,7 @@
             // ubah warna progress bar sesuai tier
             document.getElementById('gaugeProgress').style.backgroundColor = badgecolor;
             documenyt.getElementById('displayRating').style.color = badgecolor;
-            
+
             // Ambil teks ringkas dari opsi dropdown
             document.getElementById('liquidityValue').innerText = liquiditySelect.options[liquiditySelect.selectedIndex].text.split(' ')[0];
             document.getElementById('leverageValue').innerText = leverageSelect.options[leverageSelect.selectedIndex].text.split(' ')[0];
