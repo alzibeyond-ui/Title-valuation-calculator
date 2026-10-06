@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow ala Google Dark Mode (Ungu - Biru lembut di background) */
+        /* Ambient Glow ala Google Dark Mode */
         .ambient-glow {
             position: absolute;
             top: -100px;
@@ -85,7 +85,7 @@
             margin-top: 4px;
         }
 
-        /* Bento Grid Layout dengan Transparansi Kaca & Hover Ngangkat */
+        /* Bento Grid Layout */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -113,7 +113,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.15);
         }
 
-        /* Card Sizing Grid */
         .col-span-5 { grid-column: span 5; }
         .col-span-7 { grid-column: span 7; }
 
@@ -123,7 +122,6 @@
             }
         }
 
-        /* Typography & Form Elements */
         .card-label {
             font-size: 0.72rem;
             font-weight: 700;
@@ -168,7 +166,7 @@
             background-color: rgba(18, 24, 33, 0.8);
         }
 
-        /* Custom Range Slider ala Brightness/Volume Bar */
+        /* Custom Range Slider ala Brightness/Volume Bar untuk Profil Risiko */
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
@@ -219,7 +217,6 @@
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
         }
 
-        /* Metric & Display Items */
         .big-score-display {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2.3rem;
@@ -315,45 +312,41 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>Macroeconomic & Wealth Projections</p>
+                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
             </div>
         </div>
 
         <!-- Bento Grid Layout -->
         <div class="bento-grid">
             
-            <!-- CARD 1: INPUT PREFERENSI INVESTASI (KOSONG DI AWAL) -->
+            <!-- CARD 1: INPUT PREFERENSI INVESTASI -->
             <div class="bento-card col-span-5">
                 <div class="card-label">01. Investor Profile & Preferences</div>
                 
                 <div class="form-grid-2">
                     <div class="input-group">
-                        <label>Modal (IDR)</label>
+                        <label>Initial Capital(IDR)</label>
                         <input type="number" id="capital" placeholder="e.g. 10000000">
                     </div>
                     <div class="input-group">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <label>Time Span</label>
-                            <span id="timeframeLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">5 Tahun</span>
-                        </div>
-                        <input type="range" id="timeframe" min="1" max="15" value="5" step="1">
+                        <label>Time Span</label>
+                        <input type="number" id="timeframe" placeholder="e.g. 5" min="1" max="30">
                     </div>
                 </div>
 
                 <div class="form-grid-2">
+                    <!-- Slider Profil Risiko / Return p.a (0 - 15%) -->
                     <div class="input-group">
-                        <label>Profile Risk</label>
-                        <select id="riskProfile">
-                            <option value="" disabled selected>Select Risk</option>
-                            <option value="aggressive">Aggressive (15% p.a)</option>
-                            <option value="stable">Stable (11% p.a)</option>
-                            <option value="conservative">Conservative (8% p.a)</option>
-                        </select>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label>Target Return (p.a)</label>
+                            <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">10%</span>
+                        </div>
+                        <input type="range" id="riskSlider" min="1" max="15" value="10" step="0.5">
                     </div>
                     <div class="input-group">
                         <label>Sector</label>
                         <select id="sector">
-                            <option value="" disabled selected>Select Sectors</option>
+                            <option value="" disabled selected>Select Sector</option>
                             <option value="banking">Banking & Financials</option>
                             <option value="tech">Technology & Digital</option>
                             <option value="energy">Energy & Commodities</option>
@@ -363,7 +356,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Target Emiten Pembanding (Opsional)</label>
+                    <label>Target comparable issuer (optional)</label>
                     <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
                 </div>
 
@@ -372,75 +365,62 @@
 
             <!-- CARD 2: TOTAL SCORE, METRICS & GRAFIK BAR VERTIKAL -->
             <div class="bento-card col-span-7">
-                <div class="card-label">02. Index & Wealth Simulation</div>
+                <div class="card-label">02. Wealth Projection & Compounding Summary</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div class="big-score-display" id="scoreVal">--</div>
-                        <div style="font-size: 0.78rem; color: #8e8ea0; margin-top: 2px;" id="tierVal">Status: Awaiting</div>
+                        <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: AWAITING</div>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Analysis Mode</div>
+                        <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
                         <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
                     </div>
                 </div>
 
-                <!-- Mini Metrics Grid -->
-                <div class="metrics-mini-grid">
-                    <div class="mini-stat-card">
-                        <div class="mini-val" id="m1">--</div>
-                        <div class="mini-lbl">Solvency Index</div>
-                    </div>
-                    <div class="mini-stat-card">
-                        <div class="mini-val" id="m2">--</div>
-                        <div class="mini-lbl">Earnings Velocity</div>
-                    </div>
-                    <div class="mini-stat-card">
-                        <div class="mini-val" id="m3">--</div>
-                        <div class="mini-lbl">Capital Safety</div>
-                    </div>
-                </div>
+                <!-- Big nominal output box -->
+                 <div class="big-result-box">
+                    <div class="result-title-lbl">Total Projected Final Portofolio Value</div>
+                    <div class="big-nominal-display" id="totalValDisplay">Rp --</div>
 
-                <!-- Grafik Bar Vertikal (Year 1 - 15) -->
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <span>Portfolio Growth Bar Chart (Year 1 to 15)</span>
-                        <span id="projectedEndVal" style="color: #22c55e; font-weight: 700;">Final Est: --</span>
+                <!-- Mini Metrics Grid -->
+                 <div class="metrics-mini-grid">
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mInitial">--</div>
+                        <div class="mini-lbl">Initial Capital</div>
                     </div>
-                    <svg class="chart-svg" viewBox="0 0 500 115" preserveAspectRatio="none" id="chartBars">
-                        <!-- Bar SVG akan digenerate otomatis lewat Javascript -->
-                    </svg>
-                    <div class="chart-axis-labels">
-                        <span>Yr 1-3 (Oranye Pekat)</span>
-                        <span>Yr 4-6 (Terang)</span>
-                        <span>Yr 7-10 (Kuning)</span>
-                        <span>Yr 11-15 (Ijo)</span>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mProfit" style="color: #22c55e;">--</div>
+                        <div class="mini-lbl">Net Profit</div>
+                    </div>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mMultiplier">--</div>
+                        <div class="mini-lbl">Asset Multiplier</div>
                     </div>
                 </div>
             </div>
 
             <!-- CARD 3: REKOMENDASI SAHAM / INVESTASI -->
             <div class="bento-card col-span-7">
-                <div class="card-label">03. AI Investment Match & Strategy</div>
+                <div class="card-label">03. Investment Match & Strategy</div>
                 <div class="recommendation-box">
                     <div class="rec-stock-title" id="recTitle">-- execute analysis --</div>
                     <div class="rec-desc" id="recDesc">
-                        Sistem AI akan mencocokkan profil modal, rentang waktu, serta sektor pilihan Anda untuk menghasilkan rekomendasi alokasi aset, skor deterministik konsisten, dan grafik pertumbuhan majemuk secara otomatis.
+                        The system will match your capital profile, time span, target return percentage, and chosen sector to automatically generate asset allocation recommendations and compound projections.
                     </div>
                 </div>
             </div>
 
-            <!-- CARD 4: SYSTEM STATUS & LOG -->
+            <!-- CARD 4: LIVE STATUS & QUICK INFO -->
             <div class="bento-card col-span-5">
-                <div class="card-label">04. Macro Status & Security</div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626;">
-                        <span style="color: #8e8ea0;">Execution Environment</span>
-                        <span style="color: #22c55e; font-weight: 600;">Client-Side(JS)</span>
+                <div class="card-label">04. Simulation Summary</div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: #8e8ea0;">
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Data Storage</span>
+                        <span style="color: #f59e0b; font-weight: 600;">None (Browser Only)</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626;">
-                        <span style="color: #8e8ea0;">Simulation Model</span>
-                        <span style="color: #ffffff; font-weight: 600;">Compound Growth</span>
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; line-height: 1.4;">
+                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Tips Kalkulasi</span>
+                        <span>Semua hasil simulasi dihitung secara instan menggunakan rumus compound interest standar.</span>
                     </div>
                 </div>
             </div>
@@ -449,106 +429,59 @@
     </div>
 
     <script>
-        // Update label angka secara real-time pas slider brightness digeser
-        const timeframeSlider = document.getElementById('timeframe');
-        const timeframeLabel = document.getElementById('timeframeLabel');
+        // Update label angka persentase risiko/return secara real-time pas slider digeser
+        const riskSlider = document.getElementById('riskSlider');
+        const riskLabel = document.getElementById('riskLabel');
         
-        timeframeSlider.addEventListener('input', function() {
-            timeframeLabel.innerText = this.value + " Tahun";
+        riskSlider.addEventListener('input', function() {
+            riskLabel.innerText = this.value + "%";
         });
 
         document.getElementById('analyzeBtn').addEventListener('click', function() {
             const rawCapital = document.getElementById('capital').value.trim();
-            const timeframe = parseInt(timeframeSlider.value);
-            const riskProfile = document.getElementById('riskProfile').value;
+            const rawTimeframe = document.getElementById('timeframe').value.trim();
+            const annualRate = parseFloat(riskSlider.value) / 100;
             const sector = document.getElementById('sector').value;
             const customTicker = document.getElementById('ticker').value.trim();
 
-            // Validasi lengkap jika ada parameter yang belum diisi
-            if (!rawCapital || isNaN(rawCapital) || !riskProfile || !sector) {
-                alert("⚠️ Harap lengkapi semua parameter (Modal Awal, Profil Risiko, & Sektor Pilihan) terlebih dahulu!");
+            // Validasi lengkap parameter kosong
+            if (!rawCapital || isNaN(rawCapital) || !rawTimeframe || isNaN(rawTimeframe) || !sector) {
+                alert("⚠️ Please complete all parameters first!");
                 return;
             }
 
             const capital = parseFloat(rawCapital);
+            const timeframe = parseInt(rawTimeframe);
 
-            // 1. Kalkulasi Skor Deterministik
-            let baseScore = 200;
-            if (riskProfile === 'aggressive') baseScore += 35;
-            if (riskProfile === 'stable') baseScore += 48;
-            if (riskProfile === 'conservative') baseScore += 25;
-            if (sector === 'banking') baseScore += 14;
-            if (sector === 'tech') baseScore += 8;
-            
-            const finalScore = Math.min(300, baseScore);
-
-            document.getElementById('scoreVal').innerText = finalScore + "/300";
-            document.getElementById('tierVal').innerText = finalScore >= 240 ? "Rating: TIER 1 (APEX-OPTIMIZED)" : "Rating: TIER 2 (STABLE GROWTH)";
-            document.getElementById('modeVal').innerText = "PROFILING";
-
-            // Metrik konsisten
-            document.getElementById('m1').innerText = (sector === 'banking' ? '3.4x' : '2.8x');
-            document.getElementById('m2').innerText = (riskProfile === 'aggressive' ? '+18.5%' : '+12.2%');
-            document.getElementById('m3').innerText = (riskProfile === 'conservative' ? '98.5%' : '92.4%');
-
-            // 2. Return Rate p.a
-            let annualRate = 0.11; 
-            if (riskProfile === 'aggressive') annualRate = 0.15;
-            if (riskProfile === 'conservative') annualRate = 0.08;
-
-            // 3. Generate Data Grafik Bar Vertikal (Year 1 - 15) dengan Warna Gradasi Sesuai Permintaan
-            let svgContainer = document.getElementById('chartBars');
-            svgContainer.innerHTML = ""; 
-
-            let points = [];
-            let maxVal = 0;
-
-            for (let yr = 1; yr <= 15; yr++) {
-                let futureVal = capital * Math.pow(1 + annualRate, yr);
-                points.push({ year: yr, val: futureVal });
-                if (futureVal > maxVal) maxVal = futureVal;
+            if (timeframe <= 0 || timeframe > 40) {
+                alert("⚠️ Time span must be between 1 and 40 years!");
+                return;
             }
 
-            let svgWidth = 500;
-            let svgHeight = 90;
-            let barWidth = (svgWidth / 15) - 6; 
+            // 1. Kalkulasi Rumus Compound Interest: A = P * (1 + r)^t
+            const finalAmount = capital * Math.pow(1 + annualRate, timeframe);
+            const netProfit = finalAmount - capital;
+            const multiplier = (finalAmount / capital).toFixed(2);
 
-            points.forEach((p, idx) => {
-                let x = idx * (svgWidth / 15) + 3;
-                let barHeight = Math.max(8, (p.val / maxVal) * svgHeight);
-                let y = svgHeight - barHeight + 10;
+            // Tampilkan hasil di Card 02
+            document.getElementById('totalValDisplay').innerText = "Rp " + Math.round(finalAmount).toLocaleString('id-ID');
+            document.getElementById('mInitial').innerText = "Rp " + Math.round(capital).toLocaleString('id-ID');
+            document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
+            document.getElementById('mMultiplier').innerText = multiplier + "x Lipat";
+            
+            document.getElementById('statusSummaryLbl').innerText = `Proyeksi Berhasil (${timeframe} Tahun @ ${(annualRate*100)}% p.a)`;
+            document.getElementById('modeVal').innerText = "CALCULATED";
 
-                // Warna bar bertahap sesuai permintaan user
-                let barColor = "#c2410c"; // Year 1-3: Oranye pekat
-                if (p.year >= 4 && p.year <= 6) barColor = "#f97316"; // Year 4-6: Oranye terang
-                if (p.year >= 7 && p.year <= 10) barColor = "#eab308"; // Year 7-10: Kuning
-                if (p.year >= 11) barColor = "#22c55e"; // Year 11-15: Hijau
-
-                let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                rect.setAttribute("x", x);
-                rect.setAttribute("y", y);
-                rect.setAttribute("width", barWidth);
-                rect.setAttribute("height", barHeight);
-                rect.setAttribute("rx", "3");
-                rect.setAttribute("fill", barColor);
-                rect.style.transition = "all 0.4s ease";
-
-                svgContainer.appendChild(rect);
-            });
-
-            let finalEstimatedVal = points[points.length - 1].val;
-            document.getElementById('projectedEndVal').innerText = "Yr-15 Est: IDR " + Math.round(finalEstimatedVal).toLocaleString('id-ID');
-
-            // 4. Rekomendasi Saham & Strategy Text
+            // 2. Rekomendasi Saham & Strategy Text
             let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking Blue Chip)";
-            let strategyMsg = `Dengan modal awal <b>Rp ${capital.toLocaleString('id-ID')}</b>, rentang waktu <b>${timeframe} Tahun</b>, dan profil risiko <b>${riskProfile.toUpperCase()}</b> pada sektor pilihan, portofolio Anda diproyeksikan mengalami compounding kuat dengan asumsi return <b>${(annualRate*100)}% p.a</b>.`;
+            let strategyMsg = `Dengan modal awal <b>Rp ${capital.toLocaleString('id-ID')}</b> yang diinvestasikan selama <b>${timeframe} Tahun</b> pada tingkat return <b>${(annualRate*100)}% p.a</b>, aset Anda berpotensi berkembang menjadi <b>Rp ${Math.round(finalAmount).toLocaleString('id-ID')}</b> (menghasilkan keuntungan bersih sebesar <b>Rp ${Math.round(netProfit).toLocaleString('id-ID')}</b>).`;
 
             if (sector === 'tech') {
                 stockName = customTicker ? customTicker.toUpperCase() : "GOTO / EMTK (Tech Sector Index)";
-                strategyMsg = `Alokasi sektor teknologi dengan profil agresif berfokus pada perolehan <i>earnings velocity</i> tinggi. Proyeksi jangka panjang menunjukkan pertumbuhan eksponensial dengan volatilitas terkelola.`;
+                strategyMsg = `Strategi sektor teknologi dengan asumsi return <b>${(annualRate*100)}% p.a</b> selama <b>${timeframe} tahun</b> memaksimalkan kekuatan pertumbuhan majemuk (*compounding effect*), mengubah modal awal Anda berkali-lipat dengan volatilitas tinggi.`;
             } else if (sector === 'energy') {
                 stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA / UNTR (Energy & Dividend Yield)";
-                strategyMsg = `Sektor komoditas energi memberikan sokongan *cash buffer* yang solid melalui dividen tinggi, sangat cocok untuk mempertahankan daya beli aset dari tekanan inflasi makro.`;
+                strategyMsg = `Sektor komoditas energi menawarkan perlindungan nilai aset yang tangguh terhadap inflasi, cocok untuk mencapai target pertumbuhan akumulatif dalam jangka waktu ${timeframe} tahun ke depan.`;
             }
 
             document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
