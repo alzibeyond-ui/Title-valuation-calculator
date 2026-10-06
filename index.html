@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iverhia Terminal - Macro Intelligence</title>
+    <title>drophen terms - Macro Intelligence</title>
     <!-- Import Font Futuristic Minimalist (Space Grotesk & Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -224,16 +224,48 @@
             text-transform: uppercase;
             letter-spacing: 0.4px;
         }
+/* Terminal Logs & Bloomberg Style Box */
+        .terminal-log-box {
+            background: #0d0d0d;
+            border: 1px solid #222222;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+            color: #22c55e;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: 110px;
+            overflow-y: auto;
+        }
+        .log-line {
+            opacity: 0.85;
+        }
 
-        /* Summary Banner / Roasting Box */
-        .summary-banner {
+        /* Footer Telemetry Data Bar */
+        .telemetry-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             background: #121212;
             border: 1px solid #262626;
             border-radius: 8px;
-            padding: 14px;
-            font-size: 0.85rem;
-            line-height: 1.5;
+            padding: 10px;
+            text-align: center;
+        }
+        .tele-title {
+            font-size: 0.6rem;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .tele-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: #ececec;
+        
         }
     </style>
 </head>
@@ -241,8 +273,8 @@
 
     <div class="container">
         <div class="dashboard-header">
-            <h1>IVERHIA TERMINAL</h1>
-            <p>Macroeconomic & Corporate Intelligence Index</p>
+            <h1>DROPHEN TERMS</h1>
+            <p>Macroeconomics intelligence index</p>
         </div>
 
         <div class="dashboard-grid">
@@ -256,32 +288,32 @@
 
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="liquidity">Liquidity Ratio (Current Ratio)</label>
-                        <input type="number" id="liquidity" step="0.1" placeholder="e.g. 2.5">
+                        <input type="number" id="liquidity" step="0.1" placeholder="e.g. 2.5x">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="leverage">Debt Leverage (DER)</label>
-                        <input type="number" id="leverage" step="0.1" placeholder="e.g. 0.5">
+                        <input type="number" id="leverage" step="0.1" placeholder="e.g. 0.5x">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="profitability">Profit Margin (NPM %)</label>
-                        <input type="number" id="profitability" step="0.1" placeholder="e.g. 15">
+                        <input type="number" id="profitability" step="0.1" placeholder="e.g. 15%">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="roe">Return on Equity (ROE %)</label>
-                        <input type="number" id="roe" step="0.1" placeholder="e.g. 18">
+                        <input type="number" id="roe" step="0.1" placeholder="e.g. 18%">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="growth">YoY Revenue Growth (%)</label>
-                        <input type="number" id="growth" step="0.1" placeholder="e.g. 25">
+                        <input type="number" id="growth" step="0.1" placeholder="e.g. 25%">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 16px;">
                         <label for="coverage">Interest Coverage Ratio</label>
-                        <input type="number" id="coverage" step="0.1" placeholder="e.g. 5.0">
+                        <input type="number" id="coverage" step="0.1" placeholder="e.g. 5.0x">
                     </div>
 
                     <button type="button" id="calcBtn">Execute Terminal Analysis</button>
@@ -331,13 +363,30 @@
                     </div>
                 </div>
 
-                <!-- Summary Roasting Banner -->
-                <div class="summary-banner" id="summaryBanner">
-                    <b>Terminal Status:</b> Ready for calculation. Input metrics on the left and hit execute to stream diagnostics.
+                <!-- Terminal Execution Logs -->
+                 <div class="terminal-log-box" id="terminalLogs">
+                    <span class="log-line">> SYSTEM READY... AWAITING PARAMETER INGESTION.</span>
+                    <span class="log-line">> SECURE LINK: OFFLINE. SECURE ENCRYPTION: AES-256.</span>
+                 </div>
+                 
+                <!-- Telemetry Market Data Bar -->
+                <div class="telemetry-bar">
+                    <div>
+                        <div class="tele-title">Market State</div>
+                        <div class="tele-val" id="teleState">IDLE</div>
+                    </div>
+                    <div>
+                        <div class="tele-title">Volatility Index</div>
+                        <div class="tele-val" id="teleVol">--</div>
+                    </div>
+                    <div>
+                        <div class="tele-title">Signal Status</div>
+                        <div class="tele-val" id="teleSignal">SECURE</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <script>
         const btn = document.getElementById('calcBtn');
@@ -375,23 +424,23 @@
             if (totalScore >= 230) {
                 ratingText = "TIER 1 (APEX-LEVEL)";
                 badgeColor = "#3b82f6"; // Biru
-                healthMessage = `<b>${companyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
+                logMsg = `[APEX] ${companyName} exhibits elite capitalization & pristine cash conversion cycles.`;
             } else if (totalScore >= 180) {
                 ratingText = "TIER 2 (ELITE-LEVEL)";
                 badgeColor = "#a855f7"; // Ungu
-                healthMessage = `<b>${companyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
+                logMsg = `[ELITE] ${companyName} display robust margins with controlled balance sheet risk.`;
             } else if (totalScore >= 150) {
                 ratingText = "TIER 3 (MID-LEVEL)";
                 badgeColor = "#eab308"; // Kuning
-                healthMessage = `<b>${companyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
+                logMsg = `[WARNING] ${companyName} operates on median thresholds. Monitor quarterly cash burns.`;
             } else if (totalScore >= 100) {
                 ratingText = "TIER 4 (TRASH-LEVEL)";
                 badgeColor = "#f97316"; // Orange
-                healthMessage = `<b>${companyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
+                logMsg = `[CRITICAL] High leverage detected in ${companyName}. Solvency rations breached .`;
             } else {
                 ratingText = "TIER 5 (DEAD-LEVEL)";
                 badgeColor = "#ef4444"; // Merah
-                healthMessage = `<b>${companyName}:</b> Wallahi its over bruv 😭😭🥀.`;
+                logMsg = `[FATAL] Default probability critical for ${companyName}. Immediate liquidation advised.`;
             } 
             
             const labelEl = document.getElementById('displayRating');
@@ -409,7 +458,18 @@
             document.getElementById('compoundVal').innerText = Math.min(99, Math.round((growth / 50) * 75 + 20)) + '%';
             document.getElementById('safetyVal').innerText = Math.min(99, Math.max(10, Math.round((1 - leverage / 2) * 90)) ) + '%';
 
-            document.getElementById('summaryBanner').innerHTML = healthMessage;
+            // Update Terminal Logs & Telemetry
+            const logsContainer = document.getElementById('terminalLogs');
+            logsContainer.innerHTML = `
+                <span class="log-line">> INGESTING DATA FOR [${companyName}]...SUCCESS.</span>
+                <span class="log-line">> COMPUTING MACRO INDICES... [OK]</span>
+                <span class="log-line">> ${logMsg}</span>
+                <span class="log-line">> TERMINAL STATUS: OPTIMIZED. ENCRYPTION SECURE.</span>
+            `;
+            
+            document.getElementById('teleState').innerText = "LIVE STREAM";
+            document.getElementById('teleVol').innerText = (Math.random() * 2 + 0.8).toFixed(2) + '% (LOW)';
+            document.getElementById('teleSignal').innerText = totalScore >= 150 ? "OPTIMAL" : "HIGH RISK";
         });
     </script>
 </body>
