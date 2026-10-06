@@ -17,31 +17,27 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
-            background-color: #0a0a0a;
-            color: #ececec;
+            background-color: #0d1117;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(29, 78, 216, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            color: #e6edfd;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
         }
-        /* Container Utama Melebar ala Pro Terminal */
+        /* Main container no border */
         .container {
-            background: #121212;
-            border: 1px solid #222222;
-            padding: 35px;
-            border-radius: 16px;
             width: 100%;
-            max-width: 1300px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            max-width: 1250px;
         }
         
-        /* Header Dashboard */
+        /* Header Drophen Google style*/
         .dashboard-header {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #222222;
-            padding-bottom: 20px;
+            margin-bottom: 32px;
         }
         .dashboard-header h1 {
             font-family: 'Space Grotesk', sans-serif;
@@ -69,7 +65,19 @@
                 grid-template-columns: 1fr;
             }
         }
-
+        /* Google Glassmorphism Card Style (Semi Transparan + Blur) */
+        .form-panel, .result-panel {
+            background: rgba(22, 27, 34, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+        }    
         /* Panel Kiri: Form Input */
         .form-panel {
             background: #171717;
@@ -106,24 +114,24 @@
             outline: none;
             transition: all 0.3s;
         }
-        input[type="text"]:focus, input[type="number"]:focus {
-            border-color: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+        input[type="text"], input[type="number"]:focus {
+            background-color: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08)
         }
 
         /* Tombol Hijau Neon */
         button#calcBtn {
             width: 100%;
             padding: 13px;
-            background: #22c55e;
-            color: #000000;
+            background: #3b82f6;
+            color: #ffffff;
             border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            font-weight: 600;
             cursor: pointer;
             margin-top: 6px;
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
             transition: all 0.2s ease-in-out;
         }
         button#calcBtn:hover {
@@ -142,13 +150,15 @@
             gap: 20px;
             min-height: 100%;
         }
-
-        /* Skor & Progress Utama */
+        /* Inner Cards */
+        .score-container, .macro-card, .insight-card, .mini-metrics-bar {
+            background: rgba(13, 17, 23, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border-radius: 14px;
+        }    
         .score-container {
-            background: #121212;
-            border: 1px solid #262626;
-            border-radius: 10px;
-            padding: 18px;
+            padding: 16px;
         }
         .score-info {
             display: flex;
@@ -371,7 +381,7 @@
                 <div class="insight-card">
                     <div class="insight-header">Summary</div>
                     <div class="insight-body" id="insightText">
-                        Input company parameters and execute analysis to generate macroeconomic reports.
+                         Input company parameters and execute analysis to generate clean macroeconomic reports.
                     </div>
                 </div>
 
@@ -468,7 +478,7 @@
             document.getElementById('insightText').innerHTML = insightMsg;
             document.getElementById('mmMode').innerText = "PROFILING";
             document.getElementById('mmRisk').innerText = totalScore >= 150 ? "LOW / MODERATE" : "HIGH RISK";
-            document.getElementById('mmStatus').innerText = "DONE";
+            document.getElementById('mmStatus').innerText = "VERIFIED";
         });
     </script>
 </body>
