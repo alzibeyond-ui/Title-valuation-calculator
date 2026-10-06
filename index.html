@@ -16,14 +16,17 @@
             font-family: 'Inter', sans-serif;
         }
         body {
-            background-color: #06080c;
+            background-color: #030305;
             color: #e6edfd;
             min-height: 100vh;
             padding: 32px 16px;
             display: flex;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
-        /* ambient glow google-like*/
+
+        /* Ambient Glow ala Google Dark Mode (Ungu - Biru lembut di background) */
         .ambient-glow {
             position: absolute;
             top: -100px;
@@ -36,24 +39,25 @@
             z-index: -1;
             pointer-events: none;
             border-radius: 50%;
-        } 
-        .ambient-glow {
+        }
+
+        .ambient-glow-2 {
             position: absolute;
             bottom: 10px;
             right: 10%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(168, 85, 247, 0.15));
-            filter: blur(100px);
+            width: 500px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.15));
+            filter: blur(120px);
             z-index: -1;
             pointer-events: none;
             border-radius: 50%;
-        }        
+        }
 
         .container {
             width: 100%;
             max-width: 1300px;
+            z-index: 1;
         }
         
         /* Header Style */
@@ -80,19 +84,8 @@
             color: #8e8ea0;
             margin-top: 4px;
         }
-        .radar-badge {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.75rem;
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
 
-        /* Bento Grid Layout */
+        /* Bento Grid Layout dengan Transparansi Kaca & Hover Ngangkat */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -100,7 +93,7 @@
         }
 
         .bento-card {
-            background: rgba(18, 22, 31, 0.35);
+            background: rgba(13, 17, 23, 0.35);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -109,15 +102,15 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             transform: translateY(0);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .bento-card:hover {
-            background: rgba(22, 27, 38, 0.6);
+            background: rgba(18, 22, 31, 0.5);
             border-color: rgba(168, 85, 247, 0.3);
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(178, 85, 247, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.15);
         }
 
         /* Card Sizing Grid */
@@ -162,7 +155,7 @@
         input, select {
             width: 100%;
             padding: 9px 12px;
-            background-color: #0d1117;
+            background-color: rgba(13, 17, 23, 0.6);
             border: 1px solid #262626;
             border-radius: 8px;
             color: #ffffff;
@@ -172,7 +165,37 @@
         }
         input:focus, select:focus {
             border-color: #22c55e;
-            background-color: #121821;
+            background-color: rgba(18, 24, 33, 0.8);
+        }
+
+        /* Custom Range Slider ala Brightness/Volume Bar */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            outline: none;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 999px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            box-shadow: -405px 0 0 400px #22c55e, 0 0 15px rgba(34, 197, 94, 0.8), 0 0 25px rgba(34, 197, 94, 0.5);
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
         }
 
         .btn-action {
@@ -205,7 +228,7 @@
             line-height: 1;
         }
         .recommendation-box {
-            background: #0d1117;
+            background: rgba(13, 17, 23, 0.5);
             border: 1px solid #262626;
             border-radius: 12px;
             padding: 14px;
@@ -231,7 +254,7 @@
             gap: 8px;
         }
         .mini-stat-card {
-            background: #0d1117;
+            background: rgba(13, 17, 23, 0.5);
             border: 1px solid #262626;
             border-radius: 8px;
             padding: 10px;
@@ -252,13 +275,13 @@
 
         /* Chart Simulation Styles */
         .chart-container {
-            background: #0d1117;
-            border: 1px solid #262626;
+            background: rgba(13, 17, 23, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            padding: 12px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
         .chart-header {
             display: flex;
@@ -269,77 +292,69 @@
         }
         .chart-svg {
             width: 100%;
-            height: 110px;
+            height: 125px;
             overflow: visible;
-        }
-        .chart-line {
-            fill: none;
-            stroke: #22c55e;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .chart-area {
-            fill: rgba(34, 197, 94, 0.08);
         }
         .chart-axis-labels {
             display: flex;
             justify-content: space-between;
             font-size: 0.65rem;
             color: #64748b;
+            padding: 0 4px;
         }
     </style>
 </head>
 <body>
-    <!-- Ambient glow and nigga shit-->
-     <div class="ambient-glow"></div>
-     <div class="ambient-glow-2"></div>
+
+    <!-- AMBIENT BACKGROUND GLOW -->
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
 
     <div class="container">
         <!-- Header -->
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p> Macroeconomic & Wealth Projections</p>
+                <p>Macroeconomic & Wealth Projections</p>
             </div>
         </div>
 
         <!-- Bento Grid Layout -->
         <div class="bento-grid">
             
-            <!-- CARD 1: INPUT PREFERENSI INVESTASI -->
+            <!-- CARD 1: INPUT PREFERENSI INVESTASI (KOSONG DI AWAL) -->
             <div class="bento-card col-span-5">
                 <div class="card-label">01. Investor Profile & Preferences</div>
                 
                 <div class="form-grid-2">
                     <div class="input-group">
-                        <label>Modal Awal (IDR)</label>
-                        <input type="number" id="capital" placeholder="e.g. 10000000" value="10000000">
+                        <label>Modal (IDR)</label>
+                        <input type="number" id="capital" placeholder="e.g. 10000000">
                     </div>
                     <div class="input-group">
-                        <label>Rentang Waktu</label>
-                        <select id="timeframe">
-                            <option value="3">Short (3 Year)</option>
-                            <option value="5" selected>Medium (5 Year)</option>
-                            <option value="10">Long (10 Year)</option>
-                            <option value="15">Extended (15 Year)</option>
-                        </select>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label>Time Span</label>
+                            <span id="timeframeLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">5 Tahun</span>
+                        </div>
+                        <input type="range" id="timeframe" min="1" max="15" value="5" step="1">
                     </div>
                 </div>
 
                 <div class="form-grid-2">
                     <div class="input-group">
-                        <label>Profil Risiko</label>
+                        <label>Profile Risk</label>
                         <select id="riskProfile">
+                            <option value="" disabled selected>Select Risk</option>
                             <option value="aggressive">Aggressive (15% p.a)</option>
-                            <option value="stable" selected>Stable (11% p.a)</option>
+                            <option value="stable">Stable (11% p.a)</option>
                             <option value="conservative">Conservative (8% p.a)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label>Sektor Pilihan</label>
+                        <label>Sector</label>
                         <select id="sector">
-                            <option value="banking" selected>Banking & Financials</option>
+                            <option value="" disabled selected>Select Sectors</option>
+                            <option value="banking">Banking & Financials</option>
                             <option value="tech">Technology & Digital</option>
                             <option value="energy">Energy & Commodities</option>
                             <option value="fmcg">Consumer Goods (FMCG)</option>
@@ -355,14 +370,14 @@
                 <button type="button" class="btn-action" id="analyzeBtn">Generate Simulation</button>
             </div>
 
-            <!-- CARD 2: TOTAL SCORE, METRICS & GRAFIK PROYEKSI -->
+            <!-- CARD 2: TOTAL SCORE, METRICS & GRAFIK BAR VERTIKAL -->
             <div class="bento-card col-span-7">
-                <div class="card-label">02. 15-Year Wealth Simulation</div>
+                <div class="card-label">02. Index & Wealth Simulation</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div class="big-score-display" id="scoreVal">--</div>
-                        <div style="font-size: 0.78rem; color: #8e8ea0; margin-top: 2px;" id="tierVal">Status: Awaiting Parameters</div>
+                        <div style="font-size: 0.78rem; color: #8e8ea0; margin-top: 2px;" id="tierVal">Status: Awaiting</div>
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Analysis Mode</div>
@@ -386,21 +401,20 @@
                     </div>
                 </div>
 
-                <!-- Grafik Proyeksi Investasi (0 - 15 Tahun) -->
+                <!-- Grafik Bar Vertikal (Year 1 - 15) -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <span>Portfolio Growth Projection (Year 0 to 15)</span>
+                        <span>Portfolio Growth Bar Chart (Year 1 to 15)</span>
                         <span id="projectedEndVal" style="color: #22c55e; font-weight: 700;">Final Est: --</span>
                     </div>
-                    <svg class="chart-svg" viewBox="0 0 500 110" preserveAspectRatio="none">
-                        <path id="chartArea" class="chart-area" d="M0,100 L500,100 Z"></path>
-                        <path id="chartLine" class="chart-line" d="M0,100 L500,100"></path>
+                    <svg class="chart-svg" viewBox="0 0 500 115" preserveAspectRatio="none" id="chartBars">
+                        <!-- Bar SVG akan digenerate otomatis lewat Javascript -->
                     </svg>
                     <div class="chart-axis-labels">
-                        <span>Year 0</span>
-                        <span>Year 5</span>
-                        <span>Year 10</span>
-                        <span>Year 15</span>
+                        <span>Yr 1-3 (Oranye Pekat)</span>
+                        <span>Yr 4-6 (Terang)</span>
+                        <span>Yr 7-10 (Kuning)</span>
+                        <span>Yr 11-15 (Ijo)</span>
                     </div>
                 </div>
             </div>
@@ -409,7 +423,7 @@
             <div class="bento-card col-span-7">
                 <div class="card-label">03. AI Investment Match & Strategy</div>
                 <div class="recommendation-box">
-                    <div class="rec-stock-title" id="recTitle">-- Select parameters & execute analysis --</div>
+                    <div class="rec-stock-title" id="recTitle">-- execute analysis --</div>
                     <div class="rec-desc" id="recDesc">
                         Sistem AI akan mencocokkan profil modal, rentang waktu, serta sektor pilihan Anda untuk menghasilkan rekomendasi alokasi aset, skor deterministik konsisten, dan grafik pertumbuhan majemuk secara otomatis.
                     </div>
@@ -420,13 +434,13 @@
             <div class="bento-card col-span-5">
                 <div class="card-label">04. Macro Status & Security</div>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: #0d1117; padding: 10px; border-radius: 8px; border: 1px solid #262626;">
-                        <span style="color: #8e8ea0;">Data Encryption</span>
-                        <span style="color: #22c55e; font-weight: 600;">SECURE (TLS)</span>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626;">
+                        <span style="color: #8e8ea0;">Execution Environment</span>
+                        <span style="color: #22c55e; font-weight: 600;">Client-Side(JS)</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: #0d1117; padding: 10px; border-radius: 8px; border: 1px solid #262626;">
-                        <span style="color: #8e8ea0;">Market Feed</span>
-                        <span style="color: #ffffff; font-weight: 600;">Real-time IDEX</span>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626;">
+                        <span style="color: #8e8ea0;">Simulation Model</span>
+                        <span style="color: #ffffff; font-weight: 600;">Compound Growth</span>
                     </div>
                 </div>
             </div>
@@ -435,21 +449,30 @@
     </div>
 
     <script>
+        // Update label angka secara real-time pas slider brightness digeser
+        const timeframeSlider = document.getElementById('timeframe');
+        const timeframeLabel = document.getElementById('timeframeLabel');
+        
+        timeframeSlider.addEventListener('input', function() {
+            timeframeLabel.innerText = this.value + " Tahun";
+        });
+
         document.getElementById('analyzeBtn').addEventListener('click', function() {
             const rawCapital = document.getElementById('capital').value.trim();
-            const timeframe = parseInt(document.getElementById('timeframe').value);
+            const timeframe = parseInt(timeframeSlider.value);
             const riskProfile = document.getElementById('riskProfile').value;
             const sector = document.getElementById('sector').value;
             const customTicker = document.getElementById('ticker').value.trim();
 
-            if (!rawCapital || isNaN(rawCapital)) {
-                alert("⚠️ Harap masukkan nominal modal awal investasi yang valid terlebih dahulu!");
+            // Validasi lengkap jika ada parameter yang belum diisi
+            if (!rawCapital || isNaN(rawCapital) || !riskProfile || !sector) {
+                alert("⚠️ Harap lengkapi semua parameter (Modal Awal, Profil Risiko, & Sektor Pilihan) terlebih dahulu!");
                 return;
             }
 
             const capital = parseFloat(rawCapital);
 
-            // 1. Kalkulasi Skor Deterministik (Konsisten & Tetap walau di-spam klik)
+            // 1. Kalkulasi Skor Deterministik
             let baseScore = 200;
             if (riskProfile === 'aggressive') baseScore += 35;
             if (riskProfile === 'stable') baseScore += 48;
@@ -468,53 +491,55 @@
             document.getElementById('m2').innerText = (riskProfile === 'aggressive' ? '+18.5%' : '+12.2%');
             document.getElementById('m3').innerText = (riskProfile === 'conservative' ? '98.5%' : '92.4%');
 
-            // 2. Tentukan Return Rate p.a berdasarkan profil risiko
-            let annualRate = 0.11; // Stable default
+            // 2. Return Rate p.a
+            let annualRate = 0.11; 
             if (riskProfile === 'aggressive') annualRate = 0.15;
             if (riskProfile === 'conservative') annualRate = 0.08;
 
-            // 3. Generate Data Grafik Proyeksi 15 Tahun ke Depan
+            // 3. Generate Data Grafik Bar Vertikal (Year 1 - 15) dengan Warna Gradasi Sesuai Permintaan
+            let svgContainer = document.getElementById('chartBars');
+            svgContainer.innerHTML = ""; 
+
             let points = [];
             let maxVal = 0;
 
-            for (let yr = 0; yr <= 15; yr++) {
+            for (let yr = 1; yr <= 15; yr++) {
                 let futureVal = capital * Math.pow(1 + annualRate, yr);
-                points.push(futureVal);
+                points.push({ year: yr, val: futureVal });
                 if (futureVal > maxVal) maxVal = futureVal;
             }
 
-            // Normalisasi koordinat SVG
             let svgWidth = 500;
             let svgHeight = 90;
-            let pathD = "";
-            let areaD = "";
+            let barWidth = (svgWidth / 15) - 6; 
 
-            let coords = points.map((val, idx) => {
-                let x = (idx / 15) * svgWidth;
-                let y = svgHeight - ((val - capital) / (maxVal - capital || 1)) * (svgHeight - 15) - 10;
-                if (isNaN(y)) y = svgHeight;
-                return { x, y };
+            points.forEach((p, idx) => {
+                let x = idx * (svgWidth / 15) + 3;
+                let barHeight = Math.max(8, (p.val / maxVal) * svgHeight);
+                let y = svgHeight - barHeight + 10;
+
+                // Warna bar bertahap sesuai permintaan user
+                let barColor = "#c2410c"; // Year 1-3: Oranye pekat
+                if (p.year >= 4 && p.year <= 6) barColor = "#f97316"; // Year 4-6: Oranye terang
+                if (p.year >= 7 && p.year <= 10) barColor = "#eab308"; // Year 7-10: Kuning
+                if (p.year >= 11) barColor = "#22c55e"; // Year 11-15: Hijau
+
+                let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                rect.setAttribute("x", x);
+                rect.setAttribute("y", y);
+                rect.setAttribute("width", barWidth);
+                rect.setAttribute("height", barHeight);
+                rect.setAttribute("rx", "3");
+                rect.setAttribute("fill", barColor);
+                rect.style.transition = "all 0.4s ease";
+
+                svgContainer.appendChild(rect);
             });
 
-            coords.forEach((c, idx) => {
-                if (idx === 0) {
-                    pathD += `M ${c.x} ${c.y}`;
-                    areaD += `M ${c.x} 100 L ${c.x} ${c.y}`;
-                } else {
-                    pathD += ` L ${c.x} ${c.y}`;
-                    areaD += ` L ${c.x} ${c.y}`;
-                }
-            });
-
-            areaD += ` L 500 100 Z`;
-
-            document.getElementById('chartLine').setAttribute('d', pathD);
-            document.getElementById('chartArea').setAttribute('d', areaD);
-
-            let finalEstimatedVal = points[15];
+            let finalEstimatedVal = points[points.length - 1].val;
             document.getElementById('projectedEndVal').innerText = "Yr-15 Est: IDR " + Math.round(finalEstimatedVal).toLocaleString('id-ID');
 
-            // 4. Rekomendasi Saham Pintar & Strategy Text
+            // 4. Rekomendasi Saham & Strategy Text
             let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking Blue Chip)";
             let strategyMsg = `Dengan modal awal <b>Rp ${capital.toLocaleString('id-ID')}</b>, rentang waktu <b>${timeframe} Tahun</b>, dan profil risiko <b>${riskProfile.toUpperCase()}</b> pada sektor pilihan, portofolio Anda diproyeksikan mengalami compounding kuat dengan asumsi return <b>${(annualRate*100)}% p.a</b>.`;
 
