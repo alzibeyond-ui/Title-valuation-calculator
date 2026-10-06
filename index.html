@@ -35,50 +35,7 @@
             max-width: 1300px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
-        /* Bento Selector Cards Styling */
-        .bento-select-group {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-        }
-        .bento-input-card {
-            grid-column: span 6;
-            background: #171717;
-            border: 1px solid #262626;
-            border-radius: 12px;
-            padding: 16px;
-          
-        }
-        .bento-option {
-            background: #171717;
-            border: 1px solid #262626;
-            border-radius: 6px;
-            padding: 8px 6px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .bento-option:hover {
-            border-color: #3f3f46;
-            background: #1c1c1e;
-        }
-        .bento-option.selected {
-            background: rgba(34, 197, 94, 0.12);
-            border-color: #22c55e;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
-        }
-        .bento-title {
-            font-size: 0.72rem;
-            font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
-            color: #ffffff;
-            margin-bottom: 2px;
-        }
-        .bento-desc {
-            font-size: 0.6rem;
-            color: #8e8ea0;
-        }
+        
         /* Header Dashboard */
         .dashboard-header {
             text-align: center;
@@ -99,36 +56,49 @@
             color: #8e8ea0;
         }
 
-        /* Layout Grid 2 Kolom (Kiri: Input Bento, Kanan: Macro Index Panel) */
+        /* Layout Grid 2 Kolom Sejajar (Kiri: Input Panel, Kanan: Result Panel Besar) */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(1.1, 1fr);
-            gap: 16px;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Form / Input Panel */
-        .form-group {
-            margin-bottom: 14px;
+        /* Panel Kiri: Form Input */
+        .form-panel {
+            background: #171717;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
         label {
-            display: block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 6px;
             color: #8e8ea0;
         }
-        input[type="text"], select {
+
+        input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 11px 14px;
-            background-color: #171717;
+            padding: 10px 14px;
+            background-color: #121212;
             border: 1px solid #262626;
             border-radius: 8px;
             color: #ececec;
@@ -136,7 +106,7 @@
             outline: none;
             transition: all 0.3s;
         }
-        input[type="text"]:focus, select:focus {
+        input[type="text"]:focus, input[type="number"]:focus {
             border-color: #22c55e;
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
         }
@@ -152,7 +122,7 @@
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 6px;
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
             transition: all 0.2s ease-in-out;
         }
@@ -161,16 +131,16 @@
             box-shadow: 0 0 22px rgba(34, 197, 94, 0.5);
         }
 
-        /* Panel Sisi Kanan (Macro Index Panel) */
+        /* Panel Sisi Kanan: Result Panel Besar (Full Isi) */
         .result-panel {
-            grid-column: span 6; /* porsi lebih gede nih ngentot*/
             background: #171717;
-            border: 1px solid #222222;
+            border: 1px solid #262626;
             border-radius: 12px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-height: 100%;
         }
 
         /* Skor & Progress Utama */
@@ -228,12 +198,11 @@
             text-align: center;
         }
 
-        /* Bento Grid Persentase Indeks (Pengganti teks biasa) */
+        /* Macro Grid Persentase */
         .macro-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            display: none;
         }
         .macro-card {
             background: #121212;
@@ -265,14 +234,6 @@
             font-size: 0.85rem;
             line-height: 1.5;
             color: #ececec;
-            display: none;
-        }
-        .placeholder-text {
-            text-align: center;
-            color: #8e8ea0;
-            font-size: 0.88rem;
-            padding: 50px 20px;
-            font-style: italic;
         }
     </style>
 </head>
@@ -285,72 +246,49 @@
         </div>
 
         <div class="dashboard-grid">
-            <!-- SISI KIRI: INPUT FORM -->
+            <!-- SISI KIRI: INPUT FORM MANUAL -->
             <div class="form-panel">
                 <form id="valueForm">
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 14px;">
                         <label for="name">Company Ticker / Name</label>
                         <input type="text" id="name" placeholder="e.g. BBCA, AAPL...">
                     </div>
 
-                    <div class="form-group">
-                        <label for="liquidity">Liquidity Ratio</label>
-                        <div class="bento-option" data-category="liquidity">
-                            <div class="bento-option" data-value="50"><div class="bento-title">&gt; 3.0x</div><div class="bento-desc">Massive</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">1.2x - 3x</div><div class="bento-desc">Healthy</div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 1.0x</div><div class="bento-desc">Risk</div></div>
-                        </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="liquidity">Liquidity Ratio (Current Ratio)</label>
+                        <input type="number" id="liquidity" step="0.1" placeholder="e.g. 2.5">
                     </div>
 
-                    <div class="form-group">
-                        <label for="leverage">Leverage</label>
-                        <div class="bento-select-group" data-category="leverage">
-                            <div class="bento-option" data-value="50"><div class="bento-title">&gt; 0.2x</div><div class="bento-desc">Pristine</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">0.2 - 1.0</div><div class="bento-desc">Moderate</div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 2.0x</div><div class="bento-desc">Danger</div></div>
-                        </div>    
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="leverage">Debt Leverage (DER)</label>
+                        <input type="number" id="leverage" step="0.1" placeholder="e.g. 0.5">
                     </div>
 
-                    <div class="form-group">
-                        <label for="profitability">Profitability</label>
-                        <div class="bento-select-group" data-category="profitability">
-                            <div class="bento-option" data-value="50"><div class="bento-title">&gt; 20%</div><div class="bento-desc">Elite Cow</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">10% - 20%</div><div class="bento-desc">Solid</div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 1%</div><div class="bento-desc">Burning</div></div>
-                        </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="profitability">Profit Margin (NPM %)</label>
+                        <input type="number" id="profitability" step="0.1" placeholder="e.g. 15">
                     </div>
 
-                    <div class="form-group">
-                        <label for="roe">Return on Equity</label>
-                        <div class="bento-select-group" data-category="roe">
-                            <div class="bento-option" data-value="50"><div class="bento-title">&gt; 20%</div><div class="bento-desc">Compound</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">10% - 20%</div><div class="bento-desc">Standard</div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 5%</div><div class="bento-desc">Poor</div></div>
-                        </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="roe">Return on Equity (ROE %)</label>
+                        <input type="number" id="roe" step="0.1" placeholder="e.g. 18">
                     </div>
 
-                    <div class="form-group">
-                        <label for="growth">Growth Rate</label>
-                     <div class="bento-select-group" data-category="growth">
-                            <div class="bento-option" data-value="50"><div class="bento-title">&gt; 50%</div><div class="bento-desc">Bulletproof</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">20% - 50%</div><div class="bento-desc">Adequate</div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 5%</div><div class="bento-desc">Default</div></div>
-                        </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="growth">YoY Revenue Growth (%)</label>
+                        <input type="number" id="growth" step="0.1" placeholder="e.g. 25">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 16px;">
                         <label for="coverage">Interest Coverage Ratio</label>
-                        <div class="bento-option" data-value="50"><div class="bento-title">&gt; 8.0x</div><div class="bento-desc">Bulletproof</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">2.5 - 8x</div><div class="bento-desc">Adequate/div></div>
-                            <div class="bento-option" data-value="10"><div class="bento-title">&lt; 1.0x</div><div class="bento-desc">Default</div></div>
-                        </div>
+                        <input type="number" id="coverage" step="0.1" placeholder="e.g. 5.0">
                     </div>
 
                     <button type="button" id="calcBtn">Execute Terminal Analysis</button>
                 </form>
             </div>
 
-            <!-- SISI KANAN: MACRO INDEX PANEL -->
+            <!-- SISI KANAN: MACRO INDEX PANEL BESAR (LANGSUNG TAMPIL FULL) -->
             <div class="result-panel">
                 <div class="score-container">
                     <div class="score-info">
@@ -365,12 +303,7 @@
                     <div class="gauge-label" id="displayRating" style="color: #22c55e;">AWAITING SIGNAL</div>
                 </div>
 
-                <!-- Placeholder -->
-                <div class="placeholder-text" id="placeholderText">
-                    Configure parameters on the left and execute analysis to stream live macroeconomic indices.
-                </div>
-
-                <!-- Bento Grid Persentase Indeks (Pengganti card teks lama) -->
+                <!-- Macro Grid Persentase -->
                 <div class="macro-grid" id="macroGrid">
                     <div class="macro-card">
                         <div class="macro-val" id="solvencyVal">0%</div>
@@ -399,48 +332,36 @@
                 </div>
 
                 <!-- Summary Roasting Banner -->
-                <div class="summary-banner" id="summaryBanner"></div>
+                <div class="summary-banner" id="summaryBanner">
+                    <b>Terminal Status:</b> Ready for calculation. Input metrics on the left and hit execute to stream diagnostics.
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // New Code Jawaskrip cok anying ---
-        const selectedValues = {
-            liquidity: 0,
-            leverage: 0,
-            profitability: 0,
-            roe: 0,
-            growth: 0,
-            coverage: 0
-        };
-
-        // Event listener untuk klik Bentod Selectod Cards
-        document.querySelectorAll('.bento-select-group').forEach(group => {
-            const category = group.getAttribute('data-category');
-            group.querySelectorAll('.bento-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    group.querySelectorAll('.bento-option').forEach(opt => opt.classList.remove('selected'));
-                    this.classList.add('selected');
-                    selectedValues[category] = parseInt(this.getAttribute('data-value'));
-                });
-            });
-        });
-
         const btn = document.getElementById('calcBtn');
         
         btn.addEventListener('click', function() {
             const companyName = document.getElementById('name').value || "ANON";
 
-            // Ambil nilainya langsung dari objek bento cards yang dianjing-anjingin
-            const liquidityScore = selectedValues.liquidity;
-            const leverageScore = selectedValues.leverage;
-            const profitabilityScore = selectedValues.profitability;
-            const roeScore = selectedValues.roe;
-            const growthScore = selectedValues.growth;
-            const coverageScore = selectedValues.coverage;
+            // Ambil nilai input angka mentah
+            const liquidity = parseFloat(document.getElementById('liquidity').value) || 0;
+            const leverage = parseFloat(document.getElementById('leverage').value) || 0;
+            const profitability = parseFloat(document.getElementById('profitability').value) || 0;
+            const roe = parseFloat(document.getElementById('roe').value) || 0;
+            const growth = parseFloat(document.getElementById('growth').value) || 0;
+            const coverage = parseFloat(document.getElementById('coverage').value) || 0;
 
-            const totalScore = liquidityScore + leverageScore + profitabilityScore + roeScore + growthScore + coverageScore;
+            // Logika scoring otomatis berdasarkan input angka user
+            let liquidityScore = liquidity >= 3 ? 50 : (liquidity >= 1.2 ? 30 : 10);
+            let leverageScore = leverage <= 0.2 ? 50 : (leverage <= 1.0 ? 30 : 5);
+            let profitScore = profitability >= 20 ? 50 : (profitability >= 5 ? 30 : 10);
+            let roeScore = roe >= 20 ? 50 : (roe >= 10 ? 30 : 10);
+            let growthScore = growth >= 50 ? 50 : (growth >= 15 ? 25 : 5);
+            let coverageScore = coverage >= 8 ? 50 : (coverage >= 2.5 ? 25 : 5);
+
+            const totalScore = liquidityScore + leverageScore + profitScore + roeScore + growthScore + coverageScore;
             const maxScore = 300;
             const percentage = (totalScore / maxScore) * 100;
 
@@ -451,26 +372,25 @@
             let badgeColor = "";
             let healthMessage = "";
 
-            // Dinamis warna berdasarkan tier
             if (totalScore >= 230) {
                 ratingText = "TIER 1 (APEX-LEVEL)";
-                badgeColor = "#3b82f6"; // Biru Futuristik
+                badgeColor = "#3b82f6"; // Biru
                 healthMessage = `<b>${companyName}:</b> Bro's literally untouchable. Pure cash machine, out here flexing on the entire market.`;
             } else if (totalScore >= 180) {
                 ratingText = "TIER 2 (ELITE-LEVEL)";
-                badgeColor = "#a855f7"; // Ungu Mewah
+                badgeColor = "#a855f7"; // Ungu
                 healthMessage = `<b>${companyName}:</b> Lowkey a beast. Clean margins, zero stress, absolute solid compounding.`;
             } else if (totalScore >= 150) {
                 ratingText = "TIER 3 (MID-LEVEL)";
-                badgeColor = "#eab308"; // Kuning Aman
+                badgeColor = "#eab308"; // Kuning
                 healthMessage = `<b>${companyName}:</b> Safe for now, but walking on thin ice. One bad quarter and it's over.`;
             } else if (totalScore >= 100) {
                 ratingText = "TIER 4 (TRASH-LEVEL)";
-                badgeColor = "#f97316"; // Orange Peringatan
+                badgeColor = "#f97316"; // Orange
                 healthMessage = `<b>${companyName}:</b> Major red flags. Drowning in debt and gaslighting retail investors.`;
             } else {
                 ratingText = "TIER 5 (DEAD-LEVEL)";
-                badgeColor = "#ef4444"; // Merah Bahaya
+                badgeColor = "#ef4444"; // Merah
                 healthMessage = `<b>${companyName}:</b> Wallahi its over bruv 😭😭🥀.`;
             } 
             
@@ -481,20 +401,15 @@
             document.getElementById('gaugeProgress').style.backgroundColor = badgeColor;
             document.getElementById('displayScore').style.color = badgeColor;
 
-            // Generate persentase acak proporsional berdasarkan skor pilihan user untuk bento grid kanan
-            document.getElementById('solvencyVal').innerText = Math.min(99, Math.round((liquidityScore / 50) * 88 + Math.random() * 5)) + '%';
-            document.getElementById('velocityVal').innerText = Math.min(99, Math.round((profitabilityScore / 50) * 85 + Math.random() * 5)) + '%';
-            document.getElementById('efficiencyVal').innerText = Math.min(99, Math.round((roeScore / 50) * 90 + Math.random() * 4)) + '%';
-            document.getElementById('bufferVal').innerText = Math.min(99, Math.round((coverageScore / 50) * 82 + Math.random() * 6)) + '%';
-            document.getElementById('compoundVal').innerText = Math.min(99, Math.round((growthScore / 50) * 86 + Math.random() * 5)) + '%';
-            document.getElementById('safetyVal').innerText = Math.min(99, Math.round((leverageScore / 50) * 91 + Math.random() * 3)) + '%';
+            // Generate persentase grid kanan berdasarkan input
+            document.getElementById('solvencyVal').innerText = Math.min(99, Math.round((liquidity / 3) * 75 + 15)) + '%';
+            document.getElementById('velocityVal').innerText = Math.min(99, Math.round((profitability / 25) * 80 + 10)) + '%';
+            document.getElementById('efficiencyVal').innerText = Math.min(99, Math.round((roe / 25) * 85 + 10)) + '%';
+            document.getElementById('bufferVal').innerText = Math.min(99, Math.round((coverage / 10) * 80 + 15)) + '%';
+            document.getElementById('compoundVal').innerText = Math.min(99, Math.round((growth / 50) * 75 + 20)) + '%';
+            document.getElementById('safetyVal').innerText = Math.min(99, Math.max(10, Math.round((1 - leverage / 2) * 90)) ) + '%';
 
-            // Tampilkan panel hasil
-            document.getElementById('placeholderText').style.display = 'none';
-            document.getElementById('macroGrid').style.display = 'grid';
-            const banner = document.getElementById('summaryBanner');
-            banner.style.display = 'block';
-            banner.innerHTML = healthMessage;
+            document.getElementById('summaryBanner').innerHTML = healthMessage;
         });
     </script>
 </body>
