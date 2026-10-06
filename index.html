@@ -41,6 +41,14 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 6px;
         }
+        .bento-input-card {
+            grid-column: span 6;
+            background: #171717;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 16px;
+          
+        }
         .bento-option {
             background: #171717;
             border: 1px solid #262626;
@@ -94,9 +102,8 @@
         /* Layout Grid 2 Kolom (Kiri: Input Bento, Kanan: Macro Index Panel) */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1.2fr 1.3fr;
-            gap: 30px;
-            align-items: start;
+            grid-template-columns: repeat(1.1, 1fr);
+            gap: 16px;
         }
 
         @media (max-width: 900px) {
@@ -156,6 +163,7 @@
 
         /* Panel Sisi Kanan (Macro Index Panel) */
         .result-panel {
+            grid-column: span 6; /* porsi lebih gede nih ngentot*/
             background: #171717;
             border: 1px solid #222222;
             border-radius: 12px;
@@ -163,7 +171,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            height: 100%;
         }
 
         /* Skor & Progress Utama */
@@ -326,7 +333,7 @@
                         <label for="growth">Growth Rate</label>
                      <div class="bento-select-group" data-category="growth">
                             <div class="bento-option" data-value="50"><div class="bento-title">&gt; 50%</div><div class="bento-desc">Bulletproof</div></div>
-                            <div class="bento-option" data-value="30"><div class="bento-title">20% - 50%</div><div class="bento-desc">Adequate/div></div>
+                            <div class="bento-option" data-value="30"><div class="bento-title">20% - 50%</div><div class="bento-desc">Adequate</div></div>
                             <div class="bento-option" data-value="10"><div class="bento-title">&lt; 5%</div><div class="bento-desc">Default</div></div>
                         </div>
                     </div>
