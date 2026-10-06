@@ -328,7 +328,7 @@
             <div class="result-panel">
                 <div class="score-container">
                     <div class="score-info">
-                        <span class="score-label-text">Terminal Health Index</span>
+                        <span class="score-label-text">TOTAL SCORE</span>
                         <div>
                             <span class="gauge-score" id="displayScore">0</span><span class="score-max">/300</span>
                         </div>
@@ -336,7 +336,7 @@
                     <div class="progress-track">
                         <div class="progress-fill" id="gaugeProgress"></div>
                     </div>
-                    <div class="gauge-label" id="displayRating" style="color: #22c55e;">AWAITING SIGNAL</div>
+                    <div class="gauge-label" id="displayRating" style="color: #22c55e;">AWAITING</div>
                 </div>
 
                 <!-- Macro Grid Persentase -->
@@ -369,9 +369,9 @@
 
                 <!-- Clean Executive Insight Card -->
                 <div class="insight-card">
-                    <div class="insight-header">Executive Intelligence Summary</div>
+                    <div class="insight-header">Summary</div>
                     <div class="insight-body" id="insightText">
-                        System ready. Input company parameters and execute analysis to generate clean macroeconomic intelligence reports.
+                        Input company parameters and execute analysis to generate macroeconomic reports.
                     </div>
                 </div>
 
@@ -468,7 +468,7 @@
             document.getElementById('insightText').innerHTML = insightMsg;
             document.getElementById('mmMode').innerText = "PROFILING";
             document.getElementById('mmRisk').innerText = totalScore >= 150 ? "LOW / MODERATE" : "HIGH RISK";
-            document.getElementById('mmStatus').innerText = "VERIFIED";
+            document.getElementById('mmStatus').innerText = "DONE";
         });
     </script>
 </body>
