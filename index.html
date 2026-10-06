@@ -89,15 +89,34 @@
         /* Google Glassmorphism Card Style (Semi Transparan + Blur) */
         .form-panel, .result-panel {
             background: rgba(18, 22, 31, 0.45) !important;
-            backdrop-filter: blur(24px) !important;
-            -webkit-backdrop-filter: blur(24px) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 16px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),           
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.6);
+
+        /* Durasi dan jenis animasi*/    
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease;
+
+        }
+        /* Mekanisme saat kursor menyentuh panel (HOVER) */
+        .form-panel:hover, .result-panel:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0,2) !important;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.6);   
+            
+
+
         }    
         /* Panel Kiri: Form Input */
         .form-panel {
@@ -297,7 +316,7 @@
     <div class="container">
         <div class="dashboard-header">
             <h1>DROPHEN TERMS</h1>
-            <p>Macroeconomics intelligence index</p>
+            <p>Macroeconomics index</p>
         </div>
 
         <div class="dashboard-grid">
@@ -305,7 +324,7 @@
             <div class="form-panel">
                 <form id="valueForm">
                     <div class="form-group" style="margin-bottom: 14px;">
-                        <label for="name">Company Ticker / Name</label>
+                        <label for="name">Company Name</label>
                         <input type="text" id="name" placeholder="e.g. BBCA, AAPL...">
                     </div>
 
@@ -390,7 +409,7 @@
                 <div class="insight-card">
                     <div class="insight-header">Summary</div>
                     <div class="insight-body" id="insightText">
-                         Input company parameters and execute analysis to generate clean macroeconomic reports.
+                         Input company parameters and execute analysis to generate macroeconomic reports.
                     </div>
                 </div>
 
@@ -398,7 +417,7 @@
                 <div class="mini-metrics-bar">
                     <div>
                         <div class="mm-title">Analysis Mode</div>
-                        <div class="mm-val" id="mmMode">STANDBY</div>
+                        <div class="mm-val" id="mmMode">--</div>
                     </div>
                     <div>
                         <div class="mm-title">Risk Level</div>
@@ -406,7 +425,7 @@
                     </div>
                     <div>
                         <div class="mm-title">Data Status</div>
-                        <div class="mm-val" id="mmStatus">SECURE</div>
+                        <div class="mm-val" id="mmStatus">--</div>
                     </div>
                 </div>
             </div>
@@ -417,7 +436,19 @@
         const btn = document.getElementById('calcBtn');
         
         btn.addEventListener('click', function() {
-            const companyName = document.getElementById('name').value || "ANON";
+            const companyName = document.getElementById('name').value.trim();
+            const liquidityInput = document.getElementById('liquidity').value;
+            const leverageInput = document.getElementById('leverage').value;
+            const profitInput = document.getElementById('profitability').value;
+            const roeInput = document.getElementById('roe').value;
+            const growthInput = document.getElementById('growth').value;
+            const coverageInput = document.getElementById('coverage').value;
+
+            // VALIDASI: Cek kalau ada field yang kosong
+            if (!companyName || !liquidityInput || !leverageInput || !profitInput || !roeInput || !growthInput || !coverageInput) {
+                alert("Please fill in the empty parameters!");
+                return; // Batalkan eksekusi kalau ada yang kosong
+            }
 
             // Ambil nilai input angka mentah
             const liquidity = parseFloat(document.getElementById('liquidity').value) || 0;
@@ -487,7 +518,7 @@
             document.getElementById('insightText').innerHTML = insightMsg;
             document.getElementById('mmMode').innerText = "PROFILING";
             document.getElementById('mmRisk').innerText = totalScore >= 150 ? "LOW / MODERATE" : "HIGH RISK";
-            document.getElementById('mmStatus').innerText = "VERIFIED";
+            document.getElementById('mmStatus').innerText = "DONE";
         });
     </script>
 </body>
