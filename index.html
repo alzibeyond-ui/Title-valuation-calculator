@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>drophen terms - Macro Intelligence</title>
-    <!-- Import Font Futuristic Minimalist (Space Grotesk & Inter) -->
+    <title>Drophen Terms - Smart Investment Advisor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,511 +13,372 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-            body {
+        body {
             background-color: #06080c;
-            position: relative;
-            overflow-x: hidden;
             color: #e6edfd;
+            min-height: 100vh;
+            padding: 32px 16px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 24px;
         }
-
-        /* Ambient Glow Blobs di belakang card biar efek blur transparan kaca terlihat nyata */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
-        }
-        body::before {
-            top: 10%;
-            left: 20%;
-            background: #1d4ed8;
-        }
-        body::after {
-            bottom: 10%;
-            right: 20%;
-            background: #059669;
-        }
-        /* Main container no border */
         .container {
             width: 100%;
-            max-width: 1250px;
+            max-width: 1300px;
         }
         
-        /* Header Drophen Google style*/
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        .dashboard-header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        .dashboard-header p {
-            font-size: 0.88rem;
-            color: #8e8ea0;
-        }
-
-        /* Layout Grid 2 Kolom Sejajar (Kiri: Input Panel, Kanan: Result Panel Besar) */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        @media (max-width: 950px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Google Glassmorphism Card Style (Semi Transparan + Blur) */
-        .form-panel, .result-panel {
-            background: rgba(18, 22, 31, 0.45) !important;
-            backdrop-filter: blur(16px) !important;
-            -webkit-backdrop-filter: blur(16px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 28px;
-            padding: 24px;
+        /* Header Style */
+        .header-section {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),           
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.6);
-
-        /* Durasi dan jenis animasi*/    
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.4s ease;
-
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
         }
-        /* Mekanisme saat kursor menyentuh panel (HOVER) */
-        .form-panel:hover, .result-panel:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0,2) !important;
-            box-shadow: 0 32px 64px rgba(0, 0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.6);   
-            
+        .header-title h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+        .header-title h1 span {
+            color: #22c55e;
+        }
+        .header-title p {
+            font-size: 0.85rem;
+            color: #8e8ea0;
+            margin-top: 4px;
+        }
+        .radar-badge {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
 
-        }    
-        /* Panel Kiri: Form Input */
-        .form-panel {
-            background: #171717;
-            border: 1px solid #262626;
-            border-radius: 12px;
-            padding: 24px;
+        .bento-card {
+            background: rgba(18, 22, 31, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s ease;
+        }
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
-        .form-group {
+        /* Card Sizing Grid */
+        .col-span-5 { grid-column: span 5; }
+        .col-span-7 { grid-column: span 7; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-8 { grid-column: span 8; }
+        .col-span-12 { grid-column: span 12; }
+
+        @media (max-width: 1024px) {
+            .col-span-5, .col-span-7, .col-span-4, .col-span-8 {
+                grid-column: span 12;
+            }
+        }
+
+        /* Typography & Form Elements */
+        .card-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8e8ea0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        label {
+            font-size: 0.68rem;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 9px 12px;
+            background-color: #0d1117;
+            border: 1px solid #262626;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.82rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #22c55e;
+            background-color: #121821;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 12px;
+            background: #22c55e;
+            color: #06080c;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+        .btn-action:hover {
+            background: #16a34a;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        /* Metric & Display Items */
+        .big-score-display {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .recommendation-box {
+            background: #0d1117;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
-
-        label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #8e8ea0;
-        }
-
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 10px 14px;
-            background-color: #121212;
-            border: 1px solid #262626;
-            border-radius: 8px;
-            color: #ececec;
-            font-size: 0.88rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-        input[type="text"], input[type="number"]:focus {
-            background-color: rgba(13, 17, 23, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08)
-        }
-
-        /* Tombol Hijau Neon */
-        button#calcBtn {
-            width: 100%;
-            padding: 13px;
-            background: #3b82f6;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 6px;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
-            transition: all 0.2s ease-in-out;
-        }
-        button#calcBtn:hover {
-            background: #16a34a;
-            box-shadow: 0 0 22px rgba(34, 197, 94, 0.5);
-        }
-        /* Inner Cards */
-        .score-container, .macro-card, .insight-card, .mini-metrics-bar {
-            background: rgba(13, 17, 23, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            border-radius: 14px;
-        }    
-        .score-container {
-            padding: 16px;
-        }
-        .score-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .score-label-text {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #8e8ea0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .gauge-score {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1;
-        }
-        .score-max {
-            font-size: 0.85rem;
-            color: #8e8ea0;
-        }
-        .progress-track {
-            width: 100%;
-            height: 8px;
-            background: #222222;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: #22c55e;
-            width: 0%;
-            border-radius: 4px;
-            transition: width 0.5s ease-in-out, background-color 0.3s;
-        }
-        .gauge-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
-        }
-
-        /* Macro Grid Persentase */
-        .macro-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        .macro-card {
-            background: #121212;
-            border: 1px solid #262626;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-        .macro-val {
+        .rec-stock-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 4px;
+            color: #22c55e;
         }
-        .macro-name {
-            font-size: 0.68rem;
-            color: #8e8ea0;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-        }
-        /* Clean Executive Summary Card (Ganti Terminal Ala Hacker) */
-        .insight-card {
-            background: #121212;
-            border: 1px solid #262626;
-            border-radius: 8px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .insight-header {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #8e8ea0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .insight-body {
+        .rec-desc {
             font-size: 0.82rem;
-            color: #ececec;
+            color: #cbd5e1;
             line-height: 1.4;
         }
 
-        /* Minimalist Metrics Footer Bar */
-        .mini-metrics-bar {
+        .metrics-mini-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            background: #121212;
+        }
+        .mini-stat-card {
+            background: #0d1117;
             border: 1px solid #262626;
             border-radius: 8px;
             padding: 10px;
             text-align: center;
         }
-        .mm-title {
-            font-size: 0.58rem;
+        .mini-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .mini-lbl {
+            font-size: 0.62rem;
             color: #8e8ea0;
             text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .mm-val {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #ececec;
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="dashboard-header">
-            <h1>DROPHEN TERMS</h1>
-            <p>Macroeconomics index</p>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="header-title">
+                <h1>DROPHEM <span>TERMS</span></h1>
+                <p>AI-Powered Macroeconomic Intelligence & Smart Investment Recommender</p>
+            </div>
+            <div class="radar-badge">● System Online</div>
         </div>
 
-        <div class="dashboard-grid">
-            <!-- SISI KIRI: INPUT FORM MANUAL -->
-            <div class="form-panel">
-                <form id="valueForm">
-                    <div class="form-group" style="margin-bottom: 14px;">
-                        <label for="name">Company Name</label>
-                        <input type="text" id="name" placeholder="e.g. BBCA, AAPL...">
+        <!-- Bento Grid Layout -->
+        <div class="bento-grid">
+            
+            <!-- CARD 1: INPUT PREFERENSI INVESTASI (Kiri Atas) -->
+            <div class="bento-card col-span-5">
+                <div class="card-label">01. Investor Profile & Preferences</div>
+                
+                <div class="form-grid-2">
+                    <div class="input-group">
+                        <label>Modal Awal (IDR)</label>
+                        <input type="text" id="capital" placeholder="e.g. 10.000.000">
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="liquidity">Liquidity Ratio (Current Ratio)</label>
-                        <input type="number" id="liquidity" step="0.1" placeholder="e.g. 2.5x">
+                    <div class="input-group">
+                        <label>Rentang Waktu</label>
+                        <select id="timeframe">
+                            <option value="short">Short (1-6 Bulan)</option>
+                            <option value="medium">Medium (1-3 Tahun)</option>
+                            <option value="long" selected>Long (3-5+ Tahun)</option>
+                        </select>
                     </div>
+                </div>
 
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="leverage">Debt Leverage (DER)</label>
-                        <input type="number" id="leverage" step="0.1" placeholder="e.g. 0.5x">
+                <div class="form-grid-2">
+                    <div class="input-group">
+                        <label>Profil Risiko</label>
+                        <select id="riskProfile">
+                            <option value="aggressive">Aggressive (Growth)</option>
+                            <option value="stable" selected>Stable (Blue Chip)</option>
+                            <option value="conservative">Conservative (Safe)</option>
+                        </select>
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="profitability">Profit Margin (NPM %)</label>
-                        <input type="number" id="profitability" step="0.1" placeholder="e.g. 15%">
+                    <div class="input-group">
+                        <label>Sektor Pilihan</label>
+                        <select id="sector">
+                            <option value="banking" selected>Banking & Financials</option>
+                            <option value="tech">Technology & Digital</option>
+                            <option value="energy">Energy & Commodities</option>
+                            <option value="fmcg">Consumer Goods (FMCG)</option>
+                        </select>
                     </div>
+                </div>
 
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="roe">Return on Equity (ROE %)</label>
-                        <input type="number" id="roe" step="0.1" placeholder="e.g. 18%">
-                    </div>
+                <div class="input-group">
+                    <label>Target Emiten Pembanding (Opsional)</label>
+                    <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
+                </div>
 
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="growth">YoY Revenue Growth (%)</label>
-                        <input type="number" id="growth" step="0.1" placeholder="e.g. 25%">
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 16px;">
-                        <label for="coverage">Interest Coverage Ratio</label>
-                        <input type="number" id="coverage" step="0.1" placeholder="e.g. 5.0x">
-                    </div>
-
-                    <button type="button" id="calcBtn">Start Analysis</button>
-                </form>
+                <button type="button" class="btn-action" id="analyzeBtn">Generate Recommendation</button>
             </div>
 
-            <!--  NEW MINIMALIST DESIGN -->
-            <div class="result-panel">
-                <div class="score-container">
-                    <div class="score-info">
-                        <span class="score-label-text">TOTAL SCORE</span>
-                        <div>
-                            <span class="gauge-score" id="displayScore">0</span><span class="score-max">/300</span>
-                        </div>
+            <!-- CARD 2: TOTAL SCORE & STATUS (Kanan Atas) -->
+            <div class="bento-card col-span-7">
+                <div class="card-label">02. Intelligence Index & Index Score</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="big-score-display" id="scoreVal">--</div>
+                        <div style="font-size: 0.78rem; color: #8e8ea0; margin-top: 2px;" id="tierVal">Status: Awaiting Parameters</div>
                     </div>
-                    <div class="progress-track">
-                        <div class="progress-fill" id="gaugeProgress"></div>
-                    </div>
-                    <div class="gauge-label" id="displayRating" style="color: #22c55e;">AWAITING</div>
-                </div>
-
-                <!-- Macro Grid Persentase -->
-                <div class="macro-grid" id="macroGrid">
-                    <div class="macro-card">
-                        <div class="macro-val" id="solvencyVal">0%</div>
-                        <div class="macro-name">Solvency Index</div>
-                    </div>
-                    <div class="macro-card">
-                        <div class="macro-val" id="velocityVal">0%</div>
-                        <div class="macro-name">Earnings Velocity</div>
-                    </div>
-                    <div class="macro-card">
-                        <div class="macro-val" id="efficiencyVal">0%</div>
-                        <div class="macro-name">Capital Efficiency</div>
-                    </div>
-                    <div class="macro-card">
-                        <div class="macro-val" id="bufferVal">0%</div>
-                        <div class="macro-name">Cash Buffer Power</div>
-                    </div>
-                    <div class="macro-card">
-                        <div class="macro-val" id="compoundVal">0%</div>
-                        <div class="macro-name">Compounding Rate</div>
-                    </div>
-                    <div class="macro-card">
-                        <div class="macro-val" id="safetyVal">0%</div>
-                        <div class="macro-name">Debt Safety Index</div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Analysis Mode</div>
+                        <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
                     </div>
                 </div>
 
-                <!-- Clean Executive Insight Card -->
-                <div class="insight-card">
-                    <div class="insight-header">Summary</div>
-                    <div class="insight-body" id="insightText">
-                         Input company parameters and execute analysis to generate macroeconomic reports.
+                <!-- Mini Metrics Grid -->
+                <div class="metrics-mini-grid">
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="m1">--</div>
+                        <div class="mini-lbl">Solvency Index</div>
                     </div>
-                </div>
-
-                <!-- Minimalist Metrics Footer Bar -->
-                <div class="mini-metrics-bar">
-                    <div>
-                        <div class="mm-title">Analysis Mode</div>
-                        <div class="mm-val" id="mmMode">--</div>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="m2">--</div>
+                        <div class="mini-lbl">Earnings Velocity</div>
                     </div>
-                    <div>
-                        <div class="mm-title">Risk Level</div>
-                        <div class="mm-val" id="mmRisk">--</div>
-                    </div>
-                    <div>
-                        <div class="mm-title">Data Status</div>
-                        <div class="mm-val" id="mmStatus">--</div>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="m3">--</div>
+                        <div class="mini-lbl">Capital Safety</div>
                     </div>
                 </div>
             </div>
+
+            <!-- CARD 3: REKOMENDASI SAHAM / INVESTASI (Kiri Bawah) -->
+            <div class="bento-card col-span-7">
+                <div class="card-label">03. AI Investment Match & Strategy</div>
+                <div class="recommendation-box">
+                    <div class="rec-stock-title" id="recTitle">-- Select parameters & execute analysis --</div>
+                    <div class="rec-desc" id="recDesc">
+                        Sistem AI akan mencocokkan profil modal, rentang waktu, serta sektor pilihan Anda untuk menghasilkan rekomendasi alokasi aset dan proyeksi fundamental emiten terbaik secara otomatis.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4: SYSTEM STATUS & LOG (Kanan Bawah) -->
+            <div class="bento-card col-span-5">
+                <div class="card-label">04. Macro Status & Security</div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: #0d1117; padding: 10px; border-radius: 8px; border: 1px solid #262626;">
+                        <span style="color: #8e8ea0;">Data Encryption</span>
+                        <span style="color: #22c55e; font-weight: 600;">SECURE (TLS)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; background: #0d1117; padding: 10px; border-radius: 8px; border: 1px solid #262626;">
+                        <span style="color: #8e8ea0;">Market Feed</span>
+                        <span style="color: #ffffff; font-weight: 600;">Real-time IDEX</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        const btn = document.getElementById('calcBtn');
-        
-        btn.addEventListener('click', function() {
-            const companyName = document.getElementById('name').value.trim();
-            const liquidityInput = document.getElementById('liquidity').value;
-            const leverageInput = document.getElementById('leverage').value;
-            const profitInput = document.getElementById('profitability').value;
-            const roeInput = document.getElementById('roe').value;
-            const growthInput = document.getElementById('growth').value;
-            const coverageInput = document.getElementById('coverage').value;
+        document.getElementById('analyzeBtn').addEventListener('click', function() {
+            const capital = document.getElementById('capital').value.trim();
+            const timeframe = document.getElementById('timeframe').value;
+            const riskProfile = document.getElementById('riskProfile').value;
+            const sector = document.getElementById('sector').value;
 
-            // VALIDASI: Cek kalau ada field yang kosong
-            if (!companyName || !liquidityInput || !leverageInput || !profitInput || !roeInput || !growthInput || !coverageInput) {
-                alert("Please fill in the empty parameters!");
-                return; // Batalkan eksekusi kalau ada yang kosong
+            if (!capital) {
+                alert("⚠️ Harap masukkan nominal modal awal investasi Anda terlebih dahulu!");
+                return;
             }
 
-            // Ambil nilai input angka mentah
-            const liquidity = parseFloat(document.getElementById('liquidity').value) || 0;
-            const leverage = parseFloat(document.getElementById('leverage').value) || 0;
-            const profitability = parseFloat(document.getElementById('profitability').value) || 0;
-            const roe = parseFloat(document.getElementById('roe').value) || 0;
-            const growth = parseFloat(document.getElementById('growth').value) || 0;
-            const coverage = parseFloat(document.getElementById('coverage').value) || 0;
+            // Simulasi kalkulasi AI Recommender
+            let score = Math.floor(Math.random() * (290 - 180 + 1)) + 180;
+            document.getElementById('scoreVal').innerText = score + "/300";
+            document.getElementById('tierVal').innerText = "Rating: TIER 1 (OPTIMIZED)";
+            document.getElementById('modeVal').innerText = "PROFILING";
 
-            // Logika scoring otomatis berdasarkan input angka user
-            let liquidityScore = liquidity >= 3 ? 50 : (liquidity >= 1.2 ? 30 : 10);
-            let leverageScore = leverage <= 0.2 ? 50 : (leverage <= 1.0 ? 30 : 5);
-            let profitScore = profitability >= 20 ? 50 : (profitability >= 5 ? 30 : 10);
-            let roeScore = roe >= 20 ? 50 : (roe >= 10 ? 30 : 10);
-            let growthScore = growth >= 50 ? 50 : (growth >= 15 ? 25 : 5);
-            let coverageScore = coverage >= 8 ? 50 : (coverage >= 2.5 ? 25 : 5);
+            document.getElementById('m1').innerText = (Math.random() * 2 + 1.5).toFixed(1) + 'x';
+            document.getElementById('m2').innerText = "+" + (Math.random() * 15 + 10).toFixed(1) + '%';
+            document.getElementById('m3').innerText = "94.2%";
 
-            const totalScore = liquidityScore + leverageScore + profitScore + roeScore + growthScore + coverageScore;
-            const maxScore = 300;
-            const percentage = (totalScore / maxScore) * 100;
+            let stockName = "BBCA (Bank Central Asia Tbk)";
+            let strategyMsg = `Berdasarkan modal <b>Rp ${capital}</b> dengan rentang waktu <b>${timeframe}</b> dan profil risiko <b>${riskProfile}</b> pada sektor pilihan Anda, emiten ini menunjukkan daya tahan kas yang sangat kuat, sangat cocok untuk strategi compounding jangka panjang.`;
 
-            document.getElementById('gaugeProgress').style.width = percentage + '%';
-            document.getElementById('displayScore').innerText = totalScore;
+            if (sector === 'tech') {
+                stockName = "GOTO / EMTK (Technology Index)";
+                strategyMsg = `Untuk profil agresif pada sektor teknologi dengan modal <b>Rp ${capital}</b>, fokuskan pada manajemen volatilitas dan akumulasi bertahap guna menangkap momentum *earnings velocity* tinggi.`;
+            } else if (sector === 'energy') {
+                stockName = "ADRO / PTBA (Energy & Mining)";
+                strategyMsg = `Sektor energi memberikan deviden yield yang tinggi, ideal dikombinasikan dengan profil risiko <b>${riskProfile}</b> untuk mengamankan cash buffer portofolio Anda dengan modal <b>Rp ${capital}</b>.`;
+            }
 
-            let ratingText = "";
-            let badgeColor = "";
-            let insightMsge = "";
-
-            if (totalScore >= 230) {
-                ratingText = "TIER 1 (APEX-LEVEL)";
-                badgeColor = "#3b82f6"; // Biru
-                insightMsg = `<b>${companyName}</b> demonstrates exceptional capitalism and optimal cash conversion efficiency, positioning it as an industry leader with minimal solvency risk.`;
-            } else if (totalScore >= 180) {
-                ratingText = "TIER 2 (ELITE-LEVEL)";
-                badgeColor = "#a855f7"; // Ungu
-                insghtMsg = `<b>${companyName}</b> shows solid operational margins and healthy compounding performance, refelcting a robust balance sheetand well-managed financial leverage.`;
-            } else if (totalScore >= 150) {
-                ratingText = "TIER 3 (MID-LEVEL)";
-                badgeColor = "#eab308"; // Kuning
-                insightMsg = `<b>${companyName}</b> operates on standard median thresholds. Close monitoring on upcoming quarterly cash flows and debt coverage is strongly advised.`;
-            } else if (totalScore >= 100) {
-                ratingText = "TIER 4 (TRASH-LEVEL)";
-                badgeColor = "#f97316"; // Orange
-                insightMsg = `<b>${companyName}</b>. exhibits noticable structural vulnerabilites. High leverage rations and compressed margins signal potential  capital allocation risks .`;
-            } else {
-                ratingText = "TIER 5 (DEAD-LEVEL)";
-                badgeColor = "#ef4444"; // Merah
-                insightMsg = `<b>${companyName}</b>. triggers critical distress indicators across multiple metrics. immediate balance sheet restructuring or capital intervention is required.`;
-            } 
-            
-            const labelEl = document.getElementById('displayRating');
-            labelEl.innerText = ratingText;
-            labelEl.style.color = badgeColor;
-
-            document.getElementById('gaugeProgress').style.backgroundColor = badgeColor;
-            document.getElementById('displayScore').style.color = badgeColor;
-
-            // Generate persentase grid kanan berdasarkan input
-            document.getElementById('solvencyVal').innerText = Math.min(99, Math.round((liquidity / 3) * 75 + 15)) + '%';
-            document.getElementById('velocityVal').innerText = Math.min(99, Math.round((profitability / 25) * 80 + 10)) + '%';
-            document.getElementById('efficiencyVal').innerText = Math.min(99, Math.round((roe / 25) * 85 + 10)) + '%';
-            document.getElementById('bufferVal').innerText = Math.min(99, Math.round((coverage / 10) * 80 + 15)) + '%';
-            document.getElementById('compoundVal').innerText = Math.min(99, Math.round((growth / 50) * 75 + 20)) + '%';
-            document.getElementById('safetyVal').innerText = Math.min(99, Math.max(10, Math.round((1 - leverage / 2) * 90)) ) + '%';
-
-            // Update Clean Insight & Metrics Bar
-            document.getElementById('insightText').innerHTML = insightMsg;
-            document.getElementById('mmMode').innerText = "PROFILING";
-            document.getElementById('mmRisk').innerText = totalScore >= 150 ? "LOW / MODERATE" : "HIGH RISK";
-            document.getElementById('mmStatus').innerText = "DONE";
+            document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
+            document.getElementById('recDesc').innerHTML = strategyMsg;
         });
     </script>
 </body>
