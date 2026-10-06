@@ -116,9 +116,10 @@
 
         .col-span-5 { grid-column: span 5; }
         .col-span-7 { grid-column: span 7; }
+        .col-span-6 { grid-column: span 6; }
 
         @media (max-width: 1024px) {
-            .col-span-5, .col-span-7 {
+            .col-span-5, .col-span-7, .col-span-6 {
                 grid-column: span 12;
             }
         }
@@ -169,6 +170,7 @@
 
         /* Custom Range Slider */
         input[type="range"] {
+            appearance: none;
             -webkit-appearance: none;
             width: 100%;
             height: 8px;
@@ -216,6 +218,30 @@
         .btn-action:hover {
             background: #16a34a;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        /* Market Cap Trigger Buttons */
+        .btn-market {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s ease;
+        }
+        .btn-market:hover {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
         /* Highlight Nominal Final Value Style */
@@ -289,6 +315,103 @@
             text-transform: uppercase;
             margin-top: 2px;
         }
+
+        /* Futuristic Glass Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 3, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-container {
+            background: rgba(13, 17, 23, 0.75);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.2);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .close-modal {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .close-modal:hover {
+            background: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+        table.futuristic-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+        table.futuristic-table th {
+            color: #8e8ea0;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        table.futuristic-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #e6edfd;
+        }
+        table.futuristic-table tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
     </style>
 </head>
 <body>
@@ -302,7 +425,7 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>Wealth Projections</p>
+                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
             </div>
         </div>
 
@@ -355,7 +478,7 @@
                 <div style="margin-top: 6px;">
                     <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
+                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -368,7 +491,7 @@
                 <div class="card-label">Compounding Summary</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting Parameter Input</div>
+                    <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting</div>
                     <div style="text-align: right;">
                         <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
                         <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
@@ -398,21 +521,64 @@
                 </div>
             </div>
 
-            <!-- CARD 4: LIVE STATUS & QUICK INFO -->
-            <div class="bento-card col-span-7" style="grid-column: span 7;">
-                <div class="card-label">04. Simulation Summary</div>
-                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: #8e8ea0;">
-                    <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
-                        <span>Data Storage</span>
-                        <span style="color: #f59e0b; font-weight: 600;">Browser Only</span>
+            <!-- CARD REPLACEMENT FOR NUMBER 10 (MACRO & HEALTH MONITOR) -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Macro & Market Health Index</div>
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.8rem; color: #8e8ea0;">
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Global Inflation Sentiment</span>
+                        <span style="color: #22c55e; font-weight: 600;">Stable (2.4%)</span>
                     </div>
-                    <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; line-height: 1.4;">
-                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Calculation Tips</span>
-                        <span>All outputs are precisely calculated using standard annual compounding interest formulas widely adopted in financial industries.</span>
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
+                        <span>BI Rate Benchmark</span>
+                        <span style="color: #f59e0b; font-weight: 600;">6.00%</span>
+                    </div>
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; line-height: 1.4;">
+                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 AI Compounding Insight</span>
+                        <span>Long-term compounding outpaces standard inflation across major defensive sectors over 10+ year horizons.</span>
                     </div>
                 </div>
             </div>
 
+            <!-- CARD REPLACEMENT FOR NUMBER 12 (DUAL INTERACTIVE MARKET CAP BUTTONS) -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Global & IDX Market</div>
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center; height: 100%;">
+                    <button type="button" class="btn-market" id="openGlobalModal">
+                        <span>🌐 Top 15 Global Company Market Cap</span>
+                        <span style="font-size: 1.1rem; color: #22c55e;">→</span>
+                    </button>
+                    <button type="button" class="btn-market" id="openIdxModal">
+                        <span>🇮🇩 Top 15 Indonesian Company Market Cap (IDX)</span>
+                        <span style="font-size: 1.1rem; color: #22c55e;">→</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FUTURISTIC GLASS MODAL -->
+    <div class="modal-overlay" id="marketModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitleText">Market Cap</div>
+                <button type="button" class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="futuristic-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Rank</th>
+                            <th style="width: 45%;">Company Name</th>
+                            <th style="width: 40%; text-align: right;">Market Cap (USD / IDR)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalTableContent">
+                        <!-- Data will be injected dynamically -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -430,7 +596,7 @@
             const annualRate = parseFloat(riskSlider.value) / 100;
             const sector = document.getElementById('sector').value;
             const customTicker = document.getElementById('ticker').value.trim();
-
+        
             if (!rawCapital || isNaN(rawCapital) || !rawTimeframe || isNaN(rawTimeframe) || !sector) {
                 alert("⚠️ Please fill in all required parameters (Initial Capital, Time Span, & Target Sector) before proceeding!");
                 return;
@@ -444,12 +610,10 @@
                 return;
             }
 
-            // Formula Compound Interest: A = P * (1 + r)^t
             const finalAmount = capital * Math.pow(1 + annualRate, timeframe);
             const netProfit = finalAmount - capital;
             const multiplier = (finalAmount / capital).toFixed(2);
 
-            // Update to Card 02
             document.getElementById('totalValDisplay').innerText = "Rp " + Math.round(finalAmount).toLocaleString('id-ID');
             document.getElementById('mInitial').innerText = "Rp " + Math.round(capital).toLocaleString('id-ID');
             document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
@@ -458,7 +622,6 @@
             document.getElementById('statusSummaryLbl').innerText = `Simulation Successful`;
             document.getElementById('modeVal').innerText = "CALCULATED";
 
-            // Update to Card 03 (Strategy & Top Pick)
             let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking)";
             let strategyMsg = `With an initial capital of <b>Rp ${capital.toLocaleString('id-ID')}</b> invested over <b>${timeframe} Years</b> at a target return of <b>${(annualRate*100)}% p.a</b>, your assets have the potential to grow to <b>Rp ${Math.round(finalAmount).toLocaleString('id-ID')}</b> (generating a net profit of <b>Rp ${Math.round(netProfit).toLocaleString('id-ID')}</b>).`;
 
@@ -472,6 +635,81 @@
 
             document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
             document.getElementById('recDesc').innerHTML = strategyMsg;
+        });
+
+        // Modal Data for Top 15 Global & IDX
+        const globalData = [
+            { rank: 1, name: "Apple Inc. (AAPL)", cap: "$3.45 Trillion" },
+            { rank: 2, name: "Microsoft Corp. (MSFT)", cap: "$3.32 Trillion" },
+            { rank: 3, name: "NVIDIA Corp. (NVDA)", cap: "$3.15 Trillion" },
+            { rank: 4, name: "Alphabet Inc. (GOOGL)", cap: "$2.10 Trillion" },
+            { rank: 5, name: "Amazon.com Inc. (AMZN)", cap: "$1.95 Trillion" },
+            { rank: 6, name: "Saudi Aramco (2222.SR)", cap: "$1.80 Trillion" },
+            { rank: 7, name: "Meta Platforms (META)", cap: "$1.40 Trillion" },
+            { rank: 8, name: "Berkshire Hathaway (BRK.A)", cap: "$980 Billion" },
+            { rank: 9, name: "Eli Lilly & Co. (LLY)", cap: "$850 Billion" },
+            { rank: 10, name: "Broadcom Inc. (AVGO)", cap: "$780 Billion" },
+            { rank: 11, name: "Tesla Inc. (TSLA)", cap: "$720 Billion" },
+            { rank: 12, name: "JPMorgan Chase (JPM)", cap: "$610 Billion" },
+            { rank: 13, name: "Walmart Inc. (WMT)", cap: "$580 Billion" },
+            { rank: 14, name: "Visa Inc. (V)", cap: "$550 Billion" },
+            { rank: 15, name: "Exxon Mobil (XOM)", cap: "$520 Billion" }
+        ];
+
+        const idxData = [
+            { rank: 1, name: "Bank Central Asia Tbk (BBCA)", cap: "Rp 1,250 Trillion" },
+            { rank: 2, name: "Bank Rakyat Indonesia (BBRI)", cap: "Rp 740 Trillion" },
+            { rank: 3, name: "Barito Renewables (BREN)", cap: "Rp 700 Trillion" },
+            { rank: 4, name: "Bank Mandiri Persero (BMRI)", cap: "Rp 680 Trillion" },
+            { rank: 5, name: "Bayan Resources (BYAN)", cap: "Rp 580 Trillion" },
+            { rank: 6, name: "Telkom Indonesia (TLKM)", cap: "Rp 310 Trillion" },
+            { rank: 7, name: "Astra International (ASII)", cap: "Rp 210 Trillion" },
+            { rank: 8, name: "Bank Negara Indonesia (BBNI)", cap: "Rp 205 Trillion" },
+            { rank: 9, name: "Chandra Asri Pacific (TPIA)", cap: "Rp 195 Trillion" },
+            { rank: 10, name: "Amman Mineral Internasional (AMMN)", cap: "Rp 190 Trillion" },
+            { rank: 11, name: "United Tractors (UNTR)", cap: "Rp 105 Trillion" },
+            { rank: 12, name: "Indofood CBP (ICBP)", cap: "Rp 102 Trillion" },
+            { rank: 13, name: "Adaro Energy Indonesia (ADRO)", cap: "Rp 98 Trillion" },
+            { rank: 14, name: "Kalbe Farma (KLBF)", cap: "Rp 75 Trillion" },
+            { rank: 15, name: "Indofood Sukses Makmur (INDF)", cap: "Rp 72 Trillion" }
+        ];
+
+        const modalOverlay = document.getElementById('marketModal');
+        const modalTitleText = document.getElementById('modalTitleText');
+        const modalTableContent = document.getElementById('modalTableContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal(title, dataArray) {
+            modalTitleText.innerText = title;
+            modalTableContent.innerHTML = "";
+            dataArray.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="color: #22c55e; font-weight: 700;">#${item.rank}</td>
+                    <td style="font-weight: 500; color: #ffffff;">${item.name}</td>
+                    <td style="text-align: right; font-family: 'Space Grotesk'; font-weight: 600; color: #a855f7;">${item.cap}</td>
+                `;
+                modalTableContent.appendChild(row);
+            });
+            modalOverlay.classList.add('active');
+        }
+
+        document.getElementById('openGlobalModal').addEventListener('click', () => {
+            openModal("Top 15 Global Companies by Market Capitalization", globalData);
+        });
+
+        document.getElementById('openIdxModal').addEventListener('click', () => {
+            openModal("Top 15 Indonesia Companies by Market Capitalization (IDX)", idxData);
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
         });
     </script>
 </body>
