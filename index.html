@@ -224,27 +224,32 @@
             text-transform: uppercase;
             letter-spacing: 0.4px;
         }
-/* Terminal Logs & Bloomberg Style Box */
-        .terminal-log-box {
-            background: #0d0d0d;
-            border: 1px solid #222222;
+        /* Clean Executive Summary Card (Ganti Terminal Ala Hacker) */
+        .insight-card {
+            background: #121212;
+            border: 1px solid #262626;
             border-radius: 8px;
-            padding: 12px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.75rem;
-            color: #22c55e;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            max-height: 110px;
-            overflow-y: auto;
+            gap: 8px;
         }
-        .log-line {
-            opacity: 0.85;
+        .insight-header {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .insight-body {
+            font-size: 0.82rem;
+            color: #ececec;
+            line-height: 1.4;
         }
 
-        /* Footer Telemetry Data Bar */
-        .telemetry-bar {
+        /* Minimalist Metrics Footer Bar */
+        .mini-metrics-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
@@ -254,18 +259,17 @@
             padding: 10px;
             text-align: center;
         }
-        .tele-title {
-            font-size: 0.6rem;
+        .mm-title {
+            font-size: 0.58rem;
             color: #8e8ea0;
             text-transform: uppercase;
             margin-bottom: 2px;
         }
-        .tele-val {
+        .mm-val {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             color: #ececec;
-        
         }
     </style>
 </head>
@@ -316,11 +320,11 @@
                         <input type="number" id="coverage" step="0.1" placeholder="e.g. 5.0x">
                     </div>
 
-                    <button type="button" id="calcBtn">Execute Terminal Analysis</button>
+                    <button type="button" id="calcBtn">Start Analysis</button>
                 </form>
             </div>
 
-            <!-- SISI KANAN: MACRO INDEX PANEL BESAR (LANGSUNG TAMPIL FULL) -->
+            <!--  NEW MINIMALIST DESIGN -->
             <div class="result-panel">
                 <div class="score-container">
                     <div class="score-info">
@@ -363,30 +367,32 @@
                     </div>
                 </div>
 
-                <!-- Terminal Execution Logs -->
-                 <div class="terminal-log-box" id="terminalLogs">
-                    <span class="log-line">> SYSTEM READY... AWAITING PARAMETER INGESTION.</span>
-                    <span class="log-line">> SECURE LINK: OFFLINE. SECURE ENCRYPTION: AES-256.</span>
-                 </div>
-                 
-                <!-- Telemetry Market Data Bar -->
-                <div class="telemetry-bar">
+                <!-- Clean Executive Insight Card -->
+                <div class="insight-card">
+                    <div class="insight-header">Executive Intelligence Summary</div>
+                    <div class="insight-body" id="insightText">
+                        System ready. Input company parameters and execute analysis to generate clean macroeconomic intelligence reports.
+                    </div>
+                </div>
+
+                <!-- Minimalist Metrics Footer Bar -->
+                <div class="mini-metrics-bar">
                     <div>
-                        <div class="tele-title">Market State</div>
-                        <div class="tele-val" id="teleState">IDLE</div>
+                        <div class="mm-title">Analysis Mode</div>
+                        <div class="mm-val" id="mmMode">STANDBY</div>
                     </div>
                     <div>
-                        <div class="tele-title">Volatility Index</div>
-                        <div class="tele-val" id="teleVol">--</div>
+                        <div class="mm-title">Risk Level</div>
+                        <div class="mm-val" id="mmRisk">--</div>
                     </div>
                     <div>
-                        <div class="tele-title">Signal Status</div>
-                        <div class="tele-val" id="teleSignal">SECURE</div>
+                        <div class="mm-title">Data Status</div>
+                        <div class="mm-val" id="mmStatus">SECURE</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
     <script>
         const btn = document.getElementById('calcBtn');
@@ -419,28 +425,28 @@
 
             let ratingText = "";
             let badgeColor = "";
-            let healthMessage = "";
+            let insightMsge = "";
 
             if (totalScore >= 230) {
                 ratingText = "TIER 1 (APEX-LEVEL)";
                 badgeColor = "#3b82f6"; // Biru
-                logMsg = `[APEX] ${companyName} exhibits elite capitalization & pristine cash conversion cycles.`;
+                insightMsg = `<b>${companyName}</b> demonstrates exceptional capitalism and optimal cash conversion efficiency, positioning it as an industry leader with minimal solvency risk.`;
             } else if (totalScore >= 180) {
                 ratingText = "TIER 2 (ELITE-LEVEL)";
                 badgeColor = "#a855f7"; // Ungu
-                logMsg = `[ELITE] ${companyName} display robust margins with controlled balance sheet risk.`;
+                insghtMsg = `<b>${companyName}</b> shows solid operational margins and healthy compounding performance, refelcting a robust balance sheetand well-managed financial leverage.`;
             } else if (totalScore >= 150) {
                 ratingText = "TIER 3 (MID-LEVEL)";
                 badgeColor = "#eab308"; // Kuning
-                logMsg = `[WARNING] ${companyName} operates on median thresholds. Monitor quarterly cash burns.`;
+                insightMsg = `<b>${companyName}</b> operates on standard median thresholds. Close monitoring on upcoming quarterly cash flows and debt coverage is strongly advised.`;
             } else if (totalScore >= 100) {
                 ratingText = "TIER 4 (TRASH-LEVEL)";
                 badgeColor = "#f97316"; // Orange
-                logMsg = `[CRITICAL] High leverage detected in ${companyName}. Solvency rations breached .`;
+                insightMsg = `<b>${companyName}</b>. exhibits noticable structural vulnerabilites. High leverage rations and compressed margins signal potential  capital allocation risks .`;
             } else {
                 ratingText = "TIER 5 (DEAD-LEVEL)";
                 badgeColor = "#ef4444"; // Merah
-                logMsg = `[FATAL] Default probability critical for ${companyName}. Immediate liquidation advised.`;
+                insightMsg = `<b>${companyName}</b>. triggers critical distress indicators across multiple metrics. immediate balance sheet restructuring or capital intervention is required.`;
             } 
             
             const labelEl = document.getElementById('displayRating');
@@ -458,18 +464,11 @@
             document.getElementById('compoundVal').innerText = Math.min(99, Math.round((growth / 50) * 75 + 20)) + '%';
             document.getElementById('safetyVal').innerText = Math.min(99, Math.max(10, Math.round((1 - leverage / 2) * 90)) ) + '%';
 
-            // Update Terminal Logs & Telemetry
-            const logsContainer = document.getElementById('terminalLogs');
-            logsContainer.innerHTML = `
-                <span class="log-line">> INGESTING DATA FOR [${companyName}]...SUCCESS.</span>
-                <span class="log-line">> COMPUTING MACRO INDICES... [OK]</span>
-                <span class="log-line">> ${logMsg}</span>
-                <span class="log-line">> TERMINAL STATUS: OPTIMIZED. ENCRYPTION SECURE.</span>
-            `;
-            
-            document.getElementById('teleState').innerText = "LIVE STREAM";
-            document.getElementById('teleVol').innerText = (Math.random() * 2 + 0.8).toFixed(2) + '% (LOW)';
-            document.getElementById('teleSignal').innerText = totalScore >= 150 ? "OPTIMAL" : "HIGH RISK";
+            // Update Clean Insight & Metrics Bar
+            document.getElementById('insightText').innerHTML = insightMsg;
+            document.getElementById('mmMode').innerText = "PROFILING";
+            document.getElementById('mmRisk').innerText = totalScore >= 150 ? "LOW / MODERATE" : "HIGH RISK";
+            document.getElementById('mmStatus').innerText = "VERIFIED";
         });
     </script>
 </body>
