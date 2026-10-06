@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,6 +92,7 @@
             gap: 16px;
         }
 
+        /* Consistent Hover Lift & Glow Effect */
         .bento-card {
             background: rgba(13, 17, 23, 0.35);
             backdrop-filter: blur(16px);
@@ -107,8 +108,8 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .bento-card:hover {
-            background: rgba(18, 22, 31, 0.5);
-            border-color: rgba(168, 85, 247, 0.3);
+            background: rgba(18, 22, 31, 0.55);
+            border-color: rgba(168, 85, 247, 0.35);
             transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.15);
         }
@@ -166,7 +167,7 @@
             background-color: rgba(18, 24, 33, 0.8);
         }
 
-        /* Custom Range Slider ala Brightness/Volume Bar untuk Profil Risiko */
+        /* Custom Range Slider */
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
@@ -189,7 +190,7 @@
             border-radius: 50%;
             background: #ffffff;
             cursor: pointer;
-            box-shadow: -405px 0 0 400px #22c55e, 0 0 15px rgba(34, 197, 94, 0.8), 0 0 25px rgba(34, 197, 94, 0.5);
+            box-shadow: -405px 0 0 400px #22c55e, 0 0 15px rgba(34, 197, 94, 0.8);
             transition: transform 0.1s ease;
         }
         input[type="range"]::-webkit-slider-thumb:hover {
@@ -217,15 +218,34 @@
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
         }
 
-        .big-score-display {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.3rem;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1;
-        }
-        .recommendation-box {
+        /* Highlight Nominal Final Value Style */
+        .highlight-result-box {
             background: rgba(13, 17, 23, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .small-top-label {
+            font-size: 0.72rem;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .big-highlight-nominal {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #22c55e;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
+        }
+
+        .recommendation-box {
+            background: rgba(13, 17, 23, 0.4);
             border: 1px solid #262626;
             border-radius: 12px;
             padding: 14px;
@@ -235,12 +255,12 @@
         }
         .rec-stock-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #22c55e;
         }
         .rec-desc {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: #cbd5e1;
             line-height: 1.4;
         }
@@ -259,45 +279,15 @@
         }
         .mini-val {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: #ffffff;
         }
         .mini-lbl {
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             color: #8e8ea0;
             text-transform: uppercase;
             margin-top: 2px;
-        }
-
-        /* Chart Simulation Styles */
-        .chart-container {
-            background: rgba(13, 17, 23, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #8e8ea0;
-        }
-        .chart-svg {
-            width: 100%;
-            height: 125px;
-            overflow: visible;
-        }
-        .chart-axis-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.65rem;
-            color: #64748b;
-            padding: 0 4px;
         }
     </style>
 </head>
@@ -312,39 +302,38 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
+                <p>Macroeconomic Intelligence & Wealth Projections</p>
             </div>
         </div>
 
         <!-- Bento Grid Layout -->
         <div class="bento-grid">
             
-            <!-- CARD 1: INPUT PREFERENSI INVESTASI -->
+            <!-- CARD 1: INPUT PREFERENCES + CARD 3 (STRATEGY BELOW) -->
             <div class="bento-card col-span-5">
                 <div class="card-label">01. Investor Profile & Preferences</div>
                 
                 <div class="form-grid-2">
                     <div class="input-group">
-                        <label>Initial Capital(IDR)</label>
+                        <label>Initial Capital (IDR)</label>
                         <input type="number" id="capital" placeholder="e.g. 10000000">
                     </div>
                     <div class="input-group">
-                        <label>Time Span</label>
-                        <input type="number" id="timeframe" placeholder="e.g. 5" min="1" max="30">
+                        <label>Time Span (Years)</label>
+                        <input type="number" id="timeframe" placeholder="e.g. 10" min="1" max="40">
                     </div>
                 </div>
 
                 <div class="form-grid-2">
-                    <!-- Slider Profil Risiko / Return p.a (0 - 15%) -->
                     <div class="input-group">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <label>Target Return (p.a)</label>
-                            <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">10%</span>
+                            <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">8%</span>
                         </div>
-                        <input type="range" id="riskSlider" min="1" max="15" value="10" step="0.5">
+                        <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5">
                     </div>
                     <div class="input-group">
-                        <label>Sector</label>
+                        <label>Target Sector</label>
                         <select id="sector">
                             <option value="" disabled selected>Select Sector</option>
                             <option value="banking">Banking & Financials</option>
@@ -356,34 +345,44 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Target comparable issuer (optional)</label>
+                    <label>Target Comparable Issuer (Optional)</label>
                     <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
                 </div>
 
                 <button type="button" class="btn-action" id="analyzeBtn">Generate Simulation</button>
+
+                <!-- CARD 03 (STRATEGY) BELOW BUTTON -->
+                <div style="margin-top: 6px;">
+                    <div class="card-label" style="margin-bottom: 8px;">03. Investment Match & Strategy</div>
+                    <div class="recommendation-box">
+                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-desc" id="recDesc">
+                            The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- CARD 2: TOTAL SCORE, METRICS & GRAFIK BAR VERTIKAL -->
+            <!-- CARD 2: WEALTH PROJECTION & COMPOUNDING SUMMARY -->
             <div class="bento-card col-span-7">
                 <div class="card-label">02. Wealth Projection & Compounding Summary</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: AWAITING</div>
-                    </div>
+                    <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting Parameter Input</div>
                     <div style="text-align: right;">
                         <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
                         <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
                     </div>
                 </div>
 
-                <!-- Big nominal output box -->
-                 <div class="big-result-box">
-                    <div class="result-title-lbl">Total Projected Final Portofolio Value</div>
-                    <div class="big-nominal-display" id="totalValDisplay">Rp --</div>
+                <!-- Highlight Nominal Value -->
+                <div class="highlight-result-box">
+                    <div class="small-top-label">Total Projected Final Portfolio Value</div>
+                    <div class="big-highlight-nominal" id="totalValDisplay">Rp --</div>
+                </div>
 
                 <!-- Mini Metrics Grid -->
-                 <div class="metrics-mini-grid">
+                <div class="metrics-mini-grid">
                     <div class="mini-stat-card">
                         <div class="mini-val" id="mInitial">--</div>
                         <div class="mini-lbl">Initial Capital</div>
@@ -399,19 +398,8 @@
                 </div>
             </div>
 
-            <!-- CARD 3: REKOMENDASI SAHAM / INVESTASI -->
-            <div class="bento-card col-span-7">
-                <div class="card-label">03. Investment Match & Strategy</div>
-                <div class="recommendation-box">
-                    <div class="rec-stock-title" id="recTitle">-- execute analysis --</div>
-                    <div class="rec-desc" id="recDesc">
-                        The system will match your capital profile, time span, target return percentage, and chosen sector to automatically generate asset allocation recommendations and compound projections.
-                    </div>
-                </div>
-            </div>
-
             <!-- CARD 4: LIVE STATUS & QUICK INFO -->
-            <div class="bento-card col-span-5">
+            <div class="bento-card col-span-7" style="grid-column: span 7;">
                 <div class="card-label">04. Simulation Summary</div>
                 <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: #8e8ea0;">
                     <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
@@ -419,8 +407,8 @@
                         <span style="color: #f59e0b; font-weight: 600;">None (Browser Only)</span>
                     </div>
                     <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; line-height: 1.4;">
-                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Tips Kalkulasi</span>
-                        <span>Semua hasil simulasi dihitung secara instan menggunakan rumus compound interest standar.</span>
+                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Calculation Tips</span>
+                        <span>All outputs are precisely calculated using standard annual compounding interest formulas widely adopted in financial industries.</span>
                     </div>
                 </div>
             </div>
@@ -429,7 +417,6 @@
     </div>
 
     <script>
-        // Update label angka persentase risiko/return secara real-time pas slider digeser
         const riskSlider = document.getElementById('riskSlider');
         const riskLabel = document.getElementById('riskLabel');
         
@@ -444,44 +431,43 @@
             const sector = document.getElementById('sector').value;
             const customTicker = document.getElementById('ticker').value.trim();
 
-            // Validasi lengkap parameter kosong
             if (!rawCapital || isNaN(rawCapital) || !rawTimeframe || isNaN(rawTimeframe) || !sector) {
-                alert("⚠️ Please complete all parameters first!");
+                alert("⚠️ Please fill in all required parameters (Initial Capital, Time Span, & Target Sector) before proceeding!");
                 return;
             }
 
             const capital = parseFloat(rawCapital);
             const timeframe = parseInt(rawTimeframe);
 
-            if (timeframe <= 0 || timeframe > 40) {
-                alert("⚠️ Time span must be between 1 and 40 years!");
+            if (timeframe <= 0 || timeframe > 60) {
+                alert("⚠️ Time span must be between 1 and 60 years!");
                 return;
             }
 
-            // 1. Kalkulasi Rumus Compound Interest: A = P * (1 + r)^t
+            // Formula Compound Interest: A = P * (1 + r)^t
             const finalAmount = capital * Math.pow(1 + annualRate, timeframe);
             const netProfit = finalAmount - capital;
             const multiplier = (finalAmount / capital).toFixed(2);
 
-            // Tampilkan hasil di Card 02
+            // Update to Card 02
             document.getElementById('totalValDisplay').innerText = "Rp " + Math.round(finalAmount).toLocaleString('id-ID');
             document.getElementById('mInitial').innerText = "Rp " + Math.round(capital).toLocaleString('id-ID');
             document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
-            document.getElementById('mMultiplier').innerText = multiplier + "x Lipat";
+            document.getElementById('mMultiplier').innerText = multiplier + "x";
             
-            document.getElementById('statusSummaryLbl').innerText = `Proyeksi Berhasil (${timeframe} Tahun @ ${(annualRate*100)}% p.a)`;
+            document.getElementById('statusSummaryLbl').innerText = `Simulation Successful (${timeframe} Years @ ${(annualRate*100)}% p.a)`;
             document.getElementById('modeVal').innerText = "CALCULATED";
 
-            // 2. Rekomendasi Saham & Strategy Text
+            // Update to Card 03 (Strategy & Top Pick)
             let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking Blue Chip)";
-            let strategyMsg = `Dengan modal awal <b>Rp ${capital.toLocaleString('id-ID')}</b> yang diinvestasikan selama <b>${timeframe} Tahun</b> pada tingkat return <b>${(annualRate*100)}% p.a</b>, aset Anda berpotensi berkembang menjadi <b>Rp ${Math.round(finalAmount).toLocaleString('id-ID')}</b> (menghasilkan keuntungan bersih sebesar <b>Rp ${Math.round(netProfit).toLocaleString('id-ID')}</b>).`;
+            let strategyMsg = `With an initial capital of <b>Rp ${capital.toLocaleString('id-ID')}</b> invested over <b>${timeframe} Years</b> at a target return of <b>${(annualRate*100)}% p.a</b>, your assets have the potential to grow to <b>Rp ${Math.round(finalAmount).toLocaleString('id-ID')}</b> (generating a net profit of <b>Rp ${Math.round(netProfit).toLocaleString('id-ID')}</b>).`;
 
             if (sector === 'tech') {
                 stockName = customTicker ? customTicker.toUpperCase() : "GOTO / EMTK (Tech Sector Index)";
-                strategyMsg = `Strategi sektor teknologi dengan asumsi return <b>${(annualRate*100)}% p.a</b> selama <b>${timeframe} tahun</b> memaksimalkan kekuatan pertumbuhan majemuk (*compounding effect*), mengubah modal awal Anda berkali-lipat dengan volatilitas tinggi.`;
+                strategyMsg = `Technology sector strategy assuming a return of <b>${(annualRate*100)}% p.a</b> over <b>${timeframe} years</b> maximizes long-term compounding momentum.`;
             } else if (sector === 'energy') {
                 stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA / UNTR (Energy & Dividend Yield)";
-                strategyMsg = `Sektor komoditas energi menawarkan perlindungan nilai aset yang tangguh terhadap inflasi, cocok untuk mencapai target pertumbuhan akumulatif dalam jangka waktu ${timeframe} tahun ke depan.`;
+                strategyMsg = `Energy and commodity sectors provide robust inflation hedging and high dividend yield accumulation for a ${timeframe}-year horizon.`;
             }
 
             document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
