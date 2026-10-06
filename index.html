@@ -302,7 +302,7 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>Macroeconomic Intelligence & Wealth Projections</p>
+                <p>Wealth Projections</p>
             </div>
         </div>
 
@@ -311,7 +311,7 @@
             
             <!-- CARD 1: INPUT PREFERENCES + CARD 3 (STRATEGY BELOW) -->
             <div class="bento-card col-span-5">
-                <div class="card-label">01. Investor Profile & Preferences</div>
+                <div class="card-label">Preferences</div>
                 
                 <div class="form-grid-2">
                     <div class="input-group">
@@ -327,13 +327,13 @@
                 <div class="form-grid-2">
                     <div class="input-group">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <label>Target Return (p.a)</label>
+                            <label>Return</label>
                             <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">8%</span>
                         </div>
                         <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5">
                     </div>
                     <div class="input-group">
-                        <label>Target Sector</label>
+                        <label>Sector</label>
                         <select id="sector">
                             <option value="" disabled selected>Select Sector</option>
                             <option value="banking">Banking & Financials</option>
@@ -345,7 +345,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Target Comparable Issuer (Optional)</label>
+                    <label>Company</label>
                     <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
                 </div>
 
@@ -353,9 +353,9 @@
 
                 <!-- CARD 03 (STRATEGY) BELOW BUTTON -->
                 <div style="margin-top: 6px;">
-                    <div class="card-label" style="margin-bottom: 8px;">03. Investment Match & Strategy</div>
+                    <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -365,7 +365,7 @@
 
             <!-- CARD 2: WEALTH PROJECTION & COMPOUNDING SUMMARY -->
             <div class="bento-card col-span-7">
-                <div class="card-label">02. Wealth Projection & Compounding Summary</div>
+                <div class="card-label">Compounding Summary</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting Parameter Input</div>
@@ -377,7 +377,7 @@
 
                 <!-- Highlight Nominal Value -->
                 <div class="highlight-result-box">
-                    <div class="small-top-label">Total Projected Final Portfolio Value</div>
+                    <div class="small-top-label">Final Portfolio Value</div>
                     <div class="big-highlight-nominal" id="totalValDisplay">Rp --</div>
                 </div>
 
@@ -385,7 +385,7 @@
                 <div class="metrics-mini-grid">
                     <div class="mini-stat-card">
                         <div class="mini-val" id="mInitial">--</div>
-                        <div class="mini-lbl">Initial Capital</div>
+                        <div class="mini-lbl">Initial Cap</div>
                     </div>
                     <div class="mini-stat-card">
                         <div class="mini-val" id="mProfit" style="color: #22c55e;">--</div>
@@ -393,7 +393,7 @@
                     </div>
                     <div class="mini-stat-card">
                         <div class="mini-val" id="mMultiplier">--</div>
-                        <div class="mini-lbl">Asset Multiplier</div>
+                        <div class="mini-lbl">Asset Multi</div>
                     </div>
                 </div>
             </div>
@@ -404,7 +404,7 @@
                 <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: #8e8ea0;">
                     <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
                         <span>Data Storage</span>
-                        <span style="color: #f59e0b; font-weight: 600;">None (Browser Only)</span>
+                        <span style="color: #f59e0b; font-weight: 600;">Browser Only</span>
                     </div>
                     <div style="background: rgba(13, 17, 23, 0.6); padding: 10px; border-radius: 8px; border: 1px solid #262626; line-height: 1.4;">
                         <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Calculation Tips</span>
@@ -455,18 +455,18 @@
             document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
             document.getElementById('mMultiplier').innerText = multiplier + "x";
             
-            document.getElementById('statusSummaryLbl').innerText = `Simulation Successful (${timeframe} Years @ ${(annualRate*100)}% p.a)`;
+            document.getElementById('statusSummaryLbl').innerText = `Simulation Successful`;
             document.getElementById('modeVal').innerText = "CALCULATED";
 
             // Update to Card 03 (Strategy & Top Pick)
-            let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking Blue Chip)";
+            let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking)";
             let strategyMsg = `With an initial capital of <b>Rp ${capital.toLocaleString('id-ID')}</b> invested over <b>${timeframe} Years</b> at a target return of <b>${(annualRate*100)}% p.a</b>, your assets have the potential to grow to <b>Rp ${Math.round(finalAmount).toLocaleString('id-ID')}</b> (generating a net profit of <b>Rp ${Math.round(netProfit).toLocaleString('id-ID')}</b>).`;
 
             if (sector === 'tech') {
-                stockName = customTicker ? customTicker.toUpperCase() : "GOTO / EMTK (Tech Sector Index)";
+                stockName = customTicker ? customTicker.toUpperCase() : "GOTO / EMTK (Tech Sector)";
                 strategyMsg = `Technology sector strategy assuming a return of <b>${(annualRate*100)}% p.a</b> over <b>${timeframe} years</b> maximizes long-term compounding momentum.`;
             } else if (sector === 'energy') {
-                stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA / UNTR (Energy & Dividend Yield)";
+                stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA (Energy & Dividend Yield)";
                 strategyMsg = `Energy and commodity sectors provide robust inflation hedging and high dividend yield accumulation for a ${timeframe}-year horizon.`;
             }
 
