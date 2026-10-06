@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drophen Terms - Smart Investment Advisor</title>
+    <title>Drophen Terms - Smart Investment Advisor & Simulation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -90,12 +90,9 @@
         /* Card Sizing Grid */
         .col-span-5 { grid-column: span 5; }
         .col-span-7 { grid-column: span 7; }
-        .col-span-4 { grid-column: span 4; }
-        .col-span-8 { grid-column: span 8; }
-        .col-span-12 { grid-column: span 12; }
 
         @media (max-width: 1024px) {
-            .col-span-5, .col-span-7, .col-span-4, .col-span-8 {
+            .col-span-5, .col-span-7 {
                 grid-column: span 12;
             }
         }
@@ -169,7 +166,7 @@
         /* Metric & Display Items */
         .big-score-display {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 700;
             color: #ffffff;
             line-height: 1;
@@ -219,6 +216,45 @@
             text-transform: uppercase;
             margin-top: 2px;
         }
+
+        /* Chart Simulation Styles */
+        .chart-container {
+            background: #0d1117;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #8e8ea0;
+        }
+        .chart-svg {
+            width: 100%;
+            height: 110px;
+            overflow: visible;
+        }
+        .chart-line {
+            fill: none;
+            stroke: #22c55e;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .chart-area {
+            fill: rgba(34, 197, 94, 0.08);
+        }
+        .chart-axis-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: #64748b;
+        }
     </style>
 </head>
 <body>
@@ -228,7 +264,7 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>AI-Powered Macroeconomic Intelligence & Smart Investment Recommender</p>
+                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
             </div>
             <div class="radar-badge">● System Online</div>
         </div>
@@ -236,21 +272,22 @@
         <!-- Bento Grid Layout -->
         <div class="bento-grid">
             
-            <!-- CARD 1: INPUT PREFERENSI INVESTASI (Kiri Atas) -->
+            <!-- CARD 1: INPUT PREFERENSI INVESTASI -->
             <div class="bento-card col-span-5">
                 <div class="card-label">01. Investor Profile & Preferences</div>
                 
                 <div class="form-grid-2">
                     <div class="input-group">
                         <label>Modal Awal (IDR)</label>
-                        <input type="text" id="capital" placeholder="e.g. 10.000.000">
+                        <input type="number" id="capital" placeholder="e.g. 10000000" value="10000000">
                     </div>
                     <div class="input-group">
                         <label>Rentang Waktu</label>
                         <select id="timeframe">
-                            <option value="short">Short (1-6 Bulan)</option>
-                            <option value="medium">Medium (1-3 Tahun)</option>
-                            <option value="long" selected>Long (3-5+ Tahun)</option>
+                            <option value="3">Short (3 Tahun)</option>
+                            <option value="5" selected>Medium (5 Tahun)</option>
+                            <option value="10">Long (10 Tahun)</option>
+                            <option value="15">Extended (15 Tahun)</option>
                         </select>
                     </div>
                 </div>
@@ -259,9 +296,9 @@
                     <div class="input-group">
                         <label>Profil Risiko</label>
                         <select id="riskProfile">
-                            <option value="aggressive">Aggressive (Growth)</option>
-                            <option value="stable" selected>Stable (Blue Chip)</option>
-                            <option value="conservative">Conservative (Safe)</option>
+                            <option value="aggressive">Aggressive (15% p.a)</option>
+                            <option value="stable" selected>Stable (11% p.a)</option>
+                            <option value="conservative">Conservative (8% p.a)</option>
                         </select>
                     </div>
                     <div class="input-group">
@@ -280,12 +317,12 @@
                     <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
                 </div>
 
-                <button type="button" class="btn-action" id="analyzeBtn">Generate Recommendation</button>
+                <button type="button" class="btn-action" id="analyzeBtn">Generate Recommendation & Simulation</button>
             </div>
 
-            <!-- CARD 2: TOTAL SCORE & STATUS (Kanan Atas) -->
+            <!-- CARD 2: TOTAL SCORE, METRICS & GRAFIK PROYEKSI -->
             <div class="bento-card col-span-7">
-                <div class="card-label">02. Intelligence Index & Index Score</div>
+                <div class="card-label">02. Intelligence Index & 15-Year Wealth Simulation</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
@@ -313,20 +350,38 @@
                         <div class="mini-lbl">Capital Safety</div>
                     </div>
                 </div>
+
+                <!-- Grafik Proyeksi Investasi (0 - 15 Tahun) -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <span>Portfolio Growth Projection (Year 0 to 15)</span>
+                        <span id="projectedEndVal" style="color: #22c55e; font-weight: 700;">Final Est: --</span>
+                    </div>
+                    <svg class="chart-svg" viewBox="0 0 500 110" preserveAspectRatio="none">
+                        <path id="chartArea" class="chart-area" d="M0,100 L500,100 Z"></path>
+                        <path id="chartLine" class="chart-line" d="M0,100 L500,100"></path>
+                    </svg>
+                    <div class="chart-axis-labels">
+                        <span>Year 0</span>
+                        <span>Year 5</span>
+                        <span>Year 10</span>
+                        <span>Year 15</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- CARD 3: REKOMENDASI SAHAM / INVESTASI (Kiri Bawah) -->
+            <!-- CARD 3: REKOMENDASI SAHAM / INVESTASI -->
             <div class="bento-card col-span-7">
                 <div class="card-label">03. AI Investment Match & Strategy</div>
                 <div class="recommendation-box">
                     <div class="rec-stock-title" id="recTitle">-- Select parameters & execute analysis --</div>
                     <div class="rec-desc" id="recDesc">
-                        Sistem AI akan mencocokkan profil modal, rentang waktu, serta sektor pilihan Anda untuk menghasilkan rekomendasi alokasi aset dan proyeksi fundamental emiten terbaik secara otomatis.
+                        Sistem AI akan mencocokkan profil modal, rentang waktu, serta sektor pilihan Anda untuk menghasilkan rekomendasi alokasi aset, skor deterministik konsisten, dan grafik pertumbuhan majemuk secara otomatis.
                     </div>
                 </div>
             </div>
 
-            <!-- CARD 4: SYSTEM STATUS & LOG (Kanan Bawah) -->
+            <!-- CARD 4: SYSTEM STATUS & LOG -->
             <div class="bento-card col-span-5">
                 <div class="card-label">04. Macro Status & Security</div>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -346,35 +401,94 @@
 
     <script>
         document.getElementById('analyzeBtn').addEventListener('click', function() {
-            const capital = document.getElementById('capital').value.trim();
-            const timeframe = document.getElementById('timeframe').value;
+            const rawCapital = document.getElementById('capital').value.trim();
+            const timeframe = parseInt(document.getElementById('timeframe').value);
             const riskProfile = document.getElementById('riskProfile').value;
             const sector = document.getElementById('sector').value;
+            const customTicker = document.getElementById('ticker').value.trim();
 
-            if (!capital) {
-                alert("⚠️ Harap masukkan nominal modal awal investasi Anda terlebih dahulu!");
+            if (!rawCapital || isNaN(rawCapital)) {
+                alert("⚠️ Harap masukkan nominal modal awal investasi yang valid terlebih dahulu!");
                 return;
             }
 
-            // Simulasi kalkulasi AI Recommender
-            let score = Math.floor(Math.random() * (290 - 180 + 1)) + 180;
-            document.getElementById('scoreVal').innerText = score + "/300";
-            document.getElementById('tierVal').innerText = "Rating: TIER 1 (OPTIMIZED)";
+            const capital = parseFloat(rawCapital);
+
+            // 1. Kalkulasi Skor Deterministik (Konsisten & Tetap walau di-spam klik)
+            let baseScore = 200;
+            if (riskProfile === 'aggressive') baseScore += 35;
+            if (riskProfile === 'stable') baseScore += 48;
+            if (riskProfile === 'conservative') baseScore += 25;
+            if (sector === 'banking') baseScore += 14;
+            if (sector === 'tech') baseScore += 8;
+            
+            const finalScore = Math.min(300, baseScore);
+
+            document.getElementById('scoreVal').innerText = finalScore + "/300";
+            document.getElementById('tierVal').innerText = finalScore >= 240 ? "Rating: TIER 1 (APEX-OPTIMIZED)" : "Rating: TIER 2 (STABLE GROWTH)";
             document.getElementById('modeVal').innerText = "PROFILING";
 
-            document.getElementById('m1').innerText = (Math.random() * 2 + 1.5).toFixed(1) + 'x';
-            document.getElementById('m2').innerText = "+" + (Math.random() * 15 + 10).toFixed(1) + '%';
-            document.getElementById('m3').innerText = "94.2%";
+            // Metrik konsisten
+            document.getElementById('m1').innerText = (sector === 'banking' ? '3.4x' : '2.8x');
+            document.getElementById('m2').innerText = (riskProfile === 'aggressive' ? '+18.5%' : '+12.2%');
+            document.getElementById('m3').innerText = (riskProfile === 'conservative' ? '98.5%' : '92.4%');
 
-            let stockName = "BBCA (Bank Central Asia Tbk)";
-            let strategyMsg = `Berdasarkan modal <b>Rp ${capital}</b> dengan rentang waktu <b>${timeframe}</b> dan profil risiko <b>${riskProfile}</b> pada sektor pilihan Anda, emiten ini menunjukkan daya tahan kas yang sangat kuat, sangat cocok untuk strategi compounding jangka panjang.`;
+            // 2. Tentukan Return Rate p.a berdasarkan profil risiko
+            let annualRate = 0.11; // Stable default
+            if (riskProfile === 'aggressive') annualRate = 0.15;
+            if (riskProfile === 'conservative') annualRate = 0.08;
+
+            // 3. Generate Data Grafik Proyeksi 15 Tahun ke Depan
+            let points = [];
+            let maxVal = 0;
+
+            for (let yr = 0; yr <= 15; yr++) {
+                let futureVal = capital * Math.pow(1 + annualRate, yr);
+                points.push(futureVal);
+                if (futureVal > maxVal) maxVal = futureVal;
+            }
+
+            // Normalisasi koordinat SVG
+            let svgWidth = 500;
+            let svgHeight = 90;
+            let pathD = "";
+            let areaD = "";
+
+            let coords = points.map((val, idx) => {
+                let x = (idx / 15) * svgWidth;
+                let y = svgHeight - ((val - capital) / (maxVal - capital || 1)) * (svgHeight - 15) - 10;
+                if (isNaN(y)) y = svgHeight;
+                return { x, y };
+            });
+
+            coords.forEach((c, idx) => {
+                if (idx === 0) {
+                    pathD += `M ${c.x} ${c.y}`;
+                    areaD += `M ${c.x} 100 L ${c.x} ${c.y}`;
+                } else {
+                    pathD += ` L ${c.x} ${c.y}`;
+                    areaD += ` L ${c.x} ${c.y}`;
+                }
+            });
+
+            areaD += ` L 500 100 Z`;
+
+            document.getElementById('chartLine').setAttribute('d', pathD);
+            document.getElementById('chartArea').setAttribute('d', areaD);
+
+            let finalEstimatedVal = points[15];
+            document.getElementById('projectedEndVal').innerText = "Yr-15 Est: IDR " + Math.round(finalEstimatedVal).toLocaleString('id-ID');
+
+            // 4. Rekomendasi Saham Pintar & Strategy Text
+            let stockName = customTicker ? customTicker.toUpperCase() : "BBCA / BMRI (Banking Blue Chip)";
+            let strategyMsg = `Dengan modal awal <b>Rp ${capital.toLocaleString('id-ID')}</b>, rentang waktu <b>${timeframe} Tahun</b>, dan profil risiko <b>${riskProfile.toUpperCase()}</b> pada sektor pilihan, portofolio Anda diproyeksikan mengalami compounding kuat dengan asumsi return <b>${(annualRate*100)}% p.a</b>.`;
 
             if (sector === 'tech') {
-                stockName = "GOTO / EMTK (Technology Index)";
-                strategyMsg = `Untuk profil agresif pada sektor teknologi dengan modal <b>Rp ${capital}</b>, fokuskan pada manajemen volatilitas dan akumulasi bertahap guna menangkap momentum *earnings velocity* tinggi.`;
+                stockName = customTicker ? customTicker.toUpperCase() : "GOTO / EMTK (Tech Sector Index)";
+                strategyMsg = `Alokasi sektor teknologi dengan profil agresif berfokus pada perolehan <i>earnings velocity</i> tinggi. Proyeksi jangka panjang menunjukkan pertumbuhan eksponensial dengan volatilitas terkelola.`;
             } else if (sector === 'energy') {
-                stockName = "ADRO / PTBA (Energy & Mining)";
-                strategyMsg = `Sektor energi memberikan deviden yield yang tinggi, ideal dikombinasikan dengan profil risiko <b>${riskProfile}</b> untuk mengamankan cash buffer portofolio Anda dengan modal <b>Rp ${capital}</b>.`;
+                stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA / UNTR (Energy & Dividend Yield)";
+                strategyMsg = `Sektor komoditas energi memberikan sokongan *cash buffer* yang solid melalui dividen tinggi, sangat cocok untuk mempertahankan daya beli aset dari tekanan inflasi makro.`;
             }
 
             document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
