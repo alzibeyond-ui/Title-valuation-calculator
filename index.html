@@ -525,7 +525,7 @@
                 
                 <div class="form-grid-2">
                     <div class="input-group">
-                        <label>Initial Capital (IDR)</label>
+                        <label>Initial Capital (USD)</label>
                         <input type="number" id="capital" placeholder="e.g. 10000000">
                     </div>
                     <div class="input-group">
@@ -556,7 +556,7 @@
 
                 <div class="input-group">
                     <label>Company</label>
-                    <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
+                    <input type="text" id="ticker" placeholder="...">
                 </div>
 
                 <button type="button" class="btn-action" id="analyzeBtn">Generate Simulation</button>
@@ -565,7 +565,7 @@
                 <div style="margin-top: 6px;">
                     <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -611,7 +611,7 @@
                 <div style="margin-top: 4px;">
                     <div style="font-size: 0.65rem; color: #8e8ea0; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
                         <span style="width: 6px; height: 6px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #22c55e;"></span>
-                        <span>Live Global Market Feed</span>
+                        <span>Global Market Feed</span>
                     </div>
                     
                     <div class="global-ticker-wrapper">
@@ -714,7 +714,7 @@
                         <span style="color: #f59e0b; font-weight: 600;">6.00%</span>
                     </div>
                     <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; line-height: 1.4;">
-                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 AI Compounding Insight</span>
+                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 Compounding Insight</span>
                         <span>Long-term compounding outpaces standard inflation across major defensive sectors over 10+ year horizons.</span>
                     </div>
                 </div>
@@ -729,7 +729,7 @@
                         <span style="font-size: 1.1rem; color: #22c55e;">→</span>
                     </button>
                     <button type="button" class="btn-market" id="openIdxModal">
-                        <span>🇮Top 25 Indonesian Company Market Cap (IDX)</span>
+                        <span>Top 25 Indonesian Company Market Cap (IDX)</span>
                         <span style="font-size: 1.1rem; color: #22c55e;">→</span>
                     </button>
                 </div>
@@ -770,6 +770,22 @@
             riskLabel.innerText = this.value + "%";
         });
 
+        // Helper fungsi format USD dengan singkatan M, B, T, Q
+        function formatUSD(num) {
+            if (isNaN(num) || num === null) return "$--";
+            const absNum = Math.abs(num);
+            if (absNum >= 1e15) {
+                return '$' + (num / 1e15).toFixed(1) + 'Q';
+            } else if (absNum >= 1e12) {
+                return '$' + (num / 1e12).toFixed(1) + 'T';
+            } else if (absNum >= 1e9) {
+                return '$' + (num / 1e9).toFixed(1) + 'B';
+            } else if (absNum >= 1e6) {
+                return '$' + (num / 1e6).toFixed(1) + 'M';
+            } else {
+                return '$' + num.toLocaleString('en-US', {maximumFractionDigits: 0});
+            }
+        }   
         document.getElementById('analyzeBtn').addEventListener('click', function() {
             const rawCapital = document.getElementById('capital').value.trim();
             const rawTimeframe = document.getElementById('timeframe').value.trim();
@@ -785,8 +801,8 @@
             const capital = parseFloat(rawCapital);
             const timeframe = parseInt(rawTimeframe);
 
-            if (timeframe <= 0 || timeframe > 60) {
-                alert("⚠️ Time span must be between 1 and 60 years!");
+            if (timeframe <= 0 || timeframe > 100) {
+                alert("⚠️ Time span must be between 1 and 100 years!");
                 return;
             }
 
@@ -794,9 +810,9 @@
             const netProfit = finalAmount - capital;
             const multiplier = (finalAmount / capital).toFixed(2);
 
-            document.getElementById('totalValDisplay').innerText = "Rp " + Math.round(finalAmount).toLocaleString('id-ID');
-            document.getElementById('mInitial').innerText = "Rp " + Math.round(capital).toLocaleString('id-ID');
-            document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
+            document.getElementById('totalValDisplay').innerText = formatUSD(finalAmount);
+            document.getElementById('mInitial').innerText = formatUSD(capital);
+            document.getElementById('mProfit').innerText = formatUSD(netProfit);
             document.getElementById('mMultiplier').innerText = multiplier + "x";
             
             document.getElementById('statusSummaryLbl').innerText = `Simulation Successful`;
@@ -813,7 +829,7 @@
                 strategyMsg = `Energy and commodity sectors provide robust inflation hedging and high dividend yield accumulation for a ${timeframe}-year horizon.`;
             }
 
-            document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
+            document.getElementById('recTitle').innerText = "Company: " + stockName;
             document.getElementById('recDesc').innerHTML = strategyMsg;
         });
 
