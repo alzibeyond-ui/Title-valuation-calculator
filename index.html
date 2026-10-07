@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Drophen Terms -Investment Simulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drophen Terms - Smart Investment Advisor & Simulation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -24,9 +24,6 @@
             justify-content: center;
             position: relative;
             overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-            box-sizing: border-box;
         }
         /* Styling untuk Live Global Market Ticker (Marquee) */
         .global-ticker-wrapper {
@@ -172,7 +169,6 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 16px;
-            align-items: start;
         }
 
         /* Consistent Hover Lift & Glow Effect */
@@ -353,28 +349,44 @@
             text-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
         }
 
+        .recommendation-box {
+            background: rgba(13, 17, 23, 0.4);
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .rec-stock-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        .rec-desc {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
         .metrics-mini-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            width: 100%;
         }
         .mini-stat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(13, 17, 23, 0.5);
+            border: 1px solid #262626;
             border-radius: 8px;
-            padding: 8px 6px;
+            padding: 10px;
             text-align: center;
-            overflow: hidden; 
-            min-width: 0;
         }
         .mini-val {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #ffffff;
         }
         .mini-lbl {
             font-size: 0.6rem;
@@ -495,163 +507,228 @@
                 <p>Wealth Projections</p>
             </div>
         </div>
-        <!-- BENTO GRID UTAMA -->
-    <div class="bento-grid">
 
-    <!-- ================= BARIS 1: 2 CARD ATAS BERJEJER (PAKAI FLEX) ================= -->
-    <div class="col-span-12" style="display: flex; gap: 16px; align-items: flex-start;">
-        
-        <!-- 1. CARD PREFERENCES (Kiri) -->
-        <div class="bento-card" style="flex: 5; height: fit-content; padding-bottom: 14px; gap: 10px;">
-            <div class="card-label">Preferences</div>
+        <!-- Bento Grid Layout -->
+        <div class="bento-grid">
             
-            <div class="form-grid-2">
-                <div class="input-group">
-                    <label>Initial Capital (USD)</label>
-                    <input type="number" id="capital" placeholder="e.g. 1000000">
-                </div>
-                <div class="input-group">
-                    <label>Time Span (Years)</label>
-                    <input type="number" id="timeframe" placeholder="e.g. 10" min="1" max="40">
-                </div>
-            </div>
-
-            <div class="form-grid-2">
-                <div class="input-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <label>Return</label>
-                        <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">8%</span>
+            <!-- CARD 1: INPUT PREFERENCES + CARD 3 (STRATEGY BELOW) -->
+            <div class="bento-card col-span-5">
+                <div class="card-label">Preferences</div>
+                
+                <div class="form-grid-2">
+                    <div class="input-group">
+                        <label>Initial Capital (IDR)</label>
+                        <input type="number" id="capital" placeholder="e.g. 10000000">
                     </div>
-                    <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5">
+                    <div class="input-group">
+                        <label>Time Span (Years)</label>
+                        <input type="number" id="timeframe" placeholder="e.g. 10" min="1" max="40">
+                    </div>
                 </div>
+
+                <div class="form-grid-2">
+                    <div class="input-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label>Return</label>
+                            <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: #22c55e; font-weight: 700;">8%</span>
+                        </div>
+                        <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Sector</label>
+                        <select id="sector">
+                            <option value="" disabled selected>Select Sector</option>
+                            <option value="banking">Banking & Financials</option>
+                            <option value="tech">Technology & Digital</option>
+                            <option value="energy">Energy & Commodities</option>
+                            <option value="fmcg">Consumer Goods (FMCG)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="input-group">
-                    <label>Sector</label>
-                    <select id="sector">
-                        <option value="" disabled selected>Select Sector</option>
-                        <option value="banking">Banking & Financials</option>
-                        <option value="tech">Technology & Digital</option>
-                        <option value="energy">Energy & Commodities</option>
-                        <option value="fmcg">Consumer Goods (FMCG)</option>
-                    </select>
+                    <label>Company</label>
+                    <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
+                </div>
+
+                <button type="button" class="btn-action" id="analyzeBtn">Generate Simulation</button>
+
+                <!-- CARD 03 (STRATEGY) BELOW BUTTON -->
+                <div style="margin-top: 6px;">
+                    <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
+                    <div class="recommendation-box">
+                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-desc" id="recDesc">
+                            The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="input-group">
-                <label>Company</label>
-                <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
-            </div>
+            <!-- CARD 2: WEALTH PROJECTION & COMPOUNDING SUMMARY -->
+            <div class="bento-card col-span-7">
+                <div class="card-label">Compounding Summary</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting</div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
+                        <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
+                    </div>
+                </div>
 
-            <button type="button" class="btn-action" id="analyzeBtn">Generate Simulation</button>
-        </div>
+                <!-- Highlight Nominal Value -->
+                <div class="highlight-result-box">
+                    <div class="small-top-label">Final Portfolio Value</div>
+                    <div class="big-highlight-nominal" id="totalValDisplay">Rp --</div>
+                </div>
 
-        <!-- 2. CARD COMPOUNDING SUMMARY (Kanan - Tingginya otomatis ngikutin isi, tapi sejajar atasnya) -->
-        <div class="bento-card" style="flex: 7; height: fit-content;">
-            <div class="card-label">Compounding Summary</div>
+                <!-- Mini Metrics Grid -->
+                <div class="metrics-mini-grid">
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mInitial">--</div>
+                        <div class="mini-lbl">Initial Capital</div>
+                    </div>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mProfit" style="color: #22c55e;">--</div>
+                        <div class="mini-lbl">Net Profit</div>
+                    </div>
+                    <div class="mini-stat-card">
+                        <div class="mini-val" id="mMultiplier">--</div>
+                        <div class="mini-lbl">Asset Multiplier</div>
+                    </div>
+                </div>
             
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Awaiting</div>
-                <div style="text-align: right;">
-                    <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
-                    <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
+                <!-- TAMBAHAN: LIVE GLOBAL MARKET TICKER (MARQUEE FUTURISTIK) -->
+                <div style="margin-top: 4px;">
+                    <div style="font-size: 0.65rem; color: #8e8ea0; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 6px; height: 6px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #22c55e;"></span>
+                        <span>Live Global Market Feed</span>
+                    </div>
+                    
+                    <div class="global-ticker-wrapper">
+                        <div class="global-ticker-track">
+                            <!-- Item Ticker 1 -->
+                            <div class="ticker-item">
+                                <span class="t-name">S&P 500</span>
+                                <span class="t-val">5,815.20</span>
+                                <span class="t-chg positive">+0.64%</span>
+                            </div>
+                            <!-- Item Ticker 2 -->
+                            <div class="ticker-item">
+                                <span class="t-name">NASDAQ</span>
+                                <span class="t-val">18,350.10</span>
+                                <span class="t-chg positive">+0.88%</span>
+                            </div>
+                            <!-- Item Ticker 3 -->
+                            <div class="ticker-item">
+                                <span class="t-name">DOW JONES</span>
+                                <span class="t-val">42,275.50</span>
+                                <span class="t-chg negative">-0.12%</span>
+                            </div>
+                            <!-- Item Ticker 4 -->
+                            <div class="ticker-item">
+                                <span class="t-name">NIKKEI 225</span>
+                                <span class="t-val">39,120.00</span>
+                                <span class="t-chg positive">+1.24%</span>
+                            </div>
+                            <!-- Item Ticker 5 -->
+                            <div class="ticker-item">
+                                <span class="t-name">FTSE 100</span>
+                                <span class="t-val">8,240.30</span>
+                                <span class="t-chg positive">+0.31%</span>
+                            </div>
+                            <!-- Item Ticker 6 -->
+                            <div class="ticker-item">
+                                <span class="t-name">GOLD (XAU/USD)</span>
+                                <span class="t-val">$2,654.80</span>
+                                <span class="t-chg positive">+0.45%</span>
+                            </div>
+                            <!-- Item Ticker 7 -->
+                            <div class="ticker-item">
+                                <span class="t-name">BTC/USD</span>
+                                <span class="t-val">$64,820.00</span>
+                                <span class="t-chg negative">-0.75%</span>
+                            </div>
+
+                            <!-- DUPLIKASI SUPAYA ANIMASI LOOPINGNYA MULUS TANPA GAP -->
+                            <div class="ticker-item">
+                                <span class="t-name">S&P 500</span>
+                                <span class="t-val">5,815.20</span>
+                                <span class="t-chg positive">+0.64%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">NASDAQ</span>
+                                <span class="t-val">18,350.10</span>
+                                <span class="t-chg positive">+0.88%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">DOW JONES</span>
+                                <span class="t-val">42,275.50</span>
+                                <span class="t-chg negative">-0.12%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">NIKKEI 225</span>
+                                <span class="t-val">39,120.00</span>
+                                <span class="t-chg positive">+1.24%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">FTSE 100</span>
+                                <span class="t-val">8,240.30</span>
+                                <span class="t-chg positive">+0.31%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">GOLD (XAU/USD)</span>
+                                <span class="t-val">$2,654.80</span>
+                                <span class="t-chg positive">+0.45%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">BTC/USD</span>
+                                <span class="t-val">$64,820.00</span>
+                                <span class="t-chg negative">-0.75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+
+            <!-- CARD REPLACEMENT FOR NUMBER 10 (MACRO & HEALTH MONITOR) -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Macro & Market Health Index</div>
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.8rem; color: #8e8ea0;">
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Global Inflation Sentiment</span>
+                        <span style="color: #22c55e; font-weight: 600;">Stable (2.4%)</span>
+                    </div>
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
+                        <span>BI Rate Benchmark</span>
+                        <span style="color: #f59e0b; font-weight: 600;">6.00%</span>
+                    </div>
+                    <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; line-height: 1.4;">
+                        <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 AI Compounding Insight</span>
+                        <span>Long-term compounding outpaces standard inflation across major defensive sectors over 10+ year horizons.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="highlight-result-box">
-                <div class="small-top-label">Final Portfolio Value</div>
-                <div class="big-highlight-nominal" id="totalValDisplay">$--</div>
+            <!-- CARD REPLACEMENT FOR NUMBER 12 (DUAL INTERACTIVE MARKET CAP BUTTONS) -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Global & IDX Market</div>
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center; height: 100%;">
+                    <button type="button" class="btn-market" id="openGlobalModal">
+                        <span>Top 25 Global Company Market Cap</span>
+                        <span style="font-size: 1.1rem; color: #22c55e;">→</span>
+                    </button>
+                    <button type="button" class="btn-market" id="openIdxModal">
+                        <span>🇮Top 25 Indonesian Company Market Cap (IDX)</span>
+                        <span style="font-size: 1.1rem; color: #22c55e;">→</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="metrics-mini-grid" style="margin-bottom: 0;">
-                <div class="mini-stat-card">
-                    <div class="mini-val" id="mInitial">--</div>
-                    <div class="mini-lbl">Initial Capital</div>
-                </div>
-                <div class="mini-stat-card">
-                    <div class="mini-val" id="mProfit" style="color: #22c55e;">--</div>
-                    <div class="mini-lbl">Net Profit</div>
-                </div>
-                <div class="mini-stat-card">
-                    <div class="mini-val" id="mMultiplier">--</div>
-                    <div class="mini-lbl">Asset Multiplier</div>
-                </div>
-            </div>
         </div>
-
     </div>
-
-
-    <!-- ================= BARIS 2: TENGAH (LIVE MARKET FEED) ================= -->
-    <div class="bento-card col-span-12" style="padding: 14px 20px;">
-        <div style="font-size: 0.65rem; color: #8e8ea0; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-            <span style="width: 6px; height: 6px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #22c55e;"></span>
-            <span>Live Global Market Feed</span>
-        </div>
-        
-        <div class="global-ticker-wrapper">
-            <div class="global-ticker-track">
-                <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
-                <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
-                <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
-                <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
-                <div class="ticker-item"><span class="t-name">FTSE 100</span><span class="t-val">8,240.30</span><span class="t-chg positive">+0.31%</span></div>
-                <div class="ticker-item"><span class="t-name">GOLD (XAU/USD)</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
-                <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
-                <!-- DUPLIKASI -->
-                <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
-                <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
-                <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
-                <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
-                <div class="ticker-item"><span class="t-name">FTSE 100</span><span class="t-val">8,240.30</span><span class="t-chg positive">+0.31%</span></div>
-                <div class="ticker-item"><span class="t-name">GOLD (XAU/USD)</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
-                <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ================= BARIS 3: BAWAH (2 CARD BAWAH BERJEJER) ================= -->
-    <div class="col-span-12" style="display: flex; gap: 16px;">
-        
-        <!-- 3. CARD MACRO (Kiri Bawah) -->
-        <div class="bento-card" style="flex: 5;">
-            <div class="card-label">Macro & Market Health Index</div>
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.8rem; color: #8e8ea0;">
-                <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
-                    <span>Global Inflation Sentiment</span>
-                    <span style="color: #22c55e; font-weight: 600;">Stable (2.4%)</span>
-                </div>
-                <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; display: flex; justify-content: space-between; align-items: center;">
-                    <span>BI Rate Benchmark</span>
-                    <span style="color: #f59e0b; font-weight: 600;">6.00%</span>
-                </div>
-                <div style="background: rgba(13, 17, 23, 0.6); padding: 12px; border-radius: 10px; border: 1px solid #262626; line-height: 1.4;">
-                    <span style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 2px;">💡 AI Compounding Insight</span>
-                    <span>Long-term compounding outpaces standard inflation across major defensive sectors over 10+ year horizons.</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. CARD GLOBAL & IDX MARKET (Kanan Bawah) -->
-        <div class="bento-card" style="flex: 7;">
-            <div class="card-label">Global & IDX Market</div>
-            <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center; height: 100%;">
-                <button type="button" class="btn-market" id="openGlobalModal">
-                    <span>Top 25 Global Company Market Cap</span>
-                    <span style="font-size: 1.1rem; color: #22c55e;">→</span>
-                </button>
-                <button type="button" class="btn-market" id="openIdxModal">
-                    <span>🇮🇩 Top 25 Indonesian Company Market Cap (IDX)</span>
-                    <span style="font-size: 1.1rem; color: #22c55e;">→</span>
-                </button>
-            </div>
-        </div>
-
-    </div>
-
-</div>
- 
-
-</div>
 
     <!-- FUTURISTIC GLASS MODAL -->
     <div class="modal-overlay" id="marketModal">
@@ -685,22 +762,6 @@
             riskLabel.innerText = this.value + "%";
         });
 
-        // Helper fungsi format USD dengan singkatan M, B, T, Q
-        function formatUSD(num) {
-            if (isNaN(num) || num === null) return "$--";
-            const absNum = Math.abs(num);
-            if (absNum >= 1e15) {
-                return '$' + (num / 1e15).toFixed(1) + 'Q';
-            } else if (absNum >= 1e12) {
-                return '$' + (num / 1e12).toFixed(1) + 'T';
-            } else if (absNum >= 1e9) {
-                return '$' + (num / 1e9).toFixed(1) + 'B';
-            } else if (absNum >= 1e6) {
-                return '$' + (num / 1e6).toFixed(1) + 'M';
-            } else {
-                return '$' + num.toLocaleString('en-US', {maximumFractionDigits: 0});
-            }
-        }   
         document.getElementById('analyzeBtn').addEventListener('click', function() {
             const rawCapital = document.getElementById('capital').value.trim();
             const rawTimeframe = document.getElementById('timeframe').value.trim();
@@ -716,8 +777,8 @@
             const capital = parseFloat(rawCapital);
             const timeframe = parseInt(rawTimeframe);
 
-            if (timeframe <= 0 || timeframe > 100) {
-                alert("⚠️ Time span must be between 1 and 100 years!");
+            if (timeframe <= 0 || timeframe > 60) {
+                alert("⚠️ Time span must be between 1 and 60 years!");
                 return;
             }
 
@@ -725,9 +786,9 @@
             const netProfit = finalAmount - capital;
             const multiplier = (finalAmount / capital).toFixed(2);
 
-            document.getElementById('totalValDisplay').innerText = formatUSD(finalAmount);
-            document.getElementById('mInitial').innerText = formatUSD(capital);
-            document.getElementById('mProfit').innerText = formatUSD(netProfit);
+            document.getElementById('totalValDisplay').innerText = "Rp " + Math.round(finalAmount).toLocaleString('id-ID');
+            document.getElementById('mInitial').innerText = "Rp " + Math.round(capital).toLocaleString('id-ID');
+            document.getElementById('mProfit').innerText = "+Rp " + Math.round(netProfit).toLocaleString('id-ID');
             document.getElementById('mMultiplier').innerText = multiplier + "x";
             
             document.getElementById('statusSummaryLbl').innerText = `Simulation Successful`;
@@ -743,6 +804,9 @@
                 stockName = customTicker ? customTicker.toUpperCase() : "ADRO / PTBA (Energy & Dividend Yield)";
                 strategyMsg = `Energy and commodity sectors provide robust inflation hedging and high dividend yield accumulation for a ${timeframe}-year horizon.`;
             }
+
+            document.getElementById('recTitle').innerText = "Top Pick: " + stockName;
+            document.getElementById('recDesc').innerHTML = strategyMsg;
         });
 
         // Modal Data for Top 25 Global & IDX
