@@ -33,7 +33,7 @@
             overflow: hidden;
             width: 100%;
             position: relative;
-            padding: 16px 0;
+            padding: 20px 0;
             display: flex;
             align-items: center;
         }
@@ -59,7 +59,7 @@
 
         .global-ticker-track {
             display: flex;
-            gap: 24px;
+            gap: 28px;
             width: max-content;
             animation: tickerScroll 28s linear infinite;
         }
@@ -72,11 +72,11 @@
             align-items: center;
             gap: 8px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.78rem;
             white-space: nowrap;
             background: rgba(255, 255, 255, 0.02);
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .t-name {
@@ -504,7 +504,7 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>Wealth Projections</p>
+                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
             </div>
         </div>
 
@@ -557,7 +557,7 @@
                 <div style="margin-top: 6px;">
                     <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
+                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -717,11 +717,11 @@
                 <div class="card-label">Global & IDX Market</div>
                 <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center; height: 100%;">
                     <button type="button" class="btn-market" id="openGlobalModal">
-                        <span>🌐 Top 15 Global Company Market Cap</span>
+                        <span>🌐 Top 25 Global Company Market Cap</span>
                         <span style="font-size: 1.1rem; color: #22c55e;">→</span>
                     </button>
                     <button type="button" class="btn-market" id="openIdxModal">
-                        <span>🇮🇩 Top 15 Indonesian Company Market Cap (IDX)</span>
+                        <span>🇮🇩 Top 25 Indonesian Company Market Cap (IDX)</span>
                         <span style="font-size: 1.1rem; color: #22c55e;">→</span>
                     </button>
                 </div>
@@ -809,41 +809,61 @@
             document.getElementById('recDesc').innerHTML = strategyMsg;
         });
 
-        // Modal Data for Top 15 Global & IDX
+        // Modal Data for Top 25 Global & IDX
         const globalData = [
-            { rank: 1, name: "Apple Inc. (AAPL)", cap: "$3.45 Trillion" },
-            { rank: 2, name: "Microsoft Corp. (MSFT)", cap: "$3.32 Trillion" },
-            { rank: 3, name: "NVIDIA Corp. (NVDA)", cap: "$3.15 Trillion" },
-            { rank: 4, name: "Alphabet Inc. (GOOGL)", cap: "$2.10 Trillion" },
-            { rank: 5, name: "Amazon.com Inc. (AMZN)", cap: "$1.95 Trillion" },
-            { rank: 6, name: "Saudi Aramco (2222.SR)", cap: "$1.80 Trillion" },
-            { rank: 7, name: "Meta Platforms (META)", cap: "$1.40 Trillion" },
-            { rank: 8, name: "Berkshire Hathaway (BRK.A)", cap: "$980 Billion" },
-            { rank: 9, name: "Eli Lilly & Co. (LLY)", cap: "$850 Billion" },
-            { rank: 10, name: "Broadcom Inc. (AVGO)", cap: "$780 Billion" },
-            { rank: 11, name: "Tesla Inc. (TSLA)", cap: "$720 Billion" },
-            { rank: 12, name: "JPMorgan Chase (JPM)", cap: "$610 Billion" },
-            { rank: 13, name: "Walmart Inc. (WMT)", cap: "$580 Billion" },
-            { rank: 14, name: "Visa Inc. (V)", cap: "$550 Billion" },
-            { rank: 15, name: "Exxon Mobil (XOM)", cap: "$520 Billion" }
+            { rank: 1, name: "🇺🇸 NVIDIA Corp. (NVDA)", cap: "$5.81 Trillion" },
+            { rank: 2, name: "🇺🇸 Apple Inc. (AAPL)", cap: "$4.85 Trillion" },
+            { rank: 3, name: "🇺🇸 Alphabet Inc. / Google (GOOGL)", cap: "$4.22 Trillion" },
+            { rank: 4, name: "🇺🇸 Microsoft Corp. (MSFT)", cap: "$3.95 Trillion" },
+            { rank: 5, name: "🇺🇸 Amazon.com Inc. (AMZN)", cap: "$2.76 Trillion" },
+            { rank: 6, name: "🇹🇼 Taiwan Semiconductor / TSMC (TSM)", cap: "$2.11 Trillion" },
+            { rank: 7, name: "🇺🇸 Space Exploration Tech / SpaceX (SPCX)", cap: "$2.08 Trillion" },
+            { rank: 8, name: "🇺🇸 Meta Platforms (META)", cap: "$1.89 Trillion" },
+            { rank: 9, name: "🇺🇸 Broadcom Inc. (AVGO)", cap: "$1.80 Trillion" },
+            { rank: 10, name: "🇸🇦 Saudi Aramco (2222.SR)", cap: "$1.65 Trillion" },
+            { rank: 11, name: "🇺🇸 Tesla Inc. (TSLA)", cap: "$1.51 Trillion" },
+            { rank: 12, name: "🇰🇷 Samsung Electronics (005930.KS)", cap: "$1.31 Trillion" },
+            { rank: 13, name: "🇺🇸 Micron Technology (MU)", cap: "$1.20 Trillion" },
+            { rank: 14, name: "🇺🇸 Berkshire Hathaway (BRK.B)", cap: "$1.08 Trillion" },
+            { rank: 15, name: "🇺🇸 Advanced Micro Devices / AMD (AMD)", cap: "$1.07 Trillion" },
+            { rank: 16, name: "🇺🇸 Eli Lilly & Co. (LLY)", cap: "$1.04 Trillion" },
+            { rank: 17, name: "🇰🇷 SK Hynix (000660.KS)", cap: "$965.85 Billion" },
+            { rank: 18, name: "🇺🇸 JPMorgan Chase & Co. (JPM)", cap: "$879.86 Billion" },
+            { rank: 19, name: "🇺🇸 Walmart Inc. (WMT)", cap: "$848.12 Billion" },
+            { rank: 20, name: "🇳🇱 ASML Holding (ASML)", cap: "$713.00 Billion" },
+            { rank: 21, name: "🇺🇸 Exxon Mobil Corp. (XOM)", cap: "$682.17 Billion" },
+            { rank: 22, name: "🇺🇸 Visa Inc. (V)", cap: "$679.08 Billion" },
+            { rank: 23, name: "🇺🇸 Johnson & Johnson (JNJ)", cap: "$612.91 Billion" },
+            { rank: 24, name: "🇺🇸 Intel Corp. (INTC)", cap: "$600.86 Billion" },
+            { rank: 25, name: "🇺🇸 Mastercard Inc. (MA)", cap: "$495.38 Billion" }
         ];
 
         const idxData = [
-            { rank: 1, name: "Bank Central Asia Tbk (BBCA)", cap: "Rp 1,250 Trillion" },
-            { rank: 2, name: "Bank Rakyat Indonesia (BBRI)", cap: "Rp 740 Trillion" },
-            { rank: 3, name: "Barito Renewables (BREN)", cap: "Rp 700 Trillion" },
-            { rank: 4, name: "Bank Mandiri Persero (BMRI)", cap: "Rp 680 Trillion" },
-            { rank: 5, name: "Bayan Resources (BYAN)", cap: "Rp 580 Trillion" },
-            { rank: 6, name: "Telkom Indonesia (TLKM)", cap: "Rp 310 Trillion" },
-            { rank: 7, name: "Astra International (ASII)", cap: "Rp 210 Trillion" },
-            { rank: 8, name: "Bank Negara Indonesia (BBNI)", cap: "Rp 205 Trillion" },
-            { rank: 9, name: "Chandra Asri Pacific (TPIA)", cap: "Rp 195 Trillion" },
-            { rank: 10, name: "Amman Mineral Internasional (AMMN)", cap: "Rp 190 Trillion" },
-            { rank: 11, name: "United Tractors (UNTR)", cap: "Rp 105 Trillion" },
-            { rank: 12, name: "Indofood CBP (ICBP)", cap: "Rp 102 Trillion" },
-            { rank: 13, name: "Adaro Energy Indonesia (ADRO)", cap: "Rp 98 Trillion" },
-            { rank: 14, name: "Kalbe Farma (KLBF)", cap: "Rp 75 Trillion" },
-            { rank: 15, name: "Indofood Sukses Makmur (INDF)", cap: "Rp 72 Trillion" }
+            { rank: 1, name: "🇮🇩 PT Bank Central Asia Tbk. (BBCA)", cap: "Rp 744.46 Trillion" },
+            { rank: 2, name: "🇮🇩 PT DCI Indonesia Tbk. (DCII)", cap: "Rp 520.10 Trillion" },
+            { rank: 3, name: "🇮🇩 PT Bank Rakyat Indonesia (Persero) Tbk. (BBRI)", cap: "Rp 495.30 Trillion" },
+            { rank: 4, name: "🇮🇩 PT Bayan Resources Tbk. (BYAN)", cap: "Rp 466.63 Trillion" },
+            { rank: 5, name: "🇮🇩 PT Barito Renewables Energy Tbk. (BREN)", cap: "Rp 448.33 Trillion" },
+            { rank: 6, name: "🇮🇩 PT Bank Mandiri (Persero) Tbk. (BMRI)", cap: "Rp 390.65 Trillion" },
+            { rank: 7, name: "🇮🇩 PT Amman Mineral Internasional Tbk. (AMMN)", cap: "Rp 378.84 Trillion" },
+            { rank: 8, name: "🇮🇩 PT Telkom Indonesia (Persero) Tbk. (TLKM)", cap: "Rp 225.86 Trillion" },
+            { rank: 9, name: "🇮🇩 PT Dian Swastatika Sentosa Tbk. (DSSA)", cap: "Rp 224.42 Trillion" },
+            { rank: 10, name: "🇮🇩 PT Astra International Tbk. (ASII)", cap: "Rp 195.13 Trillion" },
+            { rank: 11, name: "🇮🇩 PT Chandra Asri Pacific Tbk. (TPIA)", cap: "Rp 147.07 Trillion" },
+            { rank: 12, name: "🇮🇩 PT Barito Pacific Tbk. (BRPT)", cap: "Rp 138.75 Trillion" },
+            { rank: 13, name: "🇮🇩 PT Bank Negara Indonesia (Persero) Tbk. (BBNI)", cap: "Rp 127.76 Trillion" },
+            { rank: 14, name: "🇮🇩 PT Sinar Mas Multiartha Tbk. (SMMA)", cap: "Rp 127.03 Trillion" },
+            { rank: 15, name: "🇮🇩 PT Merdeka Gold Resources Tbk. (EMAS)", cap: "Rp 113.43 Trillion" },
+            { rank: 16, name: "🇮🇩 PT United Tractors Tbk. (UNTR)", cap: "Rp 98.40 Trillion" },
+            { rank: 17, name: "🇮🇩 PT Kalbe Farma Tbk. (KLBF)", cap: "Rp 76.20 Trillion" },
+            { rank: 18, name: "🇮🇩 PT Indofood CBP Sukses Makmur Tbk. (ICBP)", cap: "Rp 135.50 Trillion" },
+            { rank: 19, name: "🇮🇩 PT Indofood Sukses Makmur Tbk. (INDF)", cap: "Rp 58.20 Trillion" },
+            { rank: 20, name: "🇮🇩 PT Sumber Alfaria Trijaya Tbk. (AMRT)", cap: "Rp 115.80 Trillion" },
+            { rank: 21, name: "🇮🇩 PT Vale Indonesia Tbk. (INCO)", cap: "Rp 42.60 Trillion" },
+            { rank: 22, name: "🇮🇩 PT Adaro Energy Indonesia Tbk. (ADRO)", cap: "Rp 105.40 Trillion" },
+            { rank: 23, name: "🇮🇩 PT Aneka Tambang Tbk. (ANTM)", cap: "Rp 38.90 Trillion" },
+            { rank: 24, name: "🇮🇩 PT GoTo Gojek Tokopedia Tbk. (GOTO)", cap: "Rp 85.20 Trillion" },
+            { rank: 25, name: "🇮🇩 PT Perusahaan Gas Negara Tbk. (PGAS)", cap: "Rp 34.10 Trillion" }
         ];
 
         const modalOverlay = document.getElementById('marketModal');
