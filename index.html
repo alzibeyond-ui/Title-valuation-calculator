@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drophen Terms - Smart Investment Advisor & Simulation</title>
+    <title>Drophen Terms - Investment Simulation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
             overflow: hidden;
             width: 100%;
             position: relative;
-            padding: 20px 0;
+            padding: 22px 0;
             display: flex;
             align-items: center;
         }
@@ -72,11 +72,11 @@
             align-items: center;
             gap: 8px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.78rem;
+            font-size: 1rem;
             white-space: nowrap;
             background: rgba(255, 255, 255, 0.02);
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 12px 20px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .t-name {
@@ -557,7 +557,7 @@
                 <div style="margin-top: 6px;">
                     <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -839,31 +839,31 @@
         ];
 
         const idxData = [
-            { rank: 1, name: "🇮🇩 PT Bank Central Asia Tbk. (BBCA)", cap: "Rp 744.46 Trillion" },
-            { rank: 2, name: "🇮🇩 PT DCI Indonesia Tbk. (DCII)", cap: "Rp 520.10 Trillion" },
-            { rank: 3, name: "🇮🇩 PT Bank Rakyat Indonesia (Persero) Tbk. (BBRI)", cap: "Rp 495.30 Trillion" },
-            { rank: 4, name: "🇮🇩 PT Bayan Resources Tbk. (BYAN)", cap: "Rp 466.63 Trillion" },
-            { rank: 5, name: "🇮🇩 PT Barito Renewables Energy Tbk. (BREN)", cap: "Rp 448.33 Trillion" },
-            { rank: 6, name: "🇮🇩 PT Bank Mandiri (Persero) Tbk. (BMRI)", cap: "Rp 390.65 Trillion" },
-            { rank: 7, name: "🇮🇩 PT Amman Mineral Internasional Tbk. (AMMN)", cap: "Rp 378.84 Trillion" },
-            { rank: 8, name: "🇮🇩 PT Telkom Indonesia (Persero) Tbk. (TLKM)", cap: "Rp 225.86 Trillion" },
-            { rank: 9, name: "🇮🇩 PT Dian Swastatika Sentosa Tbk. (DSSA)", cap: "Rp 224.42 Trillion" },
-            { rank: 10, name: "🇮🇩 PT Astra International Tbk. (ASII)", cap: "Rp 195.13 Trillion" },
-            { rank: 11, name: "🇮🇩 PT Chandra Asri Pacific Tbk. (TPIA)", cap: "Rp 147.07 Trillion" },
-            { rank: 12, name: "🇮🇩 PT Barito Pacific Tbk. (BRPT)", cap: "Rp 138.75 Trillion" },
-            { rank: 13, name: "🇮🇩 PT Bank Negara Indonesia (Persero) Tbk. (BBNI)", cap: "Rp 127.76 Trillion" },
-            { rank: 14, name: "🇮🇩 PT Sinar Mas Multiartha Tbk. (SMMA)", cap: "Rp 127.03 Trillion" },
-            { rank: 15, name: "🇮🇩 PT Merdeka Gold Resources Tbk. (EMAS)", cap: "Rp 113.43 Trillion" },
-            { rank: 16, name: "🇮🇩 PT United Tractors Tbk. (UNTR)", cap: "Rp 98.40 Trillion" },
-            { rank: 17, name: "🇮🇩 PT Kalbe Farma Tbk. (KLBF)", cap: "Rp 76.20 Trillion" },
-            { rank: 18, name: "🇮🇩 PT Indofood CBP Sukses Makmur Tbk. (ICBP)", cap: "Rp 135.50 Trillion" },
-            { rank: 19, name: "🇮🇩 PT Indofood Sukses Makmur Tbk. (INDF)", cap: "Rp 58.20 Trillion" },
-            { rank: 20, name: "🇮🇩 PT Sumber Alfaria Trijaya Tbk. (AMRT)", cap: "Rp 115.80 Trillion" },
-            { rank: 21, name: "🇮🇩 PT Vale Indonesia Tbk. (INCO)", cap: "Rp 42.60 Trillion" },
-            { rank: 22, name: "🇮🇩 PT Adaro Energy Indonesia Tbk. (ADRO)", cap: "Rp 105.40 Trillion" },
-            { rank: 23, name: "🇮🇩 PT Aneka Tambang Tbk. (ANTM)", cap: "Rp 38.90 Trillion" },
-            { rank: 24, name: "🇮🇩 PT GoTo Gojek Tokopedia Tbk. (GOTO)", cap: "Rp 85.20 Trillion" },
-            { rank: 25, name: "🇮🇩 PT Perusahaan Gas Negara Tbk. (PGAS)", cap: "Rp 34.10 Trillion" }
+            { rank: 1, name: "🇮🇩 PT Bank Central Asia (BBCA)", cap: "Rp 744.46 Trillion" },
+            { rank: 2, name: "🇮🇩 PT DCI Indonesia (DCII)", cap: "Rp 520.10 Trillion" },
+            { rank: 3, name: "🇮🇩 PT Bank Rakyat Indonesia (BBRI)", cap: "Rp 495.30 Trillion" },
+            { rank: 4, name: "🇮🇩 PT Bayan Resources (BYAN)", cap: "Rp 466.63 Trillion" },
+            { rank: 5, name: "🇮🇩 PT Barito Renewables Energy (BREN)", cap: "Rp 448.33 Trillion" },
+            { rank: 6, name: "🇮🇩 PT Bank Mandiri (BMRI)", cap: "Rp 390.65 Trillion" },
+            { rank: 7, name: "🇮🇩 PT Amman Mineral Internasional (AMMN)", cap: "Rp 378.84 Trillion" },
+            { rank: 8, name: "🇮🇩 PT Telkom Indonesia (Persero) (TLKM)", cap: "Rp 225.86 Trillion" },
+            { rank: 9, name: "🇮🇩 PT Dian Swastatika Sentosa (DSSA)", cap: "Rp 224.42 Trillion" },
+            { rank: 10, name: "🇮🇩 PT Astra International (ASII)", cap: "Rp 195.13 Trillion" },
+            { rank: 11, name: "🇮🇩 PT Chandra Asri Pacific (TPIA)", cap: "Rp 147.07 Trillion" },
+            { rank: 12, name: "🇮🇩 PT Barito Pacific (BRPT)", cap: "Rp 138.75 Trillion" },
+            { rank: 13, name: "🇮🇩 PT Bank Negara Indonesia (BBNI)", cap: "Rp 127.76 Trillion" },
+            { rank: 14, name: "🇮🇩 PT Sinar Mas Multiartha (SMMA)", cap: "Rp 127.03 Trillion" },
+            { rank: 15, name: "🇮🇩 PT Merdeka Gold Resources (EMAS)", cap: "Rp 113.43 Trillion" },
+            { rank: 16, name: "🇮🇩 PT United Tractors (UNTR)", cap: "Rp 98.40 Trillion" },
+            { rank: 17, name: "🇮🇩 PT Kalbe Farma (KLBF)", cap: "Rp 76.20 Trillion" },
+            { rank: 18, name: "🇮🇩 PT Indofood CBP Sukses Makmur (ICBP)", cap: "Rp 135.50 Trillion" },
+            { rank: 19, name: "🇮🇩 PT Indofood Sukses Makmur (INDF)", cap: "Rp 58.20 Trillion" },
+            { rank: 20, name: "🇮🇩 PT Sumber Alfaria Trijaya (AMRT)", cap: "Rp 115.80 Trillion" },
+            { rank: 21, name: "🇮🇩 PT Vale Indonesia (INCO)", cap: "Rp 42.60 Trillion" },
+            { rank: 22, name: "🇮🇩 PT Adaro Energy Indonesia (ADRO)", cap: "Rp 105.40 Trillion" },
+            { rank: 23, name: "🇮🇩 PT Aneka Tambang (ANTM)", cap: "Rp 38.90 Trillion" },
+            { rank: 24, name: "🇮🇩 PT GoTo Gojek Tokopedia (GOTO)", cap: "Rp 85.20 Trillion" },
+            { rank: 25, name: "🇮🇩 PT Perusahaan Gas Negara (PGAS)", cap: "Rp 34.10 Trillion" }
         ];
 
         const modalOverlay = document.getElementById('marketModal');
