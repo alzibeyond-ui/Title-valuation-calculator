@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DROPHEM TERMS - Investment</title>
+    <title>DROPHEM TERMS - Wealth Projections</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS STYLING --- */
         html, body {
             max-width: 100%;
             overflow-x: hidden;
@@ -47,7 +46,6 @@
             margin-top: 4px;
         }
 
-        /* Bento Grid Layout */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -62,13 +60,13 @@
             backdrop-filter: blur(12px);
         }
 
-        /* Span classes */
         .col-span-5 { grid-column: span 5; }
+        .col-span-6 { grid-column: span 6; }
         .col-span-7 { grid-column: span 7; }
         .col-span-12 { grid-column: span 12; }
 
         @media (max-width: 768px) {
-            .col-span-5, .col-span-7 {
+            .col-span-5, .col-span-6, .col-span-7 {
                 grid-column: span 12;
             }
         }
@@ -82,16 +80,24 @@
             margin-bottom: 12px;
         }
 
-        /* Form Controls */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
         .form-group {
             margin-bottom: 14px;
         }
 
         .form-label {
-            font-size: 0.75rem;
-            color: #cbd5e1;
+            font-size: 0.7rem;
+            color: #8e8ea0;
             margin-bottom: 6px;
             display: block;
+            text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .form-input, .form-select {
@@ -107,6 +113,33 @@
         }
         .form-input:focus, .form-select:focus {
             border-color: #22c55e;
+        }
+
+        /* Range Slider Styling */
+        .range-slider-container {
+            margin-bottom: 14px;
+        }
+        .range-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .range-input {
+            width: 100%;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+        }
+        .range-input::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #22c55e;
+            cursor: pointer;
         }
 
         .btn-generate {
@@ -128,7 +161,6 @@
             opacity: 0.9;
         }
 
-        /* Highlight Result Box */
         .highlight-result-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -141,6 +173,7 @@
             font-size: 0.7rem;
             color: #8e8ea0;
             text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .big-highlight-nominal {
@@ -154,7 +187,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Metrics Mini Grid (Agar tidak keluar bates) */
         .metrics-mini-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -174,7 +206,7 @@
 
         .mini-val {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
@@ -183,101 +215,100 @@
         }
 
         .mini-lbl {
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             color: #8e8ea0;
             text-transform: uppercase;
             margin-top: 3px;
         }
 
-        /* Live Global Market Ticker (Marquee) */
+        /* Live Market Ticker */
         .global-ticker-wrapper {
             background: rgba(13, 17, 23, 0.6);
             border: 1px solid #262626;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             width: 100%;
             position: relative;
-            padding: 18px 0;
+            padding: 12px 0;
             display: flex;
             align-items: center;
             margin-top: 14px;
         }
-        .global-ticker-wrapper::before,
-        .global-ticker-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 30px;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .global-ticker-wrapper::before {
-            left: 0;
-            background: linear-gradient(to right, rgba(13, 17, 23, 0.9), transparent);
-        }
-        .global-ticker-wrapper::after {
-            right: 0;
-            background: linear-gradient(to left, rgba(13, 17, 23, 0.9), transparent);
-        }
-
         .global-ticker-track {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             width: max-content;
-            animation: tickerScroll 28s linear infinite;
+            animation: tickerScroll 25s linear infinite;
         }
-        .global-ticker-track:hover {
-            animation-play-state: paused;
-        }
-
         .ticker-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             white-space: nowrap;
             background: rgba(255, 255, 255, 0.03);
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .t-name { color: #8e8ea0; font-weight: 600; }
         .t-val { color: #ffffff; font-weight: 700; }
-        .t-chg.positive { color: #22c55e; font-weight: 600; }
-        .t-chg.negative { color: #ef4444; font-weight: 600; }
+        .t-chg.positive { color: #22c55e; }
+        .t-chg.negative { color: #ef4444; }
 
         @keyframes tickerScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        /* Custom Notes Box */
-        .manual-notes-box {
-            background: rgba(13, 17, 23, 0.4);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            padding: 12px;
+        /* Strategy & Insight Styling */
+        .strategy-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 14px;
             margin-top: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
         }
-        .notes-title {
-            font-size: 0.68rem;
-            color: #8e8ea0;
-            text-transform: uppercase;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .notes-content {
+        .strategy-text {
             font-size: 0.8rem;
             color: #cbd5e1;
-            outline: none;
-            min-height: 35px;
+            margin-top: 6px;
             line-height: 1.4;
-            cursor: text;
+        }
+
+        /* Macro Health Table */
+        .macro-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+        }
+        .macro-row:last-child {
+            border-bottom: none;
+        }
+
+        .market-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 12px 14px;
+            border-radius: 8px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .market-btn:hover {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.05);
         }
     </style>
 </head>
@@ -286,147 +317,192 @@
     <div class="container">
         <header>
             <h1 class="brand-title">DROPHEM TERMS</h1>
-            <div class="brand-subtitle">Investment & Wealth Projections</div>
+            <div class="brand-subtitle">Wealth Projections</div>
         </header>
 
         <div class="bento-grid">
-            <!-- CARD 1: PREFERENCES & INPUT -->
+            <!-- LEFT PANEL: PREFERENCES -->
             <div class="bento-card col-span-5">
-                <div class="card-label">Parameters & Preferences</div>
+                <div class="card-label">Preferences</div>
                 
-                <div class="form-group">
-                    <label class="form-label">Initial Capital (USD)</label>
-                    <input type="number" id="inputCapital" class="form-input" placeholder="e.g. 50000" value="20000">
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Initial Capital (IDR)</label>
+                        <input type="text" id="inputCapital" class="form-input" value="2.500.000.000" oninput="formatInputRupiah(this)">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Time Span (Years)</label>
+                        <input type="number" id="inputYears" class="form-input" value="27">
+                    </div>
+                </div>
+
+                <div class="range-slider-container">
+                    <div class="range-header">
+                        <label class="form-label" style="margin-bottom:0;">Return</label>
+                        <span id="returnValText" style="font-family:'Space Grotesk'; font-size:0.85rem; color:#22c55e; font-weight:700;">15%</span>
+                    </div>
+                    <input type="range" id="inputReturn" class="range-input" min="1" max="50" value="15" oninput="updateReturnSlider(this.value)">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Time Span (Years)</label>
-                    <input type="number" id="inputYears" class="form-input" placeholder="e.g. 10" value="10">
+                    <label class="form-label">Sector</label>
+                    <select class="form-select" id="selectSector">
+                        <option value="Technology & Digital">Technology & Digital</option>
+                        <option value="Energy & Commodities">Energy & Commodities</option>
+                        <option value="Banking & Financials">Banking & Financials</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Annual Return</label>
-                    <input type="number" id="inputReturn" class="form-input" placeholder="e.g. 8" value="12">
+                    <label class="form-label">Company</label>
+                    <input type="text" id="inputCompany" class="form-input" value="BBSI">
                 </div>
 
                 <button class="btn-generate" onclick="runSimulation()">Generate Simulation</button>
+
+                <!-- INVESTMENT MATCH & STRATEGY -->
+                <div class="strategy-box">
+                    <div class="card-label" style="margin-bottom: 6px;">Investment Match & Strategy</div>
+                    <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 0.9rem; color: #22c55e;" id="stratTopPick">Top Pick: BBSI</div>
+                    <div class="strategy-text" id="stratDesc">
+                        Technology sector strategy assuming a return of 15% p.a over 27 years maximizes long-term compounding momentum.
+                    </div>
+                </div>
             </div>
 
-            <!-- CARD 2: WEALTH PROJECTION & COMPOUNDING SUMMARY -->
+            <!-- RIGHT PANEL: COMPOUNDING SUMMARY -->
             <div class="bento-card col-span-7">
-                <div class="card-label">Compounding Summary</div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-size: 0.8rem; color: #8e8ea0;" id="statusSummaryLbl">Status: Ready</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div class="card-label" style="margin-bottom: 0;">Compounding Summary</div>
                     <div style="text-align: right;">
-                        <div style="font-size: 0.7rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
-                        <div style="font-family: 'Space Grotesk'; font-weight: 700; color: #22c55e;" id="modeVal">STANDBY</div>
+                        <div style="font-size: 0.65rem; color: #8e8ea0; text-transform: uppercase;">Mode</div>
+                        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 0.85rem; color: #22c55e;">CALCULATED</div>
                     </div>
                 </div>
 
-                <!-- Highlight Nominal Value -->
+                <div style="font-size: 0.8rem; color: #8e8ea0; margin-bottom: 4px;" id="statusSummaryLbl">Simulation Successful</div>
+
                 <div class="highlight-result-box">
                     <div class="small-top-label">Final Portfolio Value</div>
-                    <div class="big-highlight-nominal" id="totalValDisplay">$0</div>
+                    <div class="big-highlight-nominal" id="totalValDisplay">Rp 108.838.287.099</div>
                 </div>
 
-                <!-- Mini Metrics Grid -->
                 <div class="metrics-mini-grid">
                     <div class="mini-stat-card">
-                        <div class="mini-val" id="mInitial">$0</div>
+                        <div class="mini-val" id="mInitial">Rp 2.500.000.000</div>
                         <div class="mini-lbl">Initial Capital</div>
                     </div>
                     <div class="mini-stat-card">
-                        <div class="mini-val" id="mProfit" style="color: #22c55e;">$0</div>
+                        <div class="mini-val" id="mProfit" style="color: #22c55e;">+Rp 106.338.287.099</div>
                         <div class="mini-lbl">Net Profit</div>
                     </div>
                     <div class="mini-stat-card">
-                        <div class="mini-val" id="mMultiplier">1.00x</div>
+                        <div class="mini-val" id="mMultiplier">43.54x</div>
                         <div class="mini-lbl">Asset Multiplier</div>
                     </div>
                 </div>
 
-                <!-- LIVE GLOBAL MARKET TICKER -->
+                <!-- LIVE GLOBAL MARKET FEED TICKER -->
                 <div class="global-ticker-wrapper">
                     <div class="global-ticker-track">
-                        <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
                         <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
                         <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
                         <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
-                        <div class="ticker-item"><span class="t-name">GOLD</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
-                        <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
-                        <!-- Duplikasi untuk looping mulus -->
-                        <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
+                        <!-- Duplikasi Ticker -->
                         <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
                         <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
                         <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
-                        <div class="ticker-item"><span class="t-name">GOLD</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
-                        <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Custom Notes Box -->
-                <div class="manual-notes-box">
-                    <div class="notes-title">Strategy & Custom Notes</div>
-                    <div class="notes-content" contenteditable="true">Click here to write custom notes or macroeconomic thesis...</div>
+            <!-- BOTTOM LEFT: MACRO & MARKET HEALTH INDEX -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Macro & Market Health Index</div>
+                
+                <div class="macro-row">
+                    <span style="color: #8e8ea0;">Global Inflation Sentiment</span>
+                    <span style="color: #22c55e; font-weight: 600;">Stable (2.4%)</span>
                 </div>
+                <div class="macro-row">
+                    <span style="color: #8e8ea0;">BI Rate Benchmark</span>
+                    <span style="font-weight: 600;">6.00%</span>
+                </div>
+
+                <div style="margin-top: 14px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px;">
+                    <div style="font-size: 0.75rem; font-weight: 600; color: #22c55e; font-family: 'Space Grotesk';">💡 AI Compounding Insight</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px; line-height: 1.4;">
+                        Long-term compounding outpaces standard inflation across major defensive sectors over 10+ year horizons.
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTTOM RIGHT: GLOBAL & IDX MARKET -->
+            <div class="bento-card col-span-6">
+                <div class="card-label">Global & IDX Market</div>
+                
+                <button class="market-btn" onclick="alert('Top 25 Global Company Market Cap Loaded')">
+                    <span>Top 25 Global Company Market Cap</span>
+                    <span>➔</span>
+                </button>
+                <button class="market-btn" onclick="alert('Top 25 Indonesian Company Market Cap (IDX) Loaded')">
+                    <span>Top 25 Indonesian Company Market Cap (IDX)</span>
+                    <span>➔</span>
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Fungsi Format Angka ke USD ($) dengan Singkatan M, B, T, Q
-        function formatUSD(num) {
-            if (num === null || num === undefined || isNaN(num)) return "$0";
-            
-            const absNum = Math.abs(num);
-            let formatted = "";
+        function updateReturnSlider(val) {
+            document.getElementById("returnValText").innerText = val + "%";
+            runSimulation();
+        }
 
-            if (absNum >= 1e15) {
-                formatted = (num / 1e15).toFixed(2) + "Q"; // Quadrillion
-            } else if (absNum >= 1e12) {
-                formatted = (num / 1e12).toFixed(2) + "T"; // Trillion
-            } else if (absNum >= 1e9) {
-                formatted = (num / 1e9).toFixed(2) + "B"; // Billion
-            } else if (absNum >= 1e6) {
-                formatted = (num / 1e6).toFixed(2) + "M"; // Million
-            } else if (absNum >= 1e3) {
-                formatted = (num / 1e3).toFixed(1) + "K"; // Thousand
-            } else {
-                formatted = num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+        function formatRupiahNumber(num) {
+            return "Rp " + Math.round(num).toLocaleString("id-ID");
+        }
+
+        function formatInputRupiah(el) {
+            let val = el.value.replace(/[^,\d]/g, "").toString();
+            let split = val.split(",");
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                let separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
             }
-
-            return "$" + formatted;
+            el.value = rupiah;
         }
 
-        // Fungsi Format Multiplier (misal 6.85x)
-        function formatMultiplier(num) {
-            if (num === null || num === undefined || isNaN(num)) return "1.00x";
-            return num.toFixed(2) + "x";
+        function getCleanNumber(id) {
+            let val = document.getElementById(id).value;
+            if (!val) return 0;
+            return parseFloat(val.replace(/\./g, "").replace(/,/g, ".")) || 0;
         }
 
-        // Simulasi Kalkulator Compounding
         function runSimulation() {
-            const capital = parseFloat(document.getElementById("inputCapital").value) || 0;
+            const capital = getCleanNumber("inputCapital");
             const years = parseFloat(document.getElementById("inputYears").value) || 0;
-            const returnRate = (parseFloat(document.getElementById("inputReturn").value) || 0) / 100;
+            const returnRate = parseFloat(document.getElementById("inputReturn").value) / 100;
+            const company = document.getElementById("inputCompany").value || "BBSI";
+            const sector = document.getElementById("selectSector").value;
 
-            // Rumus Compounding: A = P(1 + r)^t
             const finalValue = capital * Math.pow((1 + returnRate), years);
             const netProfit = finalValue - capital;
             const multiplier = capital > 0 ? finalValue / capital : 0;
 
-            // Update UI dengan format USD pendek (M, B, T, Q)
-            document.getElementById("totalValDisplay").innerText = formatUSD(finalValue);
-            document.getElementById("mInitial").innerText = formatUSD(capital);
-            document.getElementById("mProfit").innerText = formatUSD(netProfit);
-            document.getElementById("mMultiplier").innerText = formatMultiplier(multiplier);
+            document.getElementById("totalValDisplay").innerText = formatRupiahNumber(finalValue);
+            document.getElementById("mInitial").innerText = formatRupiahNumber(capital);
+            document.getElementById("mProfit").innerText = "+ " + formatRupiahNumber(netProfit);
+            document.getElementById("mMultiplier").innerText = multiplier.toFixed(2) + "x";
 
-            document.getElementById("statusSummaryLbl").innerText = "Status: Simulation Successful";
-            document.getElementById("modeVal").innerText = "CALCULATED";
+            document.getElementById("stratTopPick").innerText = "Top Pick: " + company.toUpperCase();
+            document.getElementById("stratDesc").innerText = sector + " sector strategy assuming a return of " + (returnRate * 100) + "% p.a over " + years + " years maximizes long-term compounding momentum.";
         }
 
-        // Jalankan sekali saat load pertama
         window.onload = function() {
             runSimulation();
         };
