@@ -25,6 +25,85 @@
             position: relative;
             overflow-x: hidden;
         }
+        /* Styling untuk Live Global Market Ticker (Marquee) */
+        .global-ticker-wrapper {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid #262626;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        /* Efek blur tipis di pinggir kiri-kanan container biar estetik */
+        .global-ticker-wrapper::before,
+        .global-ticker-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 30px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .global-ticker-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(13, 17, 23, 0.9), transparent);
+        }
+        .global-ticker-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(13, 17, 23, 0.9), transparent);
+        }
+
+        .global-ticker-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: tickerScroll 28s linear infinite;
+        }
+        .global-ticker-track:hover {
+            animation-play-state: paused; /* Berhenti pas kursor di-hover */
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .t-name {
+            color: #8e8ea0;
+            font-weight: 600;
+        }
+        .t-val {
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .t-chg.positive {
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .t-chg.negative {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
 
         /* Ambient Glow ala Google Dark Mode */
         .ambient-glow {
@@ -425,7 +504,7 @@
         <div class="header-section">
             <div class="header-title">
                 <h1>DROPHEM <span>TERMS</span></h1>
-                <p>AI-Powered Macroeconomic Intelligence & Wealth Projections</p>
+                <p>Wealth Projections</p>
             </div>
         </div>
 
@@ -478,7 +557,7 @@
                 <div style="margin-top: 6px;">
                     <div class="card-label" style="margin-bottom: 8px;">Investment Match & Strategy</div>
                     <div class="recommendation-box">
-                        <div class="rec-stock-title" id="recTitle">-- Select parameters & run simulation --</div>
+                        <div class="rec-stock-title" id="recTitle">Select parameters & run simulation</div>
                         <div class="rec-desc" id="recDesc">
                             The System will analyze projected final outcomes and provide tailored issuer strategy recommendations based on your parameters.
                         </div>
@@ -519,7 +598,100 @@
                         <div class="mini-lbl">Asset Multi</div>
                     </div>
                 </div>
+            
+                <!-- TAMBAHAN: LIVE GLOBAL MARKET TICKER (MARQUEE FUTURISTIK) -->
+                <div style="margin-top: 4px;">
+                    <div style="font-size: 0.65rem; color: #8e8ea0; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 6px; height: 6px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #22c55e;"></span>
+                        <span>Live Global Market Feed</span>
+                    </div>
+                    
+                    <div class="global-ticker-wrapper">
+                        <div class="global-ticker-track">
+                            <!-- Item Ticker 1 -->
+                            <div class="ticker-item">
+                                <span class="t-name">S&P 500</span>
+                                <span class="t-val">5,815.20</span>
+                                <span class="t-chg positive">+0.64%</span>
+                            </div>
+                            <!-- Item Ticker 2 -->
+                            <div class="ticker-item">
+                                <span class="t-name">NASDAQ</span>
+                                <span class="t-val">18,350.10</span>
+                                <span class="t-chg positive">+0.88%</span>
+                            </div>
+                            <!-- Item Ticker 3 -->
+                            <div class="ticker-item">
+                                <span class="t-name">DOW JONES</span>
+                                <span class="t-val">42,275.50</span>
+                                <span class="t-chg negative">-0.12%</span>
+                            </div>
+                            <!-- Item Ticker 4 -->
+                            <div class="ticker-item">
+                                <span class="t-name">NIKKEI 225</span>
+                                <span class="t-val">39,120.00</span>
+                                <span class="t-chg positive">+1.24%</span>
+                            </div>
+                            <!-- Item Ticker 5 -->
+                            <div class="ticker-item">
+                                <span class="t-name">FTSE 100</span>
+                                <span class="t-val">8,240.30</span>
+                                <span class="t-chg positive">+0.31%</span>
+                            </div>
+                            <!-- Item Ticker 6 -->
+                            <div class="ticker-item">
+                                <span class="t-name">GOLD (XAU/USD)</span>
+                                <span class="t-val">$2,654.80</span>
+                                <span class="t-chg positive">+0.45%</span>
+                            </div>
+                            <!-- Item Ticker 7 -->
+                            <div class="ticker-item">
+                                <span class="t-name">BTC/USD</span>
+                                <span class="t-val">$64,820.00</span>
+                                <span class="t-chg negative">-0.75%</span>
+                            </div>
+
+                            <!-- DUPLIKASI SUPAYA ANIMASI LOOPING-NYA MULUS TANPA GAP -->
+                            <div class="ticker-item">
+                                <span class="t-name">S&P 500</span>
+                                <span class="t-val">5,815.20</span>
+                                <span class="t-chg positive">+0.64%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">NASDAQ</span>
+                                <span class="t-val">18,350.10</span>
+                                <span class="t-chg positive">+0.88%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">DOW JONES</span>
+                                <span class="t-val">42,275.50</span>
+                                <span class="t-chg negative">-0.12%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">NIKKEI 225</span>
+                                <span class="t-val">39,120.00</span>
+                                <span class="t-chg positive">+1.24%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">FTSE 100</span>
+                                <span class="t-val">8,240.30</span>
+                                <span class="t-chg positive">+0.31%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">GOLD (XAU/USD)</span>
+                                <span class="t-val">$2,654.80</span>
+                                <span class="t-chg positive">+0.45%</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="t-name">BTC/USD</span>
+                                <span class="t-val">$64,820.00</span>
+                                <span class="t-chg negative">-0.75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+                
 
             <!-- CARD REPLACEMENT FOR NUMBER 10 (MACRO & HEALTH MONITOR) -->
             <div class="bento-card col-span-6">
