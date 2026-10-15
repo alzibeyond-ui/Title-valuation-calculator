@@ -233,9 +233,103 @@
         <section id="financialView" class="view-section">
             <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
             
-            <div class="terminal-card">
-                <div class="card-label">Financial Advisor // Compounding Simulation</div>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Dedicated financial simulation workspace goes here.</p>
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Financial Advisor Workspace</h2>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">Simulate long-term asset compounding, portfolio growth trajectories, and sector distributions.</p>
+            </div>
+
+            <!-- Bento Layout khusus Financial Advisor -->
+            <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
+                
+                <!-- KOLOM KIRI: PREFERENCES & INPUTS (col-span-5) -->
+                <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
+                    <div class="card-label">Preferences & Inputs</div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Initial Capital (USD)</label>
+                            <input type="number" id="capital" placeholder="e.g. 1000000">
+                        </div>
+                        
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Time Span (Years)</label>
+                            <input type="number" id="timeframe" placeholder="e.g. 10" min="1" max="40">
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <label>Return Rate</label>
+                                <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: var(--accent-green); font-weight: 700;">8%</span>
+                            </div>
+                            <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5" style="width: 100%; accent-color: var(--accent-green); cursor: pointer; margin-top: 6px;">
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Target Sector</label>
+                            <select id="sector">
+                                <option value="" disabled selected>Select Sector</option>
+                                <option value="banking">Banking & Financials</option>
+                                <option value="tech">Technology & Digital</option>
+                                <option value="energy">Energy & Commodities</option>
+                                <option value="fmcg">Consumer Goods (FMCG)</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Company / Ticker</label>
+                            <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
+                        </div>
+
+                        <button type="button" class="btn-action" id="analyzeBtn" style="margin-top: 6px;">Generate Simulation</button>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN: COMPOUNDING SUMMARY & METRICS (col-span-7) -->
+                <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px;">
+                    
+                    <!-- Summary Result Card -->
+                    <div class="terminal-card" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                            <div class="card-label" style="margin-bottom: 0;">Compounding Summary</div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase;">Mode</div>
+                                <div style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.8rem;" id="modeVal">STANDBY</div>
+                            </div>
+                        </div>
+
+                        <!-- Big Highlight Result Box -->
+                        <div style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 14px;">
+                            <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Portfolio Value</div>
+                            <div style="font-family: 'Space Grotesk'; font-size: 2.2rem; font-weight: 700; color: var(--accent-green);" id="totalValDisplay">$ --</div>
+                        </div>
+
+                        <!-- Mini Metrics Grid -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
+                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: #fff;" id="mInitial">--</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Initial Capital</div>
+                            </div>
+                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
+                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: var(--accent-green);" id="mProfit">--</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Net Profit</div>
+                            </div>
+                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
+                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: #fff;" id="mMultiplier">--</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Multiplier</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Insight / Macro Card -->
+                    <div class="terminal-card" style="margin-bottom: 0;">
+                        <div class="card-label">💡 AI Compounding Insight</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+                            Long-term asset compounding consistently outpaces standard inflation across major defensive sectors over 10+ year horizons. Ensure portfolio rebalancing aligns with macro benchmark rates.
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 
@@ -244,25 +338,258 @@
         <section id="economicView" class="view-section">
             <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
             
-            <div class="terminal-card">
-                <div class="card-label">Global Economic // Macro Intelligence & Market Cap</div>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Market banners, global corporate market caps, and country GDP metrics go here.</p>
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Global Economic Intelligence</h2>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">Macro-economic tracking, sovereign GDP metrics, and international market valuations.</p>
+            </div>
+
+            <!-- Ticker Style Animation CSS (Biar jalan horizontal mulus) -->
+            <style>
+                .global-ticker-wrapper {
+                    overflow: hidden;
+                    width: 100%;
+                    background: rgba(8, 10, 15, 0.6);
+                    border: 1px solid var(--border-color);
+                    border-radius: 12px;
+                    padding: 12px 0;
+                    white-space: nowrap;
+                    position: relative;
+                }
+                .global-ticker-track {
+                    display: inline-flex;
+                    gap: 30px;
+                    animation: marquee 25s linear infinite;
+                }
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .ticker-item {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 0.8rem;
+                    font-family: 'Space Grotesk', sans-serif;
+                }
+                .t-name { color: var(--text-muted); font-weight: 600; }
+                .t-val { color: #fff; font-weight: 700; }
+                .t-chg.positive { color: var(--accent-green); }
+                .t-chg.negative { color: #ef4444; }
+                
+                .market-btn-pro {
+                    background: rgba(8, 10, 15, 0.5);
+                    border: 1px solid var(--border-color);
+                    border-radius: 14px;
+                    padding: 16px 20px;
+                    color: #fff;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    width: 100%;
+                    text-align: left;
+                }
+                .market-btn-pro:hover {
+                    border-color: var(--accent-green);
+                    background: rgba(13, 17, 23, 0.9);
+                    transform: translateY(-2px);
+                }
+            </style>
+
+            <!-- Bento Layout untuk Global Economic -->
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                
+                <!-- 1. BIG MARKET BANNER -->
+                <div class="terminal-card" style="margin-bottom: 0; background: linear-gradient(135deg, rgba(13, 17, 23, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <div class="card-label" style="margin-bottom: 0;">🌍 Macro Market Banner & Sentiment</div>
+                        <div style="font-size: 0.75rem; color: var(--accent-green); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 7px; height: 7px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);"></span>
+                            LIVE FEED ACTIVE
+                        </div>
+                    </div>
+                    
+                    <!-- Horizontal Live Ticker -->
+                    <div class="global-ticker-wrapper">
+                        <div class="global-ticker-track">
+                            <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
+                            <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
+                            <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
+                            <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
+                            <div class="ticker-item"><span class="t-name">FTSE 100</span><span class="t-val">8,240.30</span><span class="t-chg positive">+0.31%</span></div>
+                            <div class="ticker-item"><span class="t-name">GOLD (XAU/USD)</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
+                            <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
+                            <!-- DUPLIKASI LOOPING -->
+                            <div class="ticker-item"><span class="t-name">S&P 500</span><span class="t-val">5,815.20</span><span class="t-chg positive">+0.64%</span></div>
+                            <div class="ticker-item"><span class="t-name">NASDAQ</span><span class="t-val">18,350.10</span><span class="t-chg positive">+0.88%</span></div>
+                            <div class="ticker-item"><span class="t-name">DOW JONES</span><span class="t-val">42,275.50</span><span class="t-chg negative">-0.12%</span></div>
+                            <div class="ticker-item"><span class="t-name">NIKKEI 225</span><span class="t-val">39,120.00</span><span class="t-chg positive">+1.24%</span></div>
+                            <div class="ticker-item"><span class="t-name">FTSE 100</span><span class="t-val">8,240.30</span><span class="t-chg positive">+0.31%</span></div>
+                            <div class="ticker-item"><span class="t-name">GOLD (XAU/USD)</span><span class="t-val">$2,654.80</span><span class="t-chg positive">+0.45%</span></div>
+                            <div class="ticker-item"><span class="t-name">BTC/USD</span><span class="t-val">$64,820.00</span><span class="t-chg negative">-0.75%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. GRID KARTU MARKET CAP & GDP -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                    
+                    <!-- Market Cap Triggers -->
+                    <div class="terminal-card" style="margin-bottom: 0; display: flex; flex-direction: column; gap: 12px;">
+                        <div class="card-label">Corporate Market Capitalization</div>
+                        
+                        <button type="button" class="market-btn-pro" onclick="alert('Modal Top 25 Global Company Market Cap akan segera dibuka!')">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem; font-family: 'Space Grotesk';">Top 25 Global Company Market Cap</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">US & International Mega-Caps (Apple, Microsoft, NVDA, dll)</div>
+                            </div>
+                            <span style="color: var(--accent-green); font-size: 1.2rem;">→</span>
+                        </button>
+
+                        <button type="button" class="market-btn-pro" onclick="alert('Modal Top 25 IDX Market Cap akan segera dibuka!')">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem; font-family: 'Space Grotesk';">🇮🇩 Top 25 Indonesian Company Market Cap (IDX)</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bursa Efek Indonesia Blue Chips (BBCA, BBRI, TLKM, dll)</div>
+                            </div>
+                            <span style="color: var(--accent-green); font-size: 1.2rem;">→</span>
+                        </button>
+                    </div>
+
+                    <!-- Sovereign GDP & Macro Indicators -->
+                    <div class="terminal-card" style="margin-bottom: 0;">
+                        <div class="card-label">Sovereign GDP & Economic Health</div>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            <div style="background: rgba(8, 10, 15, 0.4); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <span>🇺🇸 US GDP Growth (Annual)</span>
+                                <span style="color: var(--accent-green); font-weight: 600;">+2.8%</span>
+                            </div>
+                            <div style="background: rgba(8, 10, 15, 0.4); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <span>🇮🇩 Indonesia GDP Growth</span>
+                                <span style="color: var(--accent-green); font-weight: 600;">+5.05%</span>
+                            </div>
+                            <div style="background: rgba(8, 10, 15, 0.4); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <span>🇪🇺 Eurozone Inflation</span>
+                                <span style="color: var(--accent-gold); font-weight: 600;">2.2% (Stable)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 
 
-        <!-- ================= VIEW 4: FOOTBALL STATS MODULE ================= -->
+       <!-- ================= VIEW 4: FOOTBALL STATS MODULE ================= -->
         <section id="footballView" class="view-section">
             <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
             
-            <div class="terminal-card">
-                <div class="card-label">Football Analytics // Standings & Club Valuations</div>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">European/Asian league points tables and club Market Value metrics go here.</p>
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Football Club Analytics & Valuations</h2>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">European and Asian league standings, tactical evaluations, and global club Market Value (MV) metrics.</p>
+            </div>
+
+            <!-- Bento Layout untuk Football Module -->
+            <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
+                
+                <!-- KOLOM KIRI: LEAGUE STANDINGS (col-span-7) -->
+                <div class="terminal-card" style="grid-column: span 7; margin-bottom: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <div class="card-label" style="margin-bottom: 0;">⚽ Elite League Standings (Europe & Asia)</div>
+                        <select style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; color: #fff; font-size: 0.75rem; outline: none;" id="leagueSelect">
+                            <option value="epl">Premier League (England)</option>
+                            <option value="ucl">UEFA Champions League</option>
+                            <option value="liga1">Liga 1 Indonesia</option>
+                            <option value="jleague">J1 League (Japan)</option>
+                        </select>
+                    </div>
+
+                    <!-- Minimal Table -->
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
+                            <thead>
+                                <tr style="color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-size: 0.7rem; text-transform: uppercase;">
+                                    <th style="padding: 8px;"># Club</th>
+                                    <th style="padding: 8px; text-align: center;">PL</th>
+                                    <th style="padding: 8px; text-align: center;">GD</th>
+                                    <th style="padding: 8px; text-align: right;">PTS</th>
+                                </tr>
+                            </thead>
+                            <tbody style="color: #fff;">
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                    <td style="padding: 10px 8px; font-weight: 600;"><span style="color: var(--accent-green); margin-right: 6px;">1</span> Arsenal</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--text-muted);">8</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+12</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">20</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                    <td style="padding: 10px 8px; font-weight: 600;"><span style="color: var(--text-muted); margin-right: 6px;">2</span> Manchester City</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--text-muted);">8</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+10</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">19</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                    <td style="padding: 10px 8px; font-weight: 600;"><span style="color: var(--text-muted); margin-right: 6px;">3</span> Liverpool</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--text-muted);">8</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+9</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">18</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                    <td style="padding: 10px 8px; font-weight: 600;"><span style="color: var(--text-muted); margin-right: 6px;">4</span> Real Madrid</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--text-muted);">9</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+11</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">21</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN: CLUB MARKET VALUE (MV) RANKINGS (col-span-5) -->
+                <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
+                    <div class="card-label">💰 Global Club Market Value (MV)</div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Real Madrid</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted);">La Liga // Spain</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.34 Bn</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Manchester City</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League // England</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.29 Bn</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Arsenal FC</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League // England</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.17 Bn</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </section>
-
-    </div>
-
+        
     <script>
         // SPA View Switcher Engine
         function switchView(viewId) {
