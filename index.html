@@ -170,35 +170,36 @@
             margin-bottom: 14px;
             font-weight: 600;
         }
-
-        /* ================= GLOBAL RESPONSIVE FIX FOR MOBILE & PC ================= */
+    /* ================= GLOBAL AUTO-RESPONSIVE SYSTEM ================= */
+    
+    /* Otomatis mendeteksi semua grid/flex menyamping dan mengubahnya jadi vertikal ke bawah di HP */
     @media (max-width: 768px) {
-        body {
-            padding: 15px !important; /* Padding HP lebih pas */
-        }
-        
-        /* Hub Menu Grid utama jadi 1 kolom di HP */
-        .hub-grid {
-            grid-template-columns: 1fr !important;
-        }
-
-        /* Semua layout grid/dua kolom di dalam modul dipaksa jadi 1 kolom ke bawah di HP */
-        #economicView div[style*="grid-template-columns"],
-        #footballView div[style*="grid-template-columns"],
-        .fa-responsive-grid {
+        /* Semua container grid atau flex utama diubah jadi kolom ke bawah */
+        section#economicView > div[style*="grid"],
+        section#footballView > div[style*="grid"],
+        .hub-grid, 
+        div[style*="grid-template-columns"] {
             display: flex !important;
             flex-direction: column !important;
-            gap: 14px !important;
+            gap: 16px !important;
         }
 
-        /* Lebar card & tabel menyesuaikan layar HP */
-        .terminal-card {
+        /* Memastikan setiap card mengambil lebar penuh layar HP dengan jarak aman */
+        section#economicView > div > div,
+        section#footballView > div > div,
+        .hub-grid > div,
+        div[style*="grid-template-columns"] > div {
+            width: 100% !important;
+            grid-column: span 12 !important;
+        }
+
+        /* Padding halaman HP lebih lega */
+        body {
             padding: 16px !important;
         }
-
-        /* Tabel liga bola bisa di-scroll horizontal kalau sempit */
-        table {
-            font-size: 0.75rem !important;
+        
+        .terminal-card {
+            padding: 18px !important;
         }
     }
     </style>
