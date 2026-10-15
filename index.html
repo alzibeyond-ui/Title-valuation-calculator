@@ -285,7 +285,7 @@
                 <div class="hub-card" onclick="switchView('footballView')">
                     <div class="hub-card-icon">⚽</div>
                     <h3>Football Club Statistics</h3>
-                    <p>European and Asian league standings and top 100 global club Market Values.</p>
+                    <p>European and Asian standings and top 100 global club Market Values.</p>
                     <div class="hub-card-footer">
                         <span>SELECT MODULE</span>
                         <span>→</span>
@@ -626,10 +626,13 @@
         // SPA View Switcher Engine
         function switchView(viewId) {
             const sections = document.querySelectorAll('.view-section');
-            sections.forEach(sec => sec.classList.remove('active'));
+            sections.forEach(sec => {
+                sec.style.display = 'none';
+                sec.classList.remove('active');
 
             const target = document.getElementById(viewId);
             if (target) {
+                target.style.display = 'block';
                 target.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -976,6 +979,7 @@
     function closePlayerModal() {
         document.getElementById('playerModal').style.display = 'none';
     }
+        
     </script>
 </body>
 </html>
