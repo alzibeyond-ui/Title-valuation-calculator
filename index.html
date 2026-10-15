@@ -697,6 +697,62 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
+
+        // Function Pills Sector Selection
+        function selectPill(element, val) {
+            document.querySelectorAll('#sectorPills .pill-opt').forEach(p => p.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('sector').value = val;
+        }
+
+        // Financial Advisor Interactive Logic (Fixed Slider & Calculation)
+        document.addEventListener('DOMContentLoaded', () => {
+            const riskSlider = document.getElementById('riskSlider');
+            const riskLabel = document.getElementById('riskLabel');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+
+            // Live Event Listener Slider (1% - 15%)
+            if (riskSlider && riskLabel) {
+                riskSlider.addEventListener('input', (e) => {
+                    riskLabel.textContent = e.target.value + '%';
+                });
+            }
+
+            // Tombol Hitung Compounding
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', () => {
+                    const capitalVal = document.getElementById('capital').value;
+                    const timeframeVal = document.getElementById('timeframe').value;
+                    const rateVal = parseFloat(riskSlider.value) / 100;
+
+                    if (!capitalVal || !timeframeVal) {
+                        alert('Please enter Initial Capital and Time Span!');
+                        return;
+                    }
+
+                    const P = parseFloat(capitalVal);
+                    const t = parseFloat(timeframeVal);
+                    const n = 1; // Annual Compound
+
+                    // Compound Formula: A = P(1 + r/n)^(nt)
+                    const finalVal = P * Math.pow((1 + rateVal / n), (n * t));
+                    const profit = finalVal - P;
+                    const multiplier = (finalVal / P).toFixed(2) + 'x';
+
+                    // Render Hasil Ke Screen
+                    document.getElementById('totalValDisplay').textContent = '$ ' + Math.round(finalVal).toLocaleString('en-US');
+                    document.getElementById('mInitial').textContent = '$ ' + Math.round(P).toLocaleString('en-US');
+                    document.getElementById('mProfit').textContent = '+ $ ' + Math.round(profit).toLocaleString('en-US');
+                    document.getElementById('mMultiplier').textContent = multiplier;
+                    
+                    const modeVal = document.getElementById('modeVal');
+                    if (modeVal) {
+                        modeVal.textContent = 'ACTIVE';
+                        modeVal.style.color = 'var(--accent-green)';
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
