@@ -242,47 +242,142 @@
             <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
                 
                 <!-- KOLOM KIRI: PREFERENCES & INPUTS (col-span-5) -->
-                <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
-                    <div class="card-label">Preferences & Inputs</div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <div class="input-group" style="margin-bottom: 0;">
-                            <label>Initial Capital (USD)</label>
-                            <input type="number" id="capital" placeholder="e.g. 1000000">
-                        </div>
-                        
-                        <div class="input-group" style="margin-bottom: 0;">
-                            <label>Time Span (Years)</label>
-                            <input type="number" id="timeframe" placeholder="e.g. 10" min="1" max="40">
-                        </div>
+                <!-- Style Khusus Component Pills & Form Modern -->
+<style>
+    .input-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(8, 10, 15, 0.5);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 10px 14px;
+        transition: border-color 0.2s;
+    }
+    .input-row:focus-within {
+        border-color: var(--accent-green);
+    }
+    .input-row label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+    .input-row input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-align: right;
+        width: 50%;
+    }
+    
+    /* Pill Options Selectors */
+    .pill-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 6px;
+        flex-wrap: wrap;
+    }
+    .pill-opt {
+        background: rgba(8, 10, 15, 0.5);
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+    .pill-opt:hover, .pill-opt.active {
+        background: rgba(34, 197, 94, 0.15);
+        border-color: var(--accent-green);
+        color: var(--accent-green);
+        font-weight: 600;
+    }
 
-                        <div class="input-group" style="margin-bottom: 0;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <label>Return Rate</label>
-                                <span id="riskLabel" style="font-family: 'Space Grotesk'; font-size: 0.75rem; color: var(--accent-green); font-weight: 700;">8%</span>
-                            </div>
-                            <input type="range" id="riskSlider" min="1" max="15" value="8" step="0.5" style="width: 100%; accent-color: var(--accent-green); cursor: pointer; margin-top: 6px;">
-                        </div>
+    /* Range Slider Modern */
+    .slider-box {
+        background: rgba(8, 10, 15, 0.5);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 14px;
+    }
+    .custom-range {
+        width: 100%;
+        accent-color: var(--accent-green);
+        cursor: pointer;
+        margin-top: 8px;
+    }
+</style>
 
-                        <div class="input-group" style="margin-bottom: 0;">
-                            <label>Target Sector</label>
-                            <select id="sector">
-                                <option value="" disabled selected>Select Sector</option>
-                                <option value="banking">Banking & Financials</option>
-                                <option value="tech">Technology & Digital</option>
-                                <option value="energy">Energy & Commodities</option>
-                                <option value="fmcg">Consumer Goods (FMCG)</option>
-                            </select>
-                        </div>
+<!-- CARD PREFERENCES BARU (Kiri Atas) -->
+<div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
+    <div class="card-label">Preferences & Inputs</div>
+    
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+        
+        <!-- Input Initial Capital -->
+        <div class="input-row">
+            <label>Initial Capital</label>
+            <input type="number" id="capital" placeholder="100,000" value="1000000">
+        </div>
 
-                        <div class="input-group" style="margin-bottom: 0;">
-                            <label>Company / Ticker</label>
-                            <input type="text" id="ticker" placeholder="e.g. BBCA, TLKM, ASII...">
-                        </div>
+        <!-- Input Time Span -->
+        <div class="input-row">
+            <label>Time Span (Years)</label>
+            <input type="number" id="timeframe" placeholder="10" value="10" min="1" max="40">
+        </div>
 
-                        <button type="button" class="btn-action" id="analyzeBtn" style="margin-top: 6px;">Generate Simulation</button>
-                    </div>
-                </div>
+        <!-- Return Rate Slider dengan Badge -->
+        <div class="slider-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Expected Return Rate</span>
+                <span id="riskLabel" style="background: rgba(34, 197, 94, 0.15); border: 1px solid var(--accent-green); color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; padding: 2px 10px; border-radius: 12px; font-weight: 700;">8%</span>
+            </div>
+            <input type="range" class="custom-range" id="riskSlider" min="1" max="15" value="8" step="0.5">
+            <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 4px;">
+                <span>1% (Low)</span>
+                <span>15% (High)</span>
+            </div>
+        </div>
+
+        <!-- Target Sector (Mode Pills Ala Gambar Kanan) -->
+        <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Target Sector</label>
+            <div class="pill-group" id="sectorPills">
+                <div class="pill-opt active" onclick="selectPill(this, 'banking')">Banking</div>
+                <div class="pill-opt" onclick="selectPill(this, 'tech')">Tech</div>
+                <div class="pill-opt" onclick="selectPill(this, 'energy')">Energy</div>
+                <div class="pill-opt" onclick="selectPill(this, 'fmcg')">FMCG</div>
+            </div>
+            <input type="hidden" id="sector" value="banking">
+        </div>
+
+        <!-- Company / Ticker Input -->
+        <div class="input-row">
+            <label>Company Ticker</label>
+            <input type="text" id="ticker" placeholder="e.g. BBCA" value="BBCA">
+        </div>
+
+        <!-- Tombol Action Modern -->
+        <button type="button" class="btn-action" id="analyzeBtn" style="border-radius: 14px; padding: 14px; font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 0.5px;">
+            Generate Simulation →
+        </button>
+    </div>
+</div>
+
+<!-- Script buat selector Pills Sector -->
+<script>
+    function selectPill(element, val) {
+        document.querySelectorAll('#sectorPills .pill-opt').forEach(p => p.classList.remove('active'));
+        element.classList.add('active');
+        document.getElementById('sector').value = val;
+    }
+</script>
 
                 <!-- KOLOM KANAN: COMPOUNDING SUMMARY & METRICS (col-span-7) -->
                 <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px;">
@@ -589,7 +684,7 @@
 
             </div>
         </section>
-        
+
     <script>
         // SPA View Switcher Engine
         function switchView(viewId) {
