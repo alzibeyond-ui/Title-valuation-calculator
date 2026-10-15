@@ -171,6 +171,26 @@
             font-weight: 600;
         }
 
+        /* Pill Options Style */
+        .pill-opt {
+            background: rgba(8, 10, 15, 0.5);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .pill-opt:hover, .pill-opt.active {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
         /* ================= GLOBAL AUTO-RESPONSIVE SYSTEM ================= */
         @media (max-width: 768px) {
             section#economicView > div[style*="grid"],
@@ -221,18 +241,7 @@
             </div>
 
             <div class="hub-grid">
-                <!-- Menu 1: Financial Advisor -->
-                <div class="hub-card" onclick="switchView('financialView')">
-                    <div class="hub-card-icon">📈</div>
-                    <h3>Investment Calculator</h3>
-                    <p>compounding simulation and multi-year asset growth projections</p>
-                    <div class="hub-card-footer">
-                        <span>SELECT MODULE</span>
-                        <span>→</span>
-                    </div>
-                </div>
-
-                <!-- Menu 2: Global Economic -->
+                <!-- Menu 1: Global Economic -->
                 <div class="hub-card" onclick="switchView('economicView')">
                     <div class="hub-card-icon">🌍</div>
                     <h3>Global Economic</h3>
@@ -243,11 +252,11 @@
                     </div>
                 </div>
 
-                <!-- Menu 3: Football Club Stats -->
+                <!-- Menu 2: Football Club Stats -->
                 <div class="hub-card" onclick="switchView('footballView')">
                     <div class="hub-card-icon">⚽</div>
                     <h3>Football Club Statistics</h3>
-                    <p>global club Market Value .</p>
+                    <p>European and Asian league standings and top 100 global club Market Values.</p>
                     <div class="hub-card-footer">
                         <span>SELECT MODULE</span>
                         <span>→</span>
@@ -257,180 +266,7 @@
         </section>
 
 
-        <!-- ================= VIEW 2: FINANCIAL ADVISOR MODULE ================= -->
-        <section id="financialView" class="view-section">
-            <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
-            
-            <div style="margin-bottom: 20px;">
-                <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Financial Advisor Workspace</h2>
-                <p style="color: var(--text-muted); font-size: 0.82rem;">Simulate long-term asset compounding, portfolio growth trajectories, and sector distributions.</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
-                
-                <style>
-                    .input-row {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        background: rgba(8, 10, 15, 0.5);
-                        border: 1px solid var(--border-color);
-                        border-radius: 14px;
-                        padding: 10px 14px;
-                        transition: border-color 0.2s;
-                    }
-                    .input-row:focus-within {
-                        border-color: var(--accent-green);
-                    }
-                    .input-row label {
-                        font-size: 0.8rem;
-                        color: var(--text-muted);
-                        font-weight: 500;
-                    }
-                    .input-row input {
-                        background: transparent;
-                        border: none;
-                        outline: none;
-                        color: #fff;
-                        font-family: 'Space Grotesk', sans-serif;
-                        font-weight: 700;
-                        font-size: 0.95rem;
-                        text-align: right;
-                        width: 50%;
-                    }
-                    
-                    .pill-group {
-                        display: flex;
-                        gap: 8px;
-                        margin-top: 6px;
-                        flex-wrap: wrap;
-                    }
-                    .pill-opt {
-                        background: rgba(8, 10, 15, 0.5);
-                        border: 1px solid var(--border-color);
-                        color: var(--text-muted);
-                        padding: 8px 14px;
-                        border-radius: 20px;
-                        font-size: 0.78rem;
-                        cursor: pointer;
-                        transition: all 0.2s ease;
-                        font-weight: 500;
-                    }
-                    .pill-opt:hover, .pill-opt.active {
-                        background: rgba(34, 197, 94, 0.15);
-                        border-color: var(--accent-green);
-                        color: var(--accent-green);
-                        font-weight: 600;
-                    }
-
-                    .slider-box {
-                        background: rgba(8, 10, 15, 0.5);
-                        border: 1px solid var(--border-color);
-                        border-radius: 14px;
-                        padding: 14px;
-                    }
-                    .custom-range {
-                        width: 100%;
-                        accent-color: var(--accent-green);
-                        cursor: pointer;
-                        margin-top: 8px;
-                    }
-                </style>
-
-                <!-- KOLOM KIRI: PREFERENCES -->
-                <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
-                    <div class="card-label">Preferences</div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 14px;">
-                        <div class="input-row">
-                            <label>Initial Capital</label>
-                            <input type="number" id="capital" placeholder="0">
-                        </div>
-
-                        <div class="input-row">
-                            <label>Time Span</label>
-                            <input type="number" id="timeframe" placeholder="0" min="1" max="500">
-                        </div>
-
-                        <div class="slider-box">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-size: 0.8rem; color: var(--text-muted);">Expected Return Rate</span>
-                                <span id="riskLabel" style="background: rgba(34, 197, 94, 0.15); border: 1px solid var(--accent-green); color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; padding: 2px 10px; border-radius: 12px; font-weight: 700;">8%</span>
-                            </div>
-                            <input type="range" class="custom-range" id="riskSlider" min="1" max="15" value="8" step="0.5">
-                            <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 4px;">
-                                <span>1% (Low)</span>
-                                <span>15% (High)</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Target Sector</label>
-                            <div class="pill-group" id="sectorPills">
-                                <div class="pill-opt active" onclick="selectPill(this, 'banking')">Banking</div>
-                                <div class="pill-opt" onclick="selectPill(this, 'tech')">Tech</div>
-                                <div class="pill-opt" onclick="selectPill(this, 'energy')">Energy</div>
-                                <div class="pill-opt" onclick="selectPill(this, 'fmcg')">FMCG</div>
-                            </div>
-                            <input type="hidden" id="sector" value="banking">
-                        </div>
-
-                        <div class="input-row">
-                            <label>Company Ticker</label>
-                            <input type="text" id="ticker" placeholder="e.g. BBCA" value="BBCA">
-                        </div>
-
-                        <button type="button" class="btn-action" id="analyzeBtn" style="border-radius: 14px; padding: 14px; font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 0.5px; background: var(--accent-green); border: none; cursor: pointer;">
-                            Generate Simulation →
-                        </button>
-                    </div>
-                </div>
-
-                <!-- KOLOM KANAN: SUMMARY -->
-                <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px;">
-                    <div class="terminal-card" style="margin-bottom: 0;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                            <div class="card-label" style="margin-bottom: 0;">Compounding Summary</div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase;">Mode</div>
-                                <div style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.8rem;" id="modeVal">STANDBY</div>
-                            </div>
-                        </div>
-
-                        <div style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 14px;">
-                            <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Portfolio Value</div>
-                            <div style="font-family: 'Space Grotesk'; font-size: 2.2rem; font-weight: 700; color: var(--accent-green);" id="totalValDisplay">$ --</div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
-                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: #fff;" id="mInitial">--</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Initial Capital</div>
-                            </div>
-                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
-                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: var(--accent-green);" id="mProfit">--</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Net Profit</div>
-                            </div>
-                            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center;">
-                                <div style="font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 600; color: #fff;" id="mMultiplier">--</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Multiplier</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="terminal-card" style="margin-bottom: 0;">
-                        <div class="card-label">💡 Compounding Insight</div>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
-                            Long-term asset compounding consistently outpaces standard inflation across major defensive sectors over 10+ year horizons.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- ================= VIEW 3: GLOBAL ECONOMIC MODULE ================= -->
+        <!-- ================= VIEW 2: GLOBAL ECONOMIC MODULE ================= -->
         <section id="economicView" class="view-section">
             <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
             
@@ -459,7 +295,7 @@
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }
                 }
-                .ticker-ittem {
+                .ticker-item {
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
@@ -560,13 +396,13 @@
         </section>
 
 
-        <!-- ================= VIEW 4: FOOTBALL STATS MODULE ================= -->
+        <!-- ================= VIEW 3: FOOTBALL STATS MODULE ================= -->
         <section id="footballView" class="view-section">
             <button class="back-btn" onclick="switchView('hubView')">← Back to Terminal Hub</button>
             
             <div style="margin-bottom: 20px;">
                 <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Football Club Analytics & Valuations</h2>
-                <p style="color: var(--text-muted); font-size: 0.82rem;">European and Asian league standing and global club Market Value (MV) metrics.</p>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">European and Asian league standings and global club Market Value (MV) metrics.</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
@@ -606,12 +442,18 @@
                                     <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+10</td>
                                     <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">19</td>
                                 </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                                    <td style="padding: 10px 8px; font-weight: 600;"><span style="color: var(--text-muted); margin-right: 6px;">3</span> Liverpool</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--text-muted);">8</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">+9</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-family: 'Space Grotesk'; font-weight: 700;">18</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- KOLOM KANAN: TOP 3 MV + LOAD MORE BUTTON -->
+                <!-- KOLOM KANAN: TOP 3 MV + BATCH PAGINATION TRIGGER -->
                 <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
                     <div class="card-label">💰 Global Club Market Value (MV)</div>
                     <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -660,10 +502,10 @@
 
                     </div>
 
-                    <!-- Tombol Load More -->
+                    <!-- Tombol Buka Rank 100 -->
                     <button type="button" onclick="openMvModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
-                        Load More (View Full Rank) →
-                    </button>
+                        Load More (View Top 100 Rank) →
+                        </button>
                 </div>
 
             </div>
@@ -672,63 +514,49 @@
     </div>
 
 
-    <!-- ================= MODAL FULL RANK GLOBAL MARKET VALUE ================= -->
-    <div id="mvModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; padding: 20px;">
-        <div style="background: #0d1117; border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto; padding: 20px; position: relative;">
+    <!-- ================= MODAL FULL RANK GLOBAL MARKET VALUE (PAGINATED 1-100) ================= -->
+    <div id="mvModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; padding: 16px;">
+        <div style="background: #0d1117; border: 1px solid var(--border-color); border-radius: 18px; width: 100%; max-width: 550px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
             
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; color: #fff;">🌍 Global Club Market Value Ranking</div>
-                <button type="button" onclick="closeMvModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
+            <!-- Modal Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border-color); background: rgba(13, 17, 23, 0.95);">
+                <div>
+                    <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; color: #fff;">🌍 Top 100 Global Club Market Values</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;" id="batchSubTitle">Showing Rank 1 - 25</div>
+                </div>
+                <button type="button" onclick="closeMvModal()" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 50%; width: 32px; height: 32px; color: var(--text-muted); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">✕</button>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: var(--accent-green);">#1 Real Madrid</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.34 Bn</span>
-                </div>
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: #fff;">#2 Manchester City</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.29 Bn</span>
-                </div>
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: #fff;">#3 Arsenal FC</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.17 Bn</span>
-                </div>
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: var(--text-muted);">#4 Paris Saint-Germain</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.04 Bn</span>
-                </div>
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: var(--text-muted);">#5 FC Barcelona</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€945 M</span>
-                </div>
-                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                    <span style="font-weight: 700; color: var(--text-muted);">#6 Liverpool FC</span>
-                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€931 M</span>
-                </div>
+            <!-- Batch Selection Pills Filter -->
+            <div style="display: flex; gap: 8px; padding: 12px 20px; border-bottom: 1px solid var(--border-color); background: rgba(8, 10, 15, 0.4); overflow-x: auto;" id="batchPillContainer">
+                <button type="button" class="pill-opt active" onclick="loadBatch(1)" id="btnBatch1">Batch 1 (1-25)</button>
+                <button type="button" class="pill-opt" onclick="loadBatch(2)" id="btnBatch2">Batch 2 (26-50)</button>
+                <button type="button" class="pill-opt" onclick="loadBatch(3)" id="btnBatch3">Batch 3 (51-75)</button>
+                <button type="button" class="pill-opt" onclick="loadBatch(4)" id="btnBatch4">Batch 4 (76-100)</button>
             </div>
 
-            <button type="button" onclick="closeMvModal()" style="width: 100%; margin-top: 16px; background: var(--accent-green); border: none; border-radius: 10px; padding:12px; color: #000; font-family: 'Space Grotesk'; font-weight: 700; cursor: pointer;">
-                Close Rank View
-            </button>
+            <!-- Dynamic List Area -->
+            <div style="padding: 16px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; min-height: 320px;" id="mvRankList">
+                <!-- Data klub di-inject via JavaScript -->
+            </div>
+
+            <!-- Modal Footer Pagination Nav -->
+            <div style="padding: 14px 20px; border-top: 1px solid var(--border-color); background: rgba(13, 17, 23, 0.95); display: flex; justify-content: space-between; align-items: center;">
+                <button type="button" id="prevBatchBtn" onclick="changeBatch(-1)" style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 16px; color: #fff; font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+                    ← Previous
+                </button>
+                <span style="font-size: 0.75rem; color: var(--text-muted); font-family: 'Space Grotesk';" id="batchIndicator">Batch 1 of 4</span>
+                <button type="button" id="nextBatchBtn" onclick="changeBatch(1)" style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 16px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+                    Next →
+                </button>
+            </div>
         </div>
     </div>
 
 
+    <!-- ================= JAVASCRIPT ENGINE ================= -->
     <script>
-        function formatCompactNumber(num) {
-            if (isNaN(num)) return '$ 0';
-            if (num === 0) return '$ 0';
-
-            const suffixes = ['', 'M', 'B', 'T', 'Q', 'Qi', 'Sx'];
-            const i = Math.floor(Math.log10(Math.abs(num)) / 3);
-
-            if (i === 0) return '$ ' + Math.round(num).toLocaleString('en-US');
-
-            const scaled = num / Math.pow(10, i * 3);
-            return '$ ' + scaled.toFixed(2) + ' ' + suffixes[i];
-        }
-
+        // SPA View Switcher Engine
         function switchView(viewId) {
             const sections = document.querySelectorAll('.view-section');
             sections.forEach(sec => sec.classList.remove('active'));
@@ -740,63 +568,129 @@
             }
         }
 
-        function selectPill(element, val) {
-            document.querySelectorAll('#sectorPills .pill-opt').forEach(p => p.classList.remove('active'));
-            element.classList.add('active');
-            document.getElementById('sector').value = val;
+        // DATA 100 KLUB TERATAS WORLD FOOTBALL MARKET VALUE
+        const mvData100 = [
+            // Batch 1 (1-25)
+            { r: 1, name: "Real Madrid", val: "€1.34 Bn" }, { r: 2, name: "Manchester City", val: "€1.29 Bn" },
+            { r: 3, name: "Arsenal FC", val: "€1.17 Bn" }, { r: 4, name: "Paris Saint-Germain", val: "€1.04 Bn" },
+            { r: 5, name: "FC Barcelona", val: "€945 M" }, { r: 6, name: "Liverpool FC", val: "€931 M" },
+            { r: 7, name: "Bayern Munich", val: "€929 M" }, { r: 8, name: "Chelsea FC", val: "€915 M" },
+            { r: 9, name: "Tottenham Hotspur", val: "€882 M" }, { r: 10, name: "Manchester United", val: "€857 M" },
+            { r: 11, name: "Inter Milan", val: "€672 M" }, { r: 12, name: "Bayer Leverkusen", val: "€625 M" },
+            { r: 13, name: "Aston Villa", val: "€615 M" }, { r: 14, name: "Juventus FC", val: "€594 M" },
+            { r: 15, name: "Atletico Madrid", val: "€510 M" }, { r: 16, name: "Newcastle United", val: "€480 M" },
+            { r: 17, name: "RB Leipzig", val: "€475 M" }, { r: 18, name: "AC Milan", val: "€462 M" },
+            { r: 19, name: "Borussia Dortmund", val: "€455 M" }, { r: 20, name: "SSC Napoli", val: "€428 M" },
+            { r: 21, name: "Brighton & Hove Albion", val: "€415 M" }, { r: 22, name: "West Ham United", val: "€395 M" },
+            { r: 23, name: "Atalanta BC", val: "€380 M" }, { r: 24, name: "AS Monaco", val: "€365 M" },
+            { r: 25, name: "Sporting CP", val: "€350 M" },
+
+            // Batch 2 (26-50)
+            { r: 26, name: "SL Benfica", val: "€335 M" }, { r: 27, name: "Real Sociedad", val: "€320 M" },
+            { r: 28, name: "Athletic Bilbao", val: "€310 M" }, { r: 29, name: "AS Roma", val: "€295 M" },
+            { r: 30, name: "FC Porto", val: "€285 M" }, { r: 31, name: "AFC Bournemouth", val: "€275 M" },
+            { r: 32, name: "Wolverhampton Wanderers", val: "€265 M" }, { r: 33, name: "Nottingham Forest", val: "€255 M" },
+            { r: 34, name: "Crystal Palace", val: "€250 M" }, { r: 35, name: "Brentford FC", val: "€240 M" },
+            { r: 36, name: "Fulham FC", val: "€235 M" }, { r: 37, name: "Villarreal CF", val: "€225 M" },
+            { r: 38, name: "SS Lazio", val: "€220 M" }, { r: 39, name: "Fiorentina", val: "€215 M" },
+            { r: 40, name: "Olympique Marseille", val: "€210 M" }, { r: 41, name: "LOSC Lille", val: "€205 M" },
+            { r: 42, name: "RC Lens", val: "€195 M" }, { r: 43, name: "VfB Stuttgart", val: "€190 M" },
+            { r: 44, name: "Eintracht Frankfurt", val: "€185 M" }, { r: 45, name: "Feyenoord Rotterdam", val: "€180 M" },
+            { r: 46, name: "PSV Eindhoven", val: "€175 M" }, { r: 47, name: "Ajax Amsterdam", val: "€165 M" },
+            { r: 48, name: "Al-Hilal SFC", val: "€160 M" }, { r: 49, name: "Al-Nassr FC", val: "€145 M" },
+            { r: 50, name: "CR Flamengo", val: "€140 M" },
+
+            // Batch 3 (51-75)
+            { r: 51, name: "Palmeiras", val: "€135 M" }, { r: 52, name: "Girona FC", val: "€130 M" },
+            { r: 53, name: "Real Betis", val: "€128 M" }, { r: 54, name: "FC Red Bull Salzburg", val: "€125 M" },
+            { r: 55, name: "Everton FC", val: "€120 M" }, { r: 56, name: "FC Lorient", val: "€118 M" },
+            { r: 57, name: "Torino FC", val: "€115 M" }, { r: 58, name: "Bologna FC", val: "€112 M" },
+            { r: 59, name: "OGC Nice", val: "€110 M" }, { r: 60, name: "Stade Rennais", val: "€108 M" },
+            { r: 61, name: "FC Copenhagen", val: "€105 M" }, { r: 62, name: "Galatasaray SK", val: "€102 M" },
+            { r: 63, name: "Fenerbahce SK", val: "€98 M" }, { r: 64, name: "Olympiacos FC", val: "€95 M" },
+            { r: 65, name: "River Plate", val: "€92 M" }, { r: 66, name: "Boca Juniors", val: "€88 M" },
+            { r: 67, name: "Sao Paulo FC", val: "€85 M" }, { r: 68, name: "Al-Ittihad", val: "€82 M" },
+            { r: 69, name: "Al-Ahli SFC", val: "€80 M" }, { r: 70, name: "Club Brugge", val: "€78 M" },
+            { r: 71, name: "RSC Anderlecht", val: "€75 M" }, { r: 72, name: "Celtic FC", val: "€72 M" },
+            { r: 73, name: "Rangers FC", val: "€70 M" }, { r: 74, name: "Shakhtar Donetsk", val: "€68 M" },
+            { r: 75, name: "Dinamo Zagreb", val: "€65 M" },
+
+            // Batch 4 (76-100)
+            { r: 76, name: "Fluminense", val: "€63 M" }, { r: 77, name: "SC Braga", val: "€60 M" },
+            { r: 78, name: "Besiktas JK", val: "€58 M" }, { r: 79, name: "AEK Athens", val: "€55 M" },
+            { r: 80, name: "Panathinaikos", val: "€52 M" }, { r: 81, name: "Botafogo", val: "€50 M" },
+            { r: 82, name: "Gremio", val: "€48 M" }, { r: 83, name: "Athletico Paranaense", val: "€46 M" },
+            { r: 84, name: "Inter Miami CF", val: "€45 M" }, { r: 85, name: "LAFC", val: "€43 M" },
+            { r: 86, name: "Columbus Crew", val: "€41 M" }, { r: 87, name: "Atlanta United", val: "€40 M" },
+            { r: 88, name: "Urawa Red Diamonds", val: "€38 M" }, { r: 89, name: "Yokohama F. Marinos", val: "€36 M" },
+            { r: 90, name: "Vissel Kobe", val: "€35 M" }, { r: 91, name: "Jeonbuk Hyundai", val: "€33 M" },
+            { r: 92, name: "Ulsan HD", val: "€32 M" }, { r: 93, name: "Persib Bandung", val: "€12 M" },
+            { r: 94, name: "Persija Jakarta", val: "€11 M" }, { r: 95, name: "Dewa United", val: "€10 M" },
+            { r: 96, name: "Bali United", val: "€9.5 M" }, { r: 97, name: "Borneo FC", val: "€9 M" },
+            { r: 98, name: "Johor Darul Ta'zim", val: "€8.5 M" }, { r: 99, name: "Buriram United", val: "€8 M" },
+            { r: 100, name: "Muangthong United", val: "€7.5 M" }
+        ];
+
+        let currentBatch = 1;
+
+        function loadBatch(batchNum) {
+            currentBatch = batchNum;
+            const start = (batchNum - 1) * 25;
+            const end = batchNum * 25;
+            const batchData = mvData100.slice(start, end);
+
+            const listContainer = document.getElementById('mvRankList');
+            listContainer.innerHTML = '';
+
+            batchData.forEach(item => {
+                const isTop1 = item.r === 1;
+                const borderStyle = isTop1 ? 'border: 1px solid rgba(34, 197, 94, 0.3);' : 'border: 1px solid var(--border-color);';
+                const rankColor = isTop1 ? 'color: var(--accent-green);' : (item.r <= 3 ? 'color: #fff;' : 'color: var(--text-muted);');
+
+                const row = `
+                    <div style="background: rgba(8, 10, 15, 0.5); padding: 10px 14px; border-radius: 10px; ${borderStyle} display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                        <span style="font-weight: 600; ${rankColor}">#${item.r} ${item.name}</span>
+                        <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">${item.val}</span>
+                    </div>
+                `;
+                listContainer.innerHTML += row;
+            });
+
+            // Update UI State & Text
+            document.getElementById('batchSubTitle').textContent = `Showing Rank ${start + 1} - ${end}`;
+            document.getElementById('batchIndicator').textContent = `Batch ${batchNum} of 4`;
+
+            // Active Pills Highlight
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`btnBatch${i}`);
+                if (btn) {
+                    if (i === batchNum) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                }
+            }
+
+            // Disable / Enable Nav Buttons
+            document.getElementById('prevBatchBtn').style.opacity = batchNum === 1 ? '0.4' : '1';
+            document.getElementById('prevBatchBtn').style.pointerEvents = batchNum === 1 ? 'none' : 'auto';
+            document.getElementById('nextBatchBtn').style.opacity = batchNum === 4 ? '0.4' : '1';
+            document.getElementById('nextBatchBtn').style.pointerEvents = batchNum === 4 ? 'none' : 'auto';
+        }
+
+        function changeBatch(direction) {
+            const nextBatch = currentBatch + direction;
+            if (nextBatch >= 1 && nextBatch <= 4) {
+                loadBatch(nextBatch);
+            }
         }
 
         function openMvModal() {
             document.getElementById('mvModal').style.display = 'flex';
+            loadBatch(1);
         }
 
         function closeMvModal() {
             document.getElementById('mvModal').style.display = 'none';
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const riskSlider = document.getElementById('riskSlider');
-            const riskLabel = document.getElementById('riskLabel');
-            const analyzeBtn = document.getElementById('analyzeBtn');
-
-            if (riskSlider && riskLabel) {
-                riskSlider.addEventListener('input', (e) => {
-                    riskLabel.textContent = e.target.value + '%';
-                });
-            }
-
-            if (analyzeBtn) {
-                analyzeBtn.addEventListener('click', () => {
-                    const capitalVal = document.getElementById('capital').value;
-                    const timeframeVal = document.getElementById('timeframe').value;
-                    const rateVal = parseFloat(riskSlider.value) / 100;
-
-                    if (!capitalVal || !timeframeVal) {
-                        alert('Please enter Initial Capital and Time Span!');
-                        return;
-                    }
-
-                    const P = parseFloat(capitalVal);
-                    const t = parseFloat(timeframeVal);
-                    const n = 1;
-
-                    const finalVal = P * Math.pow((1 + rateVal / n), (n * t));
-                    const profit = finalVal - P;
-                    const multiplier = (finalVal / P).toFixed(2) + 'x';
-
-                    document.getElementById('totalValDisplay').textContent = formatCompactNumber(finalVal);
-                    document.getElementById('mInitial').textContent = formatCompactNumber(P);
-                    document.getElementById('mProfit').textContent = '+ ' + formatCompactNumber(profit);
-                    document.getElementById('mMultiplier').textContent = multiplier;
-                    
-                    const modeVal = document.getElementById('modeVal');
-                    if (modeVal) {
-                        modeVal.textContent = 'ACTIVE';
-                        modeVal.style.color = 'var(--accent-green)';
-                    }
-                });
-            }
-        });
     </script>
 </body>
 </html>
