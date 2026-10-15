@@ -588,68 +588,117 @@
             }
         }
 
-        // DATA 100 KLUB TERATAS WORLD FOOTBALL MARKET VALUE
+        // DATA 100 KLUB DENGAN WARNA UTAMA TEMA KLUB (HEX COLOR)
         const mvData100 = [
             // Batch 1 (1-25)
-            { r: 1, name: "Real Madrid", val: "€1.34 Bn" }, { r: 2, name: "Manchester City", val: "€1.29 Bn" },
-            { r: 3, name: "Arsenal FC", val: "€1.17 Bn" }, { r: 4, name: "Paris Saint-Germain", val: "€1.04 Bn" },
-            { r: 5, name: "FC Barcelona", val: "€945 M" }, { r: 6, name: "Liverpool FC", val: "€931 M" },
-            { r: 7, name: "Bayern Munich", val: "€929 M" }, { r: 8, name: "Chelsea FC", val: "€915 M" },
-            { r: 9, name: "Tottenham Hotspur", val: "€882 M" }, { r: 10, name: "Manchester United", val: "€857 M" },
-            { r: 11, name: "Inter Milan", val: "€672 M" }, { r: 12, name: "Bayer Leverkusen", val: "€625 M" },
-            { r: 13, name: "Aston Villa", val: "€615 M" }, { r: 14, name: "Juventus FC", val: "€594 M" },
-            { r: 15, name: "Atletico Madrid", val: "€510 M" }, { r: 16, name: "Newcastle United", val: "€480 M" },
-            { r: 17, name: "RB Leipzig", val: "€475 M" }, { r: 18, name: "AC Milan", val: "€462 M" },
-            { r: 19, name: "Borussia Dortmund", val: "€455 M" }, { r: 20, name: "SSC Napoli", val: "€428 M" },
-            { r: 21, name: "Brighton & Hove Albion", val: "€415 M" }, { r: 22, name: "West Ham United", val: "€395 M" },
-            { r: 23, name: "Atalanta BC", val: "€380 M" }, { r: 24, name: "AS Monaco", val: "€365 M" },
-            { r: 25, name: "Sporting CP", val: "€350 M" },
+            { r: 1, name: "Real Madrid", val: "€1.34 Bn", c: "#f1c40f" }, // Gold
+            { r: 2, name: "Manchester City", val: "€1.29 Bn", c: "#6cabdd" }, // Sky Blue
+            { r: 3, name: "Arsenal FC", val: "€1.17 Bn", c: "#ef0107" }, // Red
+            { r: 4, name: "Paris Saint-Germain", val: "€1.04 Bn", c: "#004170" }, // PSG Blue
+            { r: 5, name: "FC Barcelona", val: "€945 M", c: "#a70042" }, // Blaugrana Red
+            { r: 6, name: "Liverpool FC", val: "€931 M", c: "#c8102e" }, // Anfield Red
+            { r: 7, name: "Bayern Munich", val: "€929 M", c: "#dc052d" }, // Bavaria Red
+            { r: 8, name: "Chelsea FC", val: "€915 M", c: "#034694" }, // Chelsea Blue
+            { r: 9, name: "Tottenham Hotspur", val: "€882 M", c: "#ffffff" }, // White
+            { r: 10, name: "Manchester United", val: "€857 M", c: "#da020e" }, // Red Devils
+            { r: 11, name: "Inter Milan", val: "€672 M", c: "#0066b2" }, // Nerazzurri Blue
+            { r: 12, name: "Bayer Leverkusen", val: "€625 M", c: "#e32219" }, // Red
+            { r: 13, name: "Aston Villa", val: "€615 M", c: "#95bfe6" }, // Claret & Blue
+            { r: 14, name: "Juventus FC", val: "€594 M", c: "#ffffff" }, // White
+            { r: 15, name: "Atletico Madrid", val: "€510 M", c: "#cb3524" }, // Colchoneros Red
+            { r: 16, name: "Newcastle United", val: "€480 M", c: "#ffffff" }, // White
+            { r: 17, name: "RB Leipzig", val: "€475 M", c: "#dd0000" }, // RB Red
+            { r: 18, name: "AC Milan", val: "€462 M", c: "#fb090b" }, // Rossoneri Red
+            { r: 19, name: "Borussia Dortmund", val: "€455 M", c: "#fde100" }, // BVB Yellow
+            { r: 20, name: "SSC Napoli", val: "€428 M", c: "#12a0d7" }, // Azzurri Blue
+            { r: 21, name: "Brighton & Hove Albion", val: "€415 M", c: "#0057b8" }, // Seagulls Blue
+            { r: 22, name: "West Ham United", val: "€395 M", c: "#7a263a" }, // Claret
+            { r: 23, name: "Atalanta BC", val: "€380 M", c: "#1e71b8" }, // Nerazzurri Blue
+            { r: 24, name: "AS Monaco", val: "€365 M", c: "#e20613" }, // Red
+            { r: 25, name: "Sporting CP", val: "€350 M", c: "#008057" }, // Green
 
             // Batch 2 (26-50)
-            { r: 26, name: "SL Benfica", val: "€335 M" }, { r: 27, name: "Real Sociedad", val: "€320 M" },
-            { r: 28, name: "Athletic Bilbao", val: "€310 M" }, { r: 29, name: "AS Roma", val: "€295 M" },
-            { r: 30, name: "FC Porto", val: "€285 M" }, { r: 31, name: "AFC Bournemouth", val: "€275 M" },
-            { r: 32, name: "Wolverhampton Wanderers", val: "€265 M" }, { r: 33, name: "Nottingham Forest", val: "€255 M" },
-            { r: 34, name: "Crystal Palace", val: "€250 M" }, { r: 35, name: "Brentford FC", val: "€240 M" },
-            { r: 36, name: "Fulham FC", val: "€235 M" }, { r: 37, name: "Villarreal CF", val: "€225 M" },
-            { r: 38, name: "SS Lazio", val: "€220 M" }, { r: 39, name: "Fiorentina", val: "€215 M" },
-            { r: 40, name: "Olympique Marseille", val: "€210 M" }, { r: 41, name: "LOSC Lille", val: "€205 M" },
-            { r: 42, name: "RC Lens", val: "€195 M" }, { r: 43, name: "VfB Stuttgart", val: "€190 M" },
-            { r: 44, name: "Eintracht Frankfurt", val: "€185 M" }, { r: 45, name: "Feyenoord Rotterdam", val: "€180 M" },
-            { r: 46, name: "PSV Eindhoven", val: "€175 M" }, { r: 47, name: "Ajax Amsterdam", val: "€165 M" },
-            { r: 48, name: "Al-Hilal SFC", val: "€160 M" }, { r: 49, name: "Al-Nassr FC", val: "€145 M" },
-            { r: 50, name: "CR Flamengo", val: "€140 M" },
+            { r: 26, name: "SL Benfica", val: "€335 M", c: "#e30613" }, // Red
+            { r: 27, name: "Real Sociedad", val: "€320 M", c: "#00539f" }, // Blue
+            { r: 28, name: "Athletic Bilbao", val: "€310 M", c: "#ee2524" }, // Red
+            { r: 29, name: "AS Roma", val: "€295 M", c: "#8e1f2f" }, // Giallorossi Red
+            { r: 30, name: "FC Porto", val: "€285 M", c: "#004899" }, // Blue
+            { r: 31, name: "AFC Bournemouth", val: "€275 M", c: "#da291c" }, // Red
+            { r: 32, name: "Wolverhampton Wanderers", val: "€265 M", c: "#fdb913" }, // Gold
+            { r: 33, name: "Nottingham Forest", val: "€255 M", c: "#dd0000" }, // Red
+            { r: 34, name: "Crystal Palace", val: "€250 M", c: "#1b458f" }, // Blue
+            { r: 35, name: "Brentford FC", val: "€240 M", c: "#e30613" }, // Red
+            { r: 36, name: "Fulham FC", val: "€235 M", c: "#ffffff" }, // White
+            { r: 37, name: "Villarreal CF", val: "€225 M", c: "#ffe600" }, // Yellow Submarine
+            { r: 38, name: "SS Lazio", val: "€220 M", c: "#87d8f7" }, // Sky Blue
+            { r: 39, name: "Fiorentina", val: "€215 M", c: "#4f2d82" }, // Viola Purple
+            { r: 40, name: "Olympique Marseille", val: "€210 M", c: "#009ee0" }, // Blue
+            { r: 41, name: "LOSC Lille", val: "€205 M", c: "#e2001a" }, // Red
+            { r: 42, name: "RC Lens", val: "€195 M", c: "#ec1c24" }, // Red
+            { r: 43, name: "VfB Stuttgart", val: "€190 M", c: "#e30613" }, // Red
+            { r: 44, name: "Eintracht Frankfurt", val: "€185 M", c: "#e10019" }, // Red
+            { r: 45, name: "Feyenoord Rotterdam", val: "€180 M", c: "#ff0000" }, // Red
+            { r: 46, name: "PSV Eindhoven", val: "€175 M", c: "#f00000" }, // Red
+            { r: 47, name: "Ajax Amsterdam", val: "€165 M", c: "#d2122e" }, // Red
+            { r: 48, name: "Al-Hilal SFC", val: "€160 M", c: "#005ca9" }, // Blue
+            { r: 49, name: "Al-Nassr FC", val: "€145 M", c: "#fff200" }, // Yellow
+            { r: 50, name: "CR Flamengo", val: "€140 M", c: "#c3281e" }, // Red
 
             // Batch 3 (51-75)
-            { r: 51, name: "Palmeiras", val: "€135 M" }, { r: 52, name: "Girona FC", val: "€130 M" },
-            { r: 53, name: "Real Betis", val: "€128 M" }, { r: 54, name: "FC Red Bull Salzburg", val: "€125 M" },
-            { r: 55, name: "Everton FC", val: "€120 M" }, { r: 56, name: "FC Lorient", val: "€118 M" },
-            { r: 57, name: "Torino FC", val: "€115 M" }, { r: 58, name: "Bologna FC", val: "€112 M" },
-            { r: 59, name: "OGC Nice", val: "€110 M" }, { r: 60, name: "Stade Rennais", val: "€108 M" },
-            { r: 61, name: "FC Copenhagen", val: "€105 M" }, { r: 62, name: "Galatasaray SK", val: "€102 M" },
-            { r: 63, name: "Fenerbahce SK", val: "€98 M" }, { r: 64, name: "Olympiacos FC", val: "€95 M" },
-            { r: 65, name: "River Plate", val: "€92 M" }, { r: 66, name: "Boca Juniors", val: "€88 M" },
-            { r: 67, name: "Sao Paulo FC", val: "€85 M" }, { r: 68, name: "Al-Ittihad", val: "€82 M" },
-            { r: 69, name: "Al-Ahli SFC", val: "€80 M" }, { r: 70, name: "Club Brugge", val: "€78 M" },
-            { r: 71, name: "RSC Anderlecht", val: "€75 M" }, { r: 72, name: "Celtic FC", val: "€72 M" },
-            { r: 73, name: "Rangers FC", val: "€70 M" }, { r: 74, name: "Shakhtar Donetsk", val: "€68 M" },
-            { r: 75, name: "Dinamo Zagreb", val: "€65 M" },
+            { r: 51, name: "Palmeiras", val: "€135 M", c: "#006437" }, // Green
+            { r: 52, name: "Girona FC", val: "€130 M", c: "#d81e05" }, // Red
+            { r: 53, name: "Real Betis", val: "€128 M", c: "#00954c" }, // Green
+            { r: 54, name: "FC Red Bull Salzburg", val: "€125 M", c: "#e20111" }, // Red
+            { r: 55, name: "Everton FC", val: "€120 M", c: "#00369c" }, // Blue
+            { r: 56, name: "FC Lorient", val: "€118 M", c: "#f37023" }, // Orange
+            { r: 57, name: "Torino FC", val: "€115 M", c: "#8a1e2d" }, // Maroon
+            { r: 58, name: "Bologna FC", val: "€112 M", c: "#1a2c56" }, // Blue
+            { r: 59, name: "OGC Nice", val: "€110 M", c: "#e2001a" }, // Red
+            { r: 60, name: "Stade Rennais", val: "€108 M", c: "#e2001a" }, // Red
+            { r: 61, name: "FC Copenhagen", val: "€105 M", c: "#005ca9" }, // Blue
+            { r: 62, name: "Galatasaray SK", val: "€102 M", c: "#a90429" }, // Red
+            { r: 63, name: "Fenerbahce SK", val: "€98 M", c: "#002d62" }, // Navy
+            { r: 64, name: "Olympiacos FC", val: "€95 M", c: "#d81222" }, // Red
+            { r: 65, name: "River Plate", val: "€92 M", c: "#e30613" }, // Red
+            { r: 66, name: "Boca Juniors", val: "€88 M", c: "#004170" }, // Blue
+            { r: 67, name: "Sao Paulo FC", val: "€85 M", c: "#ff0000" }, // Red
+            { r: 68, name: "Al-Ittihad", val: "€82 M", c: "#f3e100" }, // Yellow
+            { r: 69, name: "Al-Ahli SFC", val: "€80 M", c: "#007a3d" }, // Green
+            { r: 70, name: "Club Brugge", val: "€78 M", c: "#00529c" }, // Blue
+            { r: 71, name: "RSC Anderlecht", val: "€75 M", c: "#5a2d82" }, // Purple
+            { r: 72, name: "Celtic FC", val: "€72 M", c: "#008751" }, // Green
+            { r: 73, name: "Rangers FC", val: "€70 M", c: "#001c58" }, // Blue
+            { r: 74, name: "Shakhtar Donetsk", val: "€68 M", c: "#f36f21" }, // Orange
+            { r: 75, name: "Dinamo Zagreb", val: "€65 M", c: "#00529c" }, // Blue
 
             // Batch 4 (76-100)
-            { r: 76, name: "Fluminense", val: "€63 M" }, { r: 77, name: "SC Braga", val: "€60 M" },
-            { r: 78, name: "Besiktas JK", val: "€58 M" }, { r: 79, name: "AEK Athens", val: "€55 M" },
-            { r: 80, name: "Panathinaikos", val: "€52 M" }, { r: 81, name: "Botafogo", val: "€50 M" },
-            { r: 82, name: "Gremio", val: "€48 M" }, { r: 83, name: "Athletico Paranaense", val: "€46 M" },
-            { r: 84, name: "Inter Miami CF", val: "€45 M" }, { r: 85, name: "LAFC", val: "€43 M" },
-            { r: 86, name: "Columbus Crew", val: "€41 M" }, { r: 87, name: "Atlanta United", val: "€40 M" },
-            { r: 88, name: "Urawa Red Diamonds", val: "€38 M" }, { r: 89, name: "Yokohama F. Marinos", val: "€36 M" },
-            { r: 90, name: "Vissel Kobe", val: "€35 M" }, { r: 91, name: "Jeonbuk Hyundai", val: "€33 M" },
-            { r: 92, name: "Ulsan HD", val: "€32 M" }, { r: 93, name: "Persib Bandung", val: "€12 M" },
-            { r: 94, name: "Persija Jakarta", val: "€11 M" }, { r: 95, name: "Dewa United", val: "€10 M" },
-            { r: 96, name: "Bali United", val: "€9.5 M" }, { r: 97, name: "Borneo FC", val: "€9 M" },
-            { r: 98, name: "Johor Darul Ta'zim", val: "€8.5 M" }, { r: 99, name: "Buriram United", val: "€8 M" },
-            { r: 100, name: "Muangthong United", val: "€7.5 M" }
+            { r: 76, name: "Fluminense", val: "€63 M", c: "#8a1e2d" }, // Maroon
+            { r: 77, name: "SC Braga", val: "€60 M", c: "#e30613" }, // Red
+            { r: 78, name: "Besiktas JK", val: "€58 M", c: "#ffffff" }, // White
+            { r: 79, name: "AEK Athens", val: "€55 M", c: "#ffcc00" }, // Yellow
+            { r: 80, name: "Panathinaikos", val: "€52 M", c: "#007a3d" }, // Green
+            { r: 81, name: "Botafogo", val: "€50 M", c: "#ffffff" }, // White
+            { r: 82, name: "Gremio", val: "€48 M", c: "#00a3e0" }, // Blue
+            { r: 83, name: "Athletico Paranaense", val: "€46 M", c: "#e30613" }, // Red
+            { r: 84, name: "Inter Miami CF", val: "€45 M", c: "#f7b5cd" }, // Pink
+            { r: 85, name: "LAFC", val: "€43 M", c: "#c39e67" }, // Gold
+            { r: 86, name: "Columbus Crew", val: "€41 M", c: "#fed100" }, // Yellow
+            { r: 87, name: "Atlanta United", val: "€40 M", c: "#800000" }, // Maroon
+            { r: 88, name: "Urawa Red Diamonds", val: "€38 M", c: "#e30613" }, // Red
+            { r: 89, name: "Yokohama F. Marinos", val: "€36 M", c: "#003f87" }, // Blue
+            { r: 90, name: "Vissel Kobe", val: "€35 M", c: "#9b0033" }, // Crimson
+            { r: 91, name: "Jeonbuk Hyundai", val: "€33 M", c: "#005a36" }, // Green
+            { r: 92, name: "Ulsan HD", val: "€32 M", c: "#003b73" }, // Blue
+            { r: 93, name: "Persib Bandung", val: "€12 M", c: "#00529c" }, // Persib Blue
+            { r: 94, name: "Persija Jakarta", val: "€11 M", c: "#ff3300" }, // Persija Orange/Red
+            { r: 95, name: "Dewa United", val: "€10 M", c: "#d4af37" }, // Gold
+            { r: 96, name: "Bali United", val: "€9.5 M", c: "#cc0000" }, // Red
+            { r: 97, name: "Borneo FC", val: "€9 M", c: "#ff6600" }, // Orange
+            { r: 98, name: "Johor Darul Ta'zim", val: "€8.5 M", c: "#002b66" }, // Blue
+            { r: 99, name: "Buriram United", val: "€8 M", c: "#122646" }, // Navy
+            { r: 100, name: "Muangthong United", val: "€7.5 M", c: "#d31145" } // Red
         ];
+        
 
         let currentBatch = 1;
 
@@ -662,14 +711,14 @@
             const listContainer = document.getElementById('mvRankList');
             listContainer.innerHTML = '';
 
-            batchData.forEach(item => {
+           batchData.forEach(item => {
                 const isTop1 = item.r === 1;
                 const borderStyle = isTop1 ? 'border: 1px solid rgba(34, 197, 94, 0.3);' : 'border: 1px solid var(--border-color);';
-                const rankColor = isTop1 ? 'color: var(--accent-green);' : (item.r <= 3 ? 'color: #fff;' : 'color: var(--text-muted);');
 
+                // WARNA DI-SET SESUAI KARAKTER WARNA UTAMA KLUB MEREKA MASING-MASING (item.c)
                 const row = `
                     <div style="background: rgba(8, 10, 15, 0.5); padding: 10px 14px; border-radius: 10px; ${borderStyle} display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-                        <span style="font-weight: 600; ${rankColor}">#${item.r} ${item.name}</span>
+                        <span style="font-weight: 600; color: ${item.c};">${item.r}. ${item.name}</span>
                         <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">${item.val}</span>
                     </div>
                 `;
