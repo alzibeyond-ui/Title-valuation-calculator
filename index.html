@@ -213,25 +213,25 @@
                 <h1>DROPHEM <span>TERMS</span></h1>
             </div>
             <div class="terminal-status">
-                SYSTEM: SECURE // HUB v2.0
+                SYSTEM: v2.0
             </div>
         </header>
 
         <!-- ================= VIEW 1: LANDING HUB (MENU UTAMA) ================= -->
         <section id="hubView" class="view-section active">
             <div style="margin-bottom: 24px;">
-                <h2 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 6px;">Terminal Command Hub</h2>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Select an intelligence module to initialize workspace.</p>
+                <h2 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 6px;">Terminal Hub</h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Select module to initialize workspace.</p>
             </div>
 
             <div class="hub-grid">
                 <!-- Menu 1: Financial Advisor -->
                 <div class="hub-card" onclick="switchView('financialView')">
                     <div class="hub-card-icon">📈</div>
-                    <h3>Financial Advisor</h3>
-                    <p>Advanced compounding simulation, multi-year asset growth projections, and sector-based portfolio allocation.</p>
+                    <h3>Investment Calculator</h3>
+                    <p>compounding simulation and multi-year asset growth projections</p>
                     <div class="hub-card-footer">
-                        <span>LAUNCH MODULE</span>
+                        <span>SELECT MODULE</span>
                         <span>→</span>
                     </div>
                 </div>
@@ -240,9 +240,9 @@
                 <div class="hub-card" onclick="switchView('economicView')">
                     <div class="hub-card-icon">🌍</div>
                     <h3>Global Economic</h3>
-                    <p>Macro market intelligence, global sovereign GDP data tracking, and top 25 international corporate market caps.</p>
+                    <p>Macro market, global sovereign GDP data, and top 25 international corporate market caps.</p>
                     <div class="hub-card-footer">
-                        <span>LAUNCH MODULE</span>
+                        <span>SELECT MODULE</span>
                         <span>→</span>
                     </div>
                 </div>
@@ -251,9 +251,9 @@
                 <div class="hub-card" onclick="switchView('footballView')">
                     <div class="hub-card-icon">⚽</div>
                     <h3>Football Club Statistics</h3>
-                    <p>European and Asian league standings, tactical evaluations, and global club Market Value (MV) metrics.</p>
+                    <p>global club Market Value .</p>
                     <div class="hub-card-footer">
-                        <span>LAUNCH MODULE</span>
+                        <span>SELECT MODULE</span>
                         <span>→</span>
                     </div>
                 </div>
@@ -348,7 +348,7 @@
 
 <!-- CARD PREFERENCES BARU (Kiri Atas) -->
 <div class="terminal-card" style="grid-column: span 5; margin-bottom: 0;">
-    <div class="card-label">Preferences & Inputs</div>
+    <div class="card-label">Preferences</div>
     
     <div style="display: flex; flex-direction: column; gap: 14px;">
         
@@ -360,7 +360,7 @@
 
         <!-- Input Time Span -->
         <div class="input-row">
-            <label>Time Span (Years)</label>
+            <label>Time Span</label>
             <input type="number" id="timeframe" placeholder="0" min="1" max="500">
         </div>
 
@@ -449,7 +449,7 @@
 
                     <!-- AI Insight / Macro Card -->
                     <div class="terminal-card" style="margin-bottom: 0;">
-                        <div class="card-label">💡 AI Compounding Insight</div>
+                        <div class="card-label">💡 Compounding Insight</div>
                         <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
                             Long-term asset compounding consistently outpaces standard inflation across major defensive sectors over 10+ year horizons. Ensure portfolio rebalancing aligns with macro benchmark rates.
                         </p>
@@ -467,7 +467,7 @@
             
             <div style="margin-bottom: 20px;">
                 <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Global Economic Intelligence</h2>
-                <p style="color: var(--text-muted); font-size: 0.82rem;">Macro-economic tracking, sovereign GDP metrics, and international market valuations.</p>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">Macro-economic, sovereign GDP metrics, and international market valuations.</p>
             </div>
 
             <!-- Ticker Style Animation CSS (Biar jalan horizontal mulus) -->
@@ -530,10 +530,10 @@
                 <!-- 1. BIG MARKET BANNER -->
                 <div class="terminal-card" style="margin-bottom: 0; background: linear-gradient(135deg, rgba(13, 17, 23, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <div class="card-label" style="margin-bottom: 0;">🌍 Macro Market Banner & Sentiment</div>
+                        <div class="card-label" style="margin-bottom: 0;">🌍 Macro Market Sentiment</div>
                         <div style="font-size: 0.75rem; color: var(--accent-green); font-weight: 600; display: flex; align-items: center; gap: 6px;">
                             <span style="width: 7px; height: 7px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);"></span>
-                            LIVE FEED ACTIVE
+                            FEED ACTIVE
                         </div>
                     </div>
                     
@@ -569,15 +569,15 @@
                         <button type="button" class="market-btn-pro" onclick="alert('Modal Top 25 Global Company Market Cap akan segera dibuka!')">
                             <div>
                                 <div style="font-weight: 600; font-size: 0.9rem; font-family: 'Space Grotesk';">Top 25 Global Company Market Cap</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">US & International Mega-Caps (Apple, Microsoft, NVDA, dll)</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">US & International Mega-Caps</div>
                             </div>
                             <span style="color: var(--accent-green); font-size: 1.2rem;">→</span>
                         </button>
 
                         <button type="button" class="market-btn-pro" onclick="alert('Modal Top 25 IDX Market Cap akan segera dibuka!')">
                             <div>
-                                <div style="font-weight: 600; font-size: 0.9rem; font-family: 'Space Grotesk';">🇮🇩 Top 25 Indonesian Company Market Cap (IDX)</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bursa Efek Indonesia Blue Chips (BBCA, BBRI, TLKM, dll)</div>
+                                <div style="font-weight: 600; font-size: 0.9rem; font-family: 'Space Grotesk';">Top 25 Indonesian Company Market Cap (IDX)</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bursa Efek Indonesia Blue Chips</div>
                             </div>
                             <span style="color: var(--accent-green); font-size: 1.2rem;">→</span>
                         </button>
@@ -614,7 +614,7 @@
             
             <div style="margin-bottom: 20px;">
                 <h2 style="font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 4px;">Football Club Analytics & Valuations</h2>
-                <p style="color: var(--text-muted); font-size: 0.82rem;">European and Asian league standings, tactical evaluations, and global club Market Value (MV) metrics.</p>
+                <p style="color: var(--text-muted); font-size: 0.82rem;">European and Asian league standing and global club Market Value (MV) metrics.</p>
             </div>
 
             <!-- Bento Layout untuk Football Module -->
@@ -623,12 +623,12 @@
                 <!-- KOLOM KIRI: LEAGUE STANDINGS (col-span-7) -->
                 <div class="terminal-card" style="grid-column: span 7; margin-bottom: 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                        <div class="card-label" style="margin-bottom: 0;">⚽ Elite League Standings (Europe & Asia)</div>
+                        <div class="card-label" style="margin-bottom: 0;">League Standings</div>
                         <select style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; color: #fff; font-size: 0.75rem; outline: none;" id="leagueSelect">
-                            <option value="epl">Premier League (England)</option>
+                            <option value="epl">England Premier League</option>
                             <option value="ucl">UEFA Champions League</option>
-                            <option value="liga1">Liga 1 Indonesia</option>
-                            <option value="jleague">J1 League (Japan)</option>
+                            <option value="liga1">Super League Indonesia</option>
+                            <option value="jleague">J1 League</option>
                         </select>
                     </div>
 
