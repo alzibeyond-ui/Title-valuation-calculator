@@ -218,6 +218,21 @@
                 padding: 18px !important;
             }
         }
+
+        /* ================= HILANGKAN SCROLLBAR VERTIKAL DI SINI ================= */
+        #mvRankList::-webkit-scrollbar,
+        #mvModal > div::-webkit-scrollbar,
+        #batchPillContainer::-webkit-scrollbar {
+            display: none !important; /* Hilangin scrollbar di Chrome, Safari, Opera */
+        }
+
+        #mvRankList,
+        #mvModal > div,
+        #batchPillContainer {
+            -ms-overflow-style: none !important;  /* IE dan Edge */
+            scrollbar-width: none !important;  /* Firefox */
+        }
+        
     </style>
 </head>
 <body>
