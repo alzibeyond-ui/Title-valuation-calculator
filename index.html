@@ -219,18 +219,32 @@
             }
         }
 
-        /* ================= HILANGKAN SCROLLBAR VERTIKAL DI SINI ================= */
-        #mvRankList::-webkit-scrollbar,
-        #mvModal > div::-webkit-scrollbar,
-        #batchPillContainer::-webkit-scrollbar {
-            display: none !important; /* Hilangin scrollbar di Chrome, Safari, Opera */
+        /* ================= CUSTOM DARK SCROLLBAR UNTUK BATCH PILLS ================= */
+        #batchPillContainer {
+            overflow-x: auto;
+            scrollbar-width: thin; /* Buat Firefox */
+            scrollbar-color: rgba(34, 197, 94, 0.4) rgba(8, 10, 15, 0.5); /* Buat Firefox */
         }
 
-        #mvRankList,
-        #mvModal > div,
-        #batchPillContainer {
-            -ms-overflow-style: none !important;  /* IE dan Edge */
-            scrollbar-width: none !important;  /* Firefox */
+        /* Buat Browser WebKit (Chrome, Safari, Edge) */
+        #batchPillContainer::-webkit-scrollbar {
+            height: 5px; /* Tinggi bar horizontal tipis */
+        }
+
+        #batchPillContainer::-webkit-scrollbar-track {
+            background: rgba(8, 10, 15, 0.6); /* Warna background track/jalur */
+            border-radius: 10px;
+            margin: 0 4px;
+        }
+
+        #batchPillContainer::-webkit-scrollbar-thumb {
+            background: rgba(34, 197, 94, 0.5); /* Warna hijau aksen terminal lo */
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        #batchPillContainer::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green); /* Jadi hijau terang pas di-hover/sentuh */
         }
         
     </style>
@@ -537,7 +551,6 @@
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border-color); background: rgba(13, 17, 23, 0.95);">
                 <div>
                     <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; color: #fff;">🌍 Top 100 Global Club Market Values</div>
-                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;" id="batchSubTitle">Showing Rank 1 - 25</div>
                 </div>
                 <button type="button" onclick="closeMvModal()" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 50%; width: 32px; height: 32px; color: var(--text-muted); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">✕</button>
             </div>
