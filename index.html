@@ -436,17 +436,64 @@
 
             <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
                 
-                <!-- KOLOM KIRI: LEAGUE STANDINGS -->
+                <!-- KOLOM KIRI: TOP PLAYER MARKET VALUE (Ganti dari League Standings) -->
                 <div class="terminal-card" style="grid-column: span 7; margin-bottom: 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                        <div class="card-label" style="margin-bottom: 0;">League Standings</div>
-                        <select style="background: rgba(8, 10, 15, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; color: #fff; font-size: 0.75rem; outline: none;" id="leagueSelect">
-                            <option value="epl">England Premier League</option>
-                            <option value="ucl">UEFA Champions League</option>
-                            <option value="liga1">Super League Indonesia</option>
-                            <option value="jleague">J1 League</option>
-                        </select>
+                        <div class="card-label" style="margin-bottom: 0;">⭐ Top Global Player Market Values</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-green); font-weight: 600;">LIVE METRICS</div>
                     </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">1.</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #a70042;">Lamine Yamal</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">FC Barcelona // Spain</div>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">2.</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #6cabdd;">Erling Haaland</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Manchester City // Norway</div>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">3.</span>
+                                <div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #f1c40f;">Kylian Mbappé</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Real Madrid // France</div>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€200 M</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Tombol Load More untuk Buka Top 100 Players Modal -->
+                    <button type="button" onclick="openPlayerModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
+                        Load More (View Top 100 Players) →
+                    </button>
+                </div>
 
                     <div style="overflow-x: auto;">
                         <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
@@ -489,10 +536,10 @@
                         
                         <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">#1</span>
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">1.</span>
                                 <div>
                                     <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Real Madrid</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">La Liga // Spain</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">La Liga</div>
                                 </div>
                             </div>
                             <div style="text-align: right;">
@@ -503,10 +550,10 @@
 
                         <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">#2</span>
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">2.</span>
                                 <div>
                                     <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Manchester City</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League // England</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">England Premier League </div>
                                 </div>
                             </div>
                             <div style="text-align: right;">
@@ -517,10 +564,10 @@
 
                         <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">#3</span>
+                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">3.</span>
                                 <div>
                                     <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk';">Arsenal FC</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League // England</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">England Premier League</div>
                                 </div>
                             </div>
                             <div style="text-align: right;">
@@ -533,7 +580,7 @@
 
                     <!-- Tombol Buka Rank 100 -->
                     <button type="button" onclick="openMvModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
-                        Load More (View Top 100 Rank) →
+                        Load More→
                         </button>
                 </div>
 
@@ -698,7 +745,117 @@
             { r: 99, name: "Buriram United", val: "€8 M", c: "#122646" }, // Navy
             { r: 100, name: "Muangthong United", val: "€7.5 M", c: "#d31145" } // Red
         ];
-        
+
+        // ======== 3. DATABASE TOP 100 PEMAIN =========
+        const mvData100 = [
+            // Batch 1 (1-25)
+            { r: 1, name: "Lamine Yamal", club: "FC Barcelona", val: "€220 M", c: "#a70042" },
+            { r: 2, name: "Erling Haaland", club: "Manchester City", val: "€220 M", c: "#6cabdd" },
+            { r: 3, name: "Kylian Mbappé", club: "Real Madrid", val: "€200 M", c: "#f1c40f" },
+            { r: 4, name: "Michael Olise", club: "FC Bayern Munich", val: "€180 M", c: "#dc052d" },
+            { r: 5, name: "Jude Bellingham", club: "Real Madrid", val: "€160 M", c: "#f1c40f" },
+            { r: 6, name: "Pedri", club: "FC Barcelona", val: "€150 M", c: "#a70042" },
+            { r: 7, name: "João Neves", club: "Paris Saint-Germain", val: "€140 M", c: "#004170" },
+            { r: 8, name: "Khvicha Kvaratskhelia", club: "Paris Saint-Germain", val: "€140 M", c: "#004170" },
+            { r: 9, name: "Vitinha", club: "Paris Saint-Germain", val: "€140 M", c: "#004170" },
+            { r: 10, name: "Vinicius Junior", club: "Real Madrid", val: "€130 M", c: "#f1c40f" },
+            { r: 11, name: "Yan Diomande", club: "RB Leipzig", val: "€120 M", c: "#dd0000" },
+            { r: 12, name: "Désiré Doué", club: "Paris Saint-Germain", val: "€120 M", c: "#004170" },
+            { r: 13, name: "Elliot Anderson", club: "Nottingham Forest", val: "€120 M", c: "#dd0000" },
+            { r: 14, name: "Morgan Rogers", club: "Aston Villa", val: "€120 M", c: "#95bfe6" },
+            { r: 15, name: "Enzo Fernández", club: "Chelsea FC", val: "€120 M", c: "#034694" },
+            { r: 16, name: "Declan Rice", club: "Arsenal FC", val: "€120 M", c: "#ef0107" },
+            { r: 17, name: "Rayan Cherki", club: "Olympique Lyon", val: "€110 M", c: "#0055a5" },
+            { r: 18, name: "Fermín López", club: "FC Barcelona", val: "€110 M", c: "#a70042" },
+            { r: 19, name: "Cole Palmer", club: "Chelsea FC", val: "€110 M", c: "#034694" },
+            { r: 20, name: "Bukayo Saka", club: "Arsenal FC", val: "€110 M", c: "#ef0107" },
+            { r: 21, name: "Julián Alvarez", club: "Atletico Madrid", val: "€110 M", c: "#cb3524" },
+            { r: 22, name: "Pau Cubarsí", club: "FC Barcelona", val: "€100 M", c: "#a70042" },
+            { r: 23, name: "Arda Güler", club: "Real Madrid", val: "€100 M", c: "#f1c40f" },
+            { r: 24, name: "Bradley Barcola", club: "Paris Saint-Germain", val: "€100 M", c: "#004170" },
+            { r: 25, name: "Moisés Caicedo", club: "Chelsea FC", val: "€100 M", c: "#034694" },
+
+            // Batch 2 (26-50)
+            { r: 26, name: "Florian Wirtz", club: "Liverpool FC", val: "€100 M", c: "#c8102e" },
+            { r: 27, name: "Jamal Musiala", club: "FC Bayern Munich", val: "€100 M", c: "#dc052d" },
+            { r: 28, name: "Phil Foden", club: "Manchester City", val: "€100 M", c: "#6cabdd" },
+            { r: 29, name: "William Saliba", club: "Arsenal FC", val: "€100 M", c: "#ef0107" },
+            { r: 30, name: "Rodri", club: "Manchester City", val: "€95 M", c: "#6cabdd" },
+            { r: 31, name: "Lautaro Martínez", club: "Inter Milan", val: "€95 M", c: "#0066b2" },
+            { r: 32, name: "Harry Kane", club: "FC Bayern Munich", val: "€90 M", c: "#dc052d" },
+            { r: 33, name: "Alexander Isak", club: "Newcastle United", val: "€90 M", c: "#ffffff" },
+            { r: 34, name: "Federico Valverde", club: "Real Madrid", val: "€90 M", c: "#f1c40f" },
+            { r: 35, name: "Rodrygo", club: "Real Madrid", val: "€90 M", c: "#f1c40f" },
+            { r: 36, name: "Martin Ødegaard", club: "Arsenal FC", val: "€85 M", c: "#ef0107" },
+            { r: 37, name: "Bruno Guimarães", club: "Newcastle United", val: "€85 M", c: "#ffffff" },
+            { r: 38, name: "Nuno Mendes", club: "Paris Saint-Germain", val: "€80 M", c: "#004170" },
+            { r: 39, name: "Achraf Hakimi", club: "Paris Saint-Germain", val: "€80 M", c: "#004170" },
+            { r: 40, name: "Gavi", club: "FC Barcelona", val: "€80 M", c: "#a70042" },
+            { r: 41, name: "Alexis Mac Allister", club: "Liverpool FC", val: "€75 M", c: "#c8102e" },
+            { r: 42, name: "Josko Gvardiol", club: "Manchester City", val: "€75 M", c: "#6cabdd" },
+            { r: 43, name: "Rafael Leão", club: "AC Milan", val: "€75 M", c: "#fb090b" },
+            { r: 44, name: "Nicolò Barella", club: "Inter Milan", val: "€75 M", c: "#0066b2" },
+            { r: 45, name: "Ruben Dias", club: "Manchester City", val: "€75 M", c: "#6cabdd" },
+            { r: 46, name: "Alessandro Bastoni", club: "Inter Milan", val: "€70 M", c: "#0066b2" },
+            { r: 47, name: "James Maddison", club: "Tottenham Hotspur", val: "€70 M", c: "#ffffff" },
+            { r: 48, name: "Ollie Watkins", club: "Aston Villa", val: "€65 M", c: "#95bfe6" },
+            { r: 49, name: "Marcus Thuram", club: "Inter Milan", val: "€65 M", c: "#0066b2" },
+            { r: 50, name: "Dusan Vlahovic", club: "Juventus FC", val: "€65 M", c: "#ffffff" },
+
+            // Batch 3 (51-75)
+            { r: 51, name: "Gabriel Martinelli", club: "Arsenal FC", val: "€65 M", c: "#ef0107" },
+            { r: 52, name: "Gabriel Magalhães", club: "Arsenal FC", val: "€65 M", c: "#ef0107" },
+            { r: 53, name: "Trent Alexander-Arnold", club: "Liverpool FC", val: "€65 M", c: "#c8102e" },
+            { r: 54, name: "Dominik Szoboszlai", club: "Liverpool FC", val: "€65 M", c: "#c8102e" },
+            { r: 55, name: "Alejandro Garnacho", club: "Manchester United", val: "€60 M", c: "#da020e" },
+            { r: 56, name: "Kobbie Mainoo", club: "Manchester United", val: "€60 M", c: "#da020e" },
+            { r: 57, name: "Rasmus Højlund", club: "Manchester United", val: "€60 M", c: "#da020e" },
+            { r: 58, name: "Anthony Gordon", club: "Newcastle United", val: "€60 M", c: "#ffffff" },
+            { r: 59, name: "Sandro Tonali", club: "Newcastle United", val: "€60 M", c: "#ffffff" },
+            { r: 60, name: "Lucas Paquetá", club: "West Ham United", val: "€60 M", c: "#7a263a" },
+            { r: 61, name: "Eberechi Eze", club: "Crystal Palace", val: "€60 M", c: "#1b458f" },
+            { r: 62, name: "Kaoru Mitoma", club: "Brighton & Hove Albion", val: "€55 M", c: "#0057b8" },
+            { r: 63, name: "Evan Ferguson", club: "Brighton & Hove Albion", val: "€55 M", c: "#0057b8" },
+            { r: 64, name: "João Pedro", club: "Brighton & Hove Albion", val: "€55 M", c: "#0057b8" },
+            { r: 65, name: "Pedro Neto", club: "Chelsea FC", val: "€55 M", c: "#034694" },
+            { r: 66, name: "Christopher Nkunku", club: "Chelsea FC", val: "€55 M", c: "#034694" },
+            { r: 67, name: "Levi Colwill", club: "Chelsea FC", val: "€55 M", c: "#034694" },
+            { r: 68, name: "Brennan Johnson", club: "Tottenham Hotspur", val: "€55 M", c: "#ffffff" },
+            { r: 69, name: "Micky van de Ven", club: "Tottenham Hotspur", val: "€55 M", c: "#ffffff" },
+            { r: 70, name: "Dejan Kulusevski", club: "Tottenham Hotspur", val: "€55 M", c: "#ffffff" },
+            { r: 71, name: "Luka Sucic", club: "Real Sociedad", val: "€50 M", c: "#00539f" },
+            { r: 72, name: "Takefusa Kubo", club: "Real Sociedad", val: "€50 M", c: "#00539f" },
+            { r: 73, name: "Martin Zubimendi", club: "Real Sociedad", val: "€50 M", c: "#00539f" },
+            { r: 74, name: "Mikel Oyarzabal", club: "Real Sociedad", val: "€50 M", c: "#00539f" },
+            { r: 75, name: "Nico Williams", club: "Athletic Bilbao", val: "€50 M", c: "#ee2524" },
+
+            // Batch 4 (76-100)
+            { r: 76, name: "Oihan Sancet", club: "Athletic Bilbao", val: "€50 M", c: "#ee2524" },
+            { r: 77, name: "Daniel Vivian", club: "Athletic Bilbao", val: "€45 M", c: "#ee2524" },
+            { r: 78, name: "Samuel Lino", club: "Atletico Madrid", val: "€45 M", c: "#cb3524" },
+            { r: 79, name: "Rodrigo Riquelme", club: "Atletico Madrid", val: "€45 M", c: "#cb3524" },
+            { r: 80, name: "Conor Gallagher", club: "Atletico Madrid", val: "€45 M", c: "#cb3524" },
+            { r: 81, name: "Teun Koopmeiners", club: "Juventus FC", val: "€45 M", c: "#ffffff" },
+            { r: 82, name: "Bremer", club: "Juventus FC", val: "€45 M", c: "#ffffff" },
+            { r: 83, name: "Kenan Yildiz", club: "Juventus FC", val: "€45 M", c: "#ffffff" },
+            { r: 84, name: "Andrea Cambiaso", club: "Juventus FC", val: "€40 M", c: "#ffffff" },
+            { r: 85, name: "Christian Pulisic", club: "AC Milan", val: "€40 M", c: "#fb090b" },
+            { r: 86, name: "Tijjani Reijnders", club: "AC Milan", val: "€40 M", c: "#fb090b" },
+            { r: 87, name: "Theo Hernández", club: "AC Milan", val: "€40 M", c: "#fb090b" },
+            { r: 88, name: "Federico Dimarco", club: "Inter Milan", val: "€40 M", c: "#0066b2" },
+            { r: 89, name: "Benjamin Pavard", club: "Inter Milan", val: "€40 M", c: "#0066b2" },
+            { r: 90, name: "Piotr Zielinski", club: "Inter Milan", val: "€38 M", c: "#0066b2" },
+            { r: 91, name: "Artem Dovbyk", club: "AS Roma", val: "€38 M", c: "#8e1f2f" },
+            { r: 92, name: "Matias Soulé", club: "AS Roma", val: "€35 M", c: "#8e1f2f" },
+            { r: 93, name: "Manu Koné", club: "AS Roma", val: "€35 M", c: "#8e1f2f" },
+            { r: 94, name: "Ederson", club: "Atalanta BC", val: "€35 M", c: "#1e71b8" },
+            { r: 95, name: "Ademola Lookman", club: "Atalanta BC", val: "€35 M", c: "#1e71b8" },
+            { r: 96, name: "Giorgio Scalvini", club: "Atalanta BC", val: "€35 M", c: "#1e71b8" },
+            { r: 97, name: "Gianluca Scamacca", club: "Atalanta BC", val: "€35 M", c: "#1e71b8" },
+            { r: 98, name: "Mateo Retegui", club: "Atalanta BC", val: "€35 M", c: "#1e71b8" },
+            { r: 99, name: "Victor Boniface", club: "Bayer Leverkusen", val: "€35 M", c: "#e32219" },
+            { r: 100, name: "Jeremie Frimpong", club: "Bayer Leverkusen", val: "€35 M", c: "#e32219" }
+        ];
 
         let currentBatch = 1;
 
@@ -760,6 +917,65 @@
         function closeMvModal() {
             document.getElementById('mvModal').style.display = 'none';
         }
+
+        // ================= 5. LOGIK PAGINASI BATCH PEMAIN =================
+    let currentPlayerBatch = 1;
+
+    function loadPlayerBatch(batchNum) {
+        currentPlayerBatch = batchNum;
+        const start = (batchNum - 1) * 25;
+        const end = batchNum * 25;
+        const batchData = playerMetrics100.slice(start, end);
+
+        const listContainer = document.getElementById('playerRankList');
+        listContainer.innerHTML = '';
+
+        batchData.forEach(item => {
+            const isTop1 = item.r === 1;
+            const borderStyle = isTop1 ? 'border: 1px solid rgba(34, 197, 94, 0.3);' : 'border: 1px solid var(--border-color);';
+
+            const row = `
+                <div style="background: rgba(8, 10, 15, 0.5); padding: 10px 14px; border-radius: 10px; ${borderStyle} display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                    <div>
+                        <span style="font-weight: 600; color: ${item.c};">${item.r}. ${item.name}</span>
+                        <div style="font-size: 0.68rem; color: var(--text-muted);">${item.club}</div>
+                    </div>
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">${item.val}</span>
+                </div>
+            `;
+            listContainer.innerHTML += row;
+        });
+
+        document.getElementById('playerBatchSubTitle').textContent = Showing Rank ${start + 1} - ${end};
+        document.getElementById('playerBatchIndicator').textContent = Batch ${batchNum} of 4;
+
+        for (let i = 1; i <= 4; i++) {
+            const btn = document.getElementById(btnPBatch${i});
+            if (btn) {
+                if (i === batchNum) btn.classList.add('active');
+                else btn.classList.remove('active');
+            }
+        }
+
+        document.getElementById('prevPlayerBatchBtn').style.opacity = batchNum === 1 ? '0.4' : '1';
+        document.getElementById('prevPlayerBatchBtn').style.pointerEvents = batchNum === 1 ? 'none' : 'auto';
+        document.getElementById('nextPlayerBatchBtn').style.opacity = batchNum === 4 ? '0.4' : '1';
+        document.getElementById('nextPlayerBatchBtn').style.pointerEvents = batchNum === 4 ? 'none' : 'auto';
+    }
+
+    function changePlayerBatch(direction) {
+        const nextBatch = currentPlayerBatch + direction;
+        if (nextBatch >= 1 && nextBatch <= 4) loadPlayerBatch(nextBatch);
+    }
+
+    function openPlayerModal() {
+        document.getElementById('playerModal').style.display = 'flex';
+        loadPlayerBatch(1);
+    }
+
+    function closePlayerModal() {
+        document.getElementById('playerModal').style.display = 'none';
+    }
     </script>
 </body>
 </html>
