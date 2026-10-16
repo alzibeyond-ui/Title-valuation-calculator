@@ -285,7 +285,7 @@
                 <div class="hub-card" onclick="switchView('footballView')">
                     <div class="hub-card-icon">⚽</div>
                     <h3>Football Club Statistics</h3>
-                    <p>European and Asian standings and top 100 global club Market Values.</p>
+                    <p>European and Asian league standings and top 100 global club Market Values.</p>
                     <div class="hub-card-footer">
                         <span>SELECT MODULE</span>
                         <span>→</span>
@@ -626,13 +626,10 @@
         // SPA View Switcher Engine
         function switchView(viewId) {
             const sections = document.querySelectorAll('.view-section');
-            sections.forEach(sec => {
-                sec.style.display = 'none';
-                sec.classList.remove('active');
+            sections.forEach(sec => sec.classList.remove('active'));
 
             const target = document.getElementById(viewId);
             if (target) {
-                target.style.display = 'block';
                 target.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -750,7 +747,7 @@
         ];
 
         // ======== 3. DATABASE TOP 100 PEMAIN =========
-        const mvData100 = [
+        const playerMetrics100 = [
             // Batch 1 (1-25)
             { r: 1, name: "Lamine Yamal", club: "FC Barcelona", val: "€220 M", c: "#a70042" },
             { r: 2, name: "Erling Haaland", club: "Manchester City", val: "€220 M", c: "#6cabdd" },
@@ -949,11 +946,11 @@
             listContainer.innerHTML += row;
         });
 
-        document.getElementById('playerBatchSubTitle').textContent = Showing Rank ${start + 1} - ${end};
-        document.getElementById('playerBatchIndicator').textContent = Batch ${batchNum} of 4;
+        document.getElementById('playerBatchSubTitle').textContent = `Showing Rank ${start + 1} - ${end}`;
+        document.getElementById('playerBatchIndicator').textContent = `Batch ${batchNum} of 4`;
 
         for (let i = 1; i <= 4; i++) {
-            const btn = document.getElementById(btnPBatch${i});
+            const btn = document.getElementById(`btnPBatch${i}`);
             if (btn) {
                 if (i === batchNum) btn.classList.add('active');
                 else btn.classList.remove('active');
@@ -979,7 +976,6 @@
     function closePlayerModal() {
         document.getElementById('playerModal').style.display = 'none';
     }
-        
     </script>
 </body>
 </html>
