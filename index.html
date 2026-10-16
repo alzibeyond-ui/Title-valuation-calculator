@@ -437,63 +437,117 @@
             <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start;">
                 
                 <!-- KOLOM KIRI: TOP PLAYER MARKET VALUE (Ganti dari League Standings) -->
-                <div class="terminal-card" style="grid-column: span 7; margin-bottom: 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                        <div class="card-label" style="margin-bottom: 0;">⭐ Top Global Player Market Values</div>
-                        <div style="font-size: 0.72rem; color: var(--accent-green); font-weight: 600;">LIVE METRICS</div>
+                <div class="terminal-card" style="grid-column: span 6; margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div class="card-label" style="margin-bottom: 0;">⭐ TOP GLOBAL PLAYER MARKET VALUES</div>
+            <div style="font-size: 0.72rem; color: var(--accent-green); font-weight: 600;">LIVE METRICS</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">1.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #a70042;">Lamine Yamal</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">FC Barcelona // Spain</div>
                     </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        
-                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">1.</span>
-                                <div>
-                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #a70042;">Lamine Yamal</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">FC Barcelona // Spain</div>
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
-                            </div>
-                        </div>
-
-                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">2.</span>
-                                <div>
-                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #6cabdd;">Erling Haaland</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Manchester City // Norway</div>
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
-                            </div>
-                        </div>
-
-                        <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">3.</span>
-                                <div>
-                                    <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #f1c40f;">Kylian Mbappé</div>
-                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Real Madrid // France</div>
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€200 M</div>
-                                <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Tombol Load More untuk Buka Top 100 Players Modal -->
-                    <button type="button" onclick="openPlayerModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
-                        Load More (View Top 100 Players) →
-                    </button>
                 </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">2.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #6cabdd;">Erling Haaland</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Manchester City // Norway</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€220 M</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">3.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #f1c40f;">Kylian Mbappé</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Real Madrid // France</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€200 M</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Valuation</div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" onclick="openPlayerModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+            Load More (View Top 100 Players) →
+        </button>
+    </div>
+
+    <!-- ================= KOLOM KANAN: TOP CLUBS (SPAN 6) ================= -->
+    <div class="terminal-card" style="grid-column: span 6; margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div class="card-label" style="margin-bottom: 0;">💰 GLOBAL CLUB MARKET VALUE</div>
+            <div style="font-size: 0.72rem; color: var(--accent-green); font-weight: 600;">VALUATIONS</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green); font-size: 0.85rem;">1.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #f1c40f;">Real Madrid</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">La Liga</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.34 Bn</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">2.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #6cabdd;">Manchester City</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.29 Bn</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(8, 10, 15, 0.4); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">3.</span>
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Space Grotesk'; color: #ef0107;">Arsenal FC</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Premier League</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.85rem; font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent-green);">€1.17 Bn</div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted);">Squad Valuation</div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" onclick="openMvModal()" style="width: 100%; margin-top: 14px; background: rgba(8, 10, 15, 0.6); border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px; color: var(--accent-green); font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+            Load More (View Top 100 Clubs) →
+        </button>
+    </div>
+ </div>
 
                     <div style="overflow-x: auto;">
                         <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
